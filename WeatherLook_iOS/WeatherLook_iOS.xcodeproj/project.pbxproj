@@ -99,7 +99,6 @@
 				B0BD0064FB9A79F1409D13AC /* Pods-WeatherLook_iOSTests.debug.xcconfig */,
 				F9E1AEAE93AD3CB79F28CEA6 /* Pods-WeatherLook_iOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -747,7 +746,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherLook_iOS/Info.plist;
+				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -776,7 +775,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherLook_iOS/Info.plist;
+				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
