@@ -6,11 +6,20 @@
 //
 
 import UIKit
+
 import RxSwift
+import SnapKit
 
 class SplashViewController: UIViewController {
     weak var coordinator: SplashCoordinator?
-    private let disposeBag = DisposeBag()
+    
+    private let splashImageView: UIImageView = {
+        let imageView = UIImageView()
+        if let splashImage = UIImage(named: "splashImage") {
+            imageView.image = splashImage
+        }
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +31,14 @@ class SplashViewController: UIViewController {
     }
     
     private func setupUI() {
-        let test = UILabel()
         view.backgroundColor = .white
-        view.addSubview(test)
-        test.text = "splash"
-        test.translatesAutoresizingMaskIntoConstraints = false
-        test.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        test.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        view.addSubview(splashImageView)
+        splashImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.width.equalTo(100)
+            $0.height.equalTo(130)
+        }
     }
 }
