@@ -831,6 +831,7 @@
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "기상룩";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -859,6 +860,7 @@
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "기상룩";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
