@@ -18,6 +18,11 @@
 		9B76637827A2A8770053E981 /* WeatherLook_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76637727A2A8770053E981 /* WeatherLook_iOSTests.swift */; };
 		9B76638227A2A8770053E981 /* WeatherLook_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76638127A2A8770053E981 /* WeatherLook_iOSUITests.swift */; };
 		9B76638427A2A8770053E981 /* WeatherLook_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76638327A2A8770053E981 /* WeatherLook_iOSUITestsLaunchTests.swift */; };
+		9B7663AA27AC4C650053E981 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663A927AC4C650053E981 /* Coordinator.swift */; };
+		9B7663AC27AC4D9C0053E981 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663AB27AC4D9C0053E981 /* MainCoordinator.swift */; };
+		9B7663B327AC50D40053E981 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B227AC50D40053E981 /* SplashCoordinator.swift */; };
+		9B7663B527AD0EBD0053E981 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B427AD0EBD0053E981 /* SplashViewController.swift */; };
+		9B7663B727B23AD30053E981 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B627B23AD30053E981 /* HomeCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +60,11 @@
 		9B76637D27A2A8770053E981 /* WeatherLook_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherLook_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76638127A2A8770053E981 /* WeatherLook_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLook_iOSUITests.swift; sourceTree = "<group>"; };
 		9B76638327A2A8770053E981 /* WeatherLook_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLook_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9B7663A927AC4C650053E981 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		9B7663AB27AC4D9C0053E981 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		9B7663B227AC50D40053E981 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		9B7663B427AD0EBD0053E981 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		9B7663B627B23AD30053E981 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		AB673275D39993B157C42412 /* Pods_WeatherLook_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherLook_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0BD0064FB9A79F1409D13AC /* Pods-WeatherLook_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherLook_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WeatherLook_iOSTests/Pods-WeatherLook_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE24ADAB0CB02E5443CDD28D /* Pods-WeatherLook_iOS-WeatherLook_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherLook_iOS-WeatherLook_iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-WeatherLook_iOS-WeatherLook_iOSUITests/Pods-WeatherLook_iOS-WeatherLook_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +184,8 @@
 		9B76639127A3EC0C0053E981 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9B7663A627AC4A9D0053E981 /* Main */,
+				9B7663AD27AC50700053E981 /* Splash */,
 				9B76639627A3EC840053E981 /* Home */,
 				9B76639727A3F3DD0053E981 /* BookMark */,
 				9B76639827A3F3E80053E981 /* Search */,
@@ -314,6 +326,7 @@
 		9B7663A227A3F47D0053E981 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				9B7663B627B23AD30053E981 /* HomeCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -330,6 +343,72 @@
 			children = (
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9B7663A627AC4A9D0053E981 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663A727AC4AA40053E981 /* Protocol */,
+				9B7663A827AC4AB40053E981 /* Coordinator */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		9B7663A727AC4AA40053E981 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663A927AC4C650053E981 /* Coordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		9B7663A827AC4AB40053E981 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663AB27AC4D9C0053E981 /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9B7663AD27AC50700053E981 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663B127AC50A70053E981 /* Model */,
+				9B7663B027AC50A10053E981 /* View */,
+				9B7663AF27AC50990053E981 /* ViewModel */,
+				9B7663AE27AC50800053E981 /* Coordinator */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		9B7663AE27AC50800053E981 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663B227AC50D40053E981 /* SplashCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9B7663AF27AC50990053E981 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9B7663B027AC50A10053E981 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663B427AD0EBD0053E981 /* SplashViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9B7663B127AC50A70053E981 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -570,8 +649,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B7663AA27AC4C650053E981 /* Coordinator.swift in Sources */,
 				9B76636527A2A8740053E981 /* HomeViewController.swift in Sources */,
 				9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */,
+				9B7663B327AC50D40053E981 /* SplashCoordinator.swift in Sources */,
+				9B7663AC27AC4D9C0053E981 /* MainCoordinator.swift in Sources */,
+				9B7663B727B23AD30053E981 /* HomeCoordinator.swift in Sources */,
+				9B7663B527AD0EBD0053E981 /* SplashViewController.swift in Sources */,
 				9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -747,9 +831,9 @@
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "기상룩";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -776,9 +860,9 @@
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "기상룩";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
