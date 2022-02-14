@@ -10,6 +10,7 @@
 		0AB82F6A1B72DA60B5F065B7 /* Pods_WeatherLook_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB673275D39993B157C42412 /* Pods_WeatherLook_iOSTests.framework */; };
 		3E0D23D784E2040CC7E22A68 /* Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E3AEB8C013A5A98ECC38F /* Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework */; };
 		63F1B867CA7C2F9C9F88D344 /* Pods_WeatherLook_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E39D72C8D4031A1297E0C45 /* Pods_WeatherLook_iOS.framework */; };
+		9B33259527BABEBD0096F20D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33259427BABEBD0096F20D /* UIColor+Extension.swift */; };
 		9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636027A2A8740053E981 /* AppDelegate.swift */; };
 		9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636227A2A8740053E981 /* SceneDelegate.swift */; };
 		9B76636527A2A8740053E981 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636427A2A8740053E981 /* HomeViewController.swift */; };
@@ -48,6 +49,7 @@
 		32EAD0376619090E28B26ED9 /* Pods-WeatherLook_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherLook_iOS.release.xcconfig"; path = "Target Support Files/Pods-WeatherLook_iOS/Pods-WeatherLook_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		6494212F0566EE95908B58D4 /* Pods-WeatherLook_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherLook_iOS.debug.xcconfig"; path = "Target Support Files/Pods-WeatherLook_iOS/Pods-WeatherLook_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7E7E3AEB8C013A5A98ECC38F /* Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B33259427BABEBD0096F20D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9B76635D27A2A8740053E981 /* WeatherLook_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLook_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76636027A2A8740053E981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B76636227A2A8740053E981 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		9B76639527A3EC530053E981 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9B33259427BABEBD0096F20D /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				9B7663AA27AC4C650053E981 /* Coordinator.swift in Sources */,
 				9B76636527A2A8740053E981 /* HomeViewController.swift in Sources */,
 				9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */,
+				9B33259527BABEBD0096F20D /* UIColor+Extension.swift in Sources */,
 				9B7663B327AC50D40053E981 /* SplashCoordinator.swift in Sources */,
 				9B7663AC27AC4D9C0053E981 /* MainCoordinator.swift in Sources */,
 				9B7663B727B23AD30053E981 /* HomeCoordinator.swift in Sources */,
