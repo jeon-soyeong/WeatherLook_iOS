@@ -30,13 +30,13 @@ class HomeViewController: UIViewController {
         return view
     }()
     
-    private let clothGuideView: UIView = {
+    private let clothingGuideView: UIView = {
         let view = UIView()
         view.backgroundColor = .yellow
         return view
     }()
     
-    private let dayliyWeatherView: UIView = {
+    private let dailyWeatherView: UIView = {
         let view = UIView()
         view.backgroundColor = .green
         return view
@@ -98,23 +98,23 @@ class HomeViewController: UIViewController {
             $0.height.equalTo(300)
         }
         
-        contentView.addSubview(clothGuideView)
-        clothGuideView.snp.makeConstraints {
+        contentView.addSubview(clothingGuideView)
+        clothingGuideView.snp.makeConstraints {
             $0.top.equalTo(currentWeatherView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
         
-        contentView.addSubview(dayliyWeatherView)
-        dayliyWeatherView.snp.makeConstraints {
-            $0.top.equalTo(clothGuideView.snp.bottom)
+        contentView.addSubview(dailyWeatherView)
+        dailyWeatherView.snp.makeConstraints {
+            $0.top.equalTo(clothingGuideView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
         
         contentView.addSubview(weeklyWeatherView)
         weeklyWeatherView.snp.makeConstraints {
-            $0.top.equalTo(dayliyWeatherView.snp.bottom)
+            $0.top.equalTo(dailyWeatherView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(300)
             $0.bottom.equalToSuperview().inset(50)
