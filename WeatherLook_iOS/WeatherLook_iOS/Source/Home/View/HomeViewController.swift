@@ -24,12 +24,6 @@ class HomeViewController: UIViewController {
         return view
     }()
     
-    private let currentWeatherView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
-    }()
-    
     private let clothingGuideView: UIView = {
         let view = UIView()
         view.backgroundColor = .yellow
@@ -59,6 +53,8 @@ class HomeViewController: UIViewController {
         button.setImage(UIImage(named: "list"), for: .normal)
         return button
     }()
+    
+    private let currentWeatherView = CurrentWeatherView.init(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
