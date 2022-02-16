@@ -62,7 +62,7 @@ class CurrentWeatherView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
+    override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupLocationLabel()
         setupCurrentTemperatureLabel()
