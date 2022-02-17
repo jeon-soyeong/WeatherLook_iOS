@@ -8,7 +8,7 @@
 import UIKit
 
 class ClothingGuideCollectionViewCell: UICollectionViewCell {
-    static let cellHight = 148
+    static let cellHeight = 148
     
     private let clothingImageView: UIImageView = {
         let imageView = UIImageView()
@@ -21,7 +21,6 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.setFont(type: .semiBold, size: 14)
         return label
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,9 +46,14 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    //TODO: ViewModel binding
-    func updateUI(image: UIImage, title: String) {
-        clothingImageView.image = image
-        clothingTitleLabel.text = title
+    func updateUI(index: Int) {
+        //TODO: 변경
+//    func updateUI(index: Int, data: WeatherData) {
+        let clothingGuide = ClothingGuide()
+        let clothingImageName = clothingGuide.getClotingImageName(by: 28) // data.current.temp
+        let clothingDescription = clothingGuide.getClotingDescriptions(by: 28)
+        
+        clothingImageView.image = UIImage(named: "\(clothingImageName)\(index + 1)")
+        clothingTitleLabel.text = "\(clothingDescription[index])"
     }
 }
