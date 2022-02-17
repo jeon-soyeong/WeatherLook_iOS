@@ -43,21 +43,21 @@ struct ClothingGuide {
     func getClotingDescriptions(by temperature: Int) -> [String] {
         switch temperature {
         case self.from28:
-            return ["민소매", "반팔", "반바지"]
+            return ["민소매", "차양모자", "반팔"]
         case self.from23To27:
-            return ["민소매", "반팔", "반바지"]
+            return ["얇은셔츠", "반팔", "반바지"]
         case self.from20To22:
-            return ["민소매", "반팔", "반바지"]
+            return ["긴팔", "긴셔츠", "긴바지"]
         case self.from17To19:
-            return ["민소매", "반팔", "반바지"]
+            return ["후드티", "얇은 니트", "청바지"]
         case self.from12To16:
-            return ["민소매", "반팔", "반바지"]
+            return ["가디건", "니트", "면바지"]
         case self.from9To11:
-            return ["민소매", "반팔", "반바지"]
+            return ["트렌치코트", "점퍼", "기모바지"]
         case self.from5To8:
-            return ["민소매", "반팔", "반바지"]
+            return ["울코트", "모자", "가죽자켓"]
         case self.to4:
-            return ["패딩", "코트", "목도리"]
+            return ["패딩", "털모자", "울코트"]
         default:
             return []
         }
