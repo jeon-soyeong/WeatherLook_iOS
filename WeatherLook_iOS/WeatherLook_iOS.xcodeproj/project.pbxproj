@@ -15,6 +15,9 @@
 		9B33259B27BB6BAD0096F20D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33259A27BB6BAD0096F20D /* UIFont+Extension.swift */; };
 		9B3325A027BB9F780096F20D /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33259F27BB9F780096F20D /* UICollectionView+Extension.swift */; };
 		9B3325A327BBA2AD0096F20D /* ClothingGuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3325A227BBA2AD0096F20D /* ClothingGuideCollectionViewCell.swift */; };
+		9B3325A527BCE2E80096F20D /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3325A427BCE2E80096F20D /* WeatherData.swift */; };
+		9B3325A727BCE61E0096F20D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3325A627BCE61D0096F20D /* HomeViewModel.swift */; };
+		9B6D4A8D27BE3A15000F2795 /* ClothingGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6D4A8C27BE3A15000F2795 /* ClothingGuide.swift */; };
 		9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636027A2A8740053E981 /* AppDelegate.swift */; };
 		9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636227A2A8740053E981 /* SceneDelegate.swift */; };
 		9B76636527A2A8740053E981 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636427A2A8740053E981 /* HomeViewController.swift */; };
@@ -58,6 +61,9 @@
 		9B33259A27BB6BAD0096F20D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		9B33259F27BB9F780096F20D /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		9B3325A227BBA2AD0096F20D /* ClothingGuideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingGuideCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B3325A427BCE2E80096F20D /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		9B3325A627BCE61D0096F20D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		9B6D4A8C27BE3A15000F2795 /* ClothingGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingGuide.swift; sourceTree = "<group>"; };
 		9B76635D27A2A8740053E981 /* WeatherLook_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLook_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76636027A2A8740053E981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B76636227A2A8740053E981 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,7 +141,6 @@
 		9B33259C27BB83D90096F20D /* Custom View */ = {
 			isa = PBXGroup;
 			children = (
-				9B3325A127BBA2860096F20D /* Cell */,
 				9B33259627BAC35F0096F20D /* CurrentWeatherView.swift */,
 			);
 			path = "Custom View";
@@ -292,6 +297,7 @@
 		9B76639927A3F40D0053E981 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9B3325A627BCE61D0096F20D /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 			children = (
 				9B76636427A2A8740053E981 /* HomeViewController.swift */,
 				9B33259C27BB83D90096F20D /* Custom View */,
+				9B3325A127BBA2860096F20D /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -308,6 +315,8 @@
 		9B76639B27A3F4220053E981 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9B3325A427BCE2E80096F20D /* WeatherData.swift */,
+				9B6D4A8C27BE3A15000F2795 /* ClothingGuide.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -684,14 +693,17 @@
 				9B3325A327BBA2AD0096F20D /* ClothingGuideCollectionViewCell.swift in Sources */,
 				9B76636527A2A8740053E981 /* HomeViewController.swift in Sources */,
 				9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */,
+				9B6D4A8D27BE3A15000F2795 /* ClothingGuide.swift in Sources */,
 				9B33259727BAC35F0096F20D /* CurrentWeatherView.swift in Sources */,
 				9B33259527BABEBD0096F20D /* UIColor+Extension.swift in Sources */,
+				9B3325A527BCE2E80096F20D /* WeatherData.swift in Sources */,
 				9B7663B327AC50D40053E981 /* SplashCoordinator.swift in Sources */,
 				9B3325A027BB9F780096F20D /* UICollectionView+Extension.swift in Sources */,
 				9B7663AC27AC4D9C0053E981 /* MainCoordinator.swift in Sources */,
 				9B7663B727B23AD30053E981 /* HomeCoordinator.swift in Sources */,
 				9B7663B527AD0EBD0053E981 /* SplashViewController.swift in Sources */,
 				9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */,
+				9B3325A727BCE61E0096F20D /* HomeViewModel.swift in Sources */,
 				9B33259B27BB6BAD0096F20D /* UIFont+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
