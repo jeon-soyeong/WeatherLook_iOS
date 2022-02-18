@@ -8,59 +8,45 @@
 import UIKit
 
 class CurrentWeatherView: UIView {
-    private let locationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "서울시 강남구"
-        label.textColor = .white
-        label.font = UIFont.setFont(type: .semiBold, size: 32)
-        return label
-    }()
+    private let locationLabel = UILabel().then {
+        $0.text = "서울시 강남구"
+        $0.textColor = .white
+        $0.font = UIFont.setFont(type: .semiBold, size: 32)
+    }
     
-    private let currentTemperatureLabel: UILabel = {
-        let label = UILabel()
-        label.text = "4'C"
-        label.textColor = .white
-        label.font = UIFont.setFont(type: .bold, size: 35)
-        return label
-    }()
+    private let currentTemperatureLabel = UILabel().then {
+        $0.text = "4'C"
+        $0.textColor = .white
+        $0.font = UIFont.setFont(type: .bold, size: 35)
+    }
     
-    private let currentWeatherImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "splashImage")
-        return imageView
-    }()
+    private let currentWeatherImageView = UIImageView().then {
+        $0.image = UIImage(named: "splashImage")
+    }
     
-    private let currentWeatherDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "맑음"
-        label.textColor = .white
-        label.font = UIFont.setFont(type: .semiBold, size: 18)
-        return label
-    }()
+    private let currentWeatherDescriptionLabel = UILabel().then {
+        $0.text = "맑음"
+        $0.textColor = .white
+        $0.font = UIFont.setFont(type: .semiBold, size: 18)
+    }
     
-    private let temperatureLabelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 20
-        return stackView
-    }()
+    private let temperatureLabelStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.spacing = 20
+    }
     
-    private let currentMaximumTemperatureLabel: UILabel = {
-        let label = UILabel()
-        label.text = "최고: 10'C"
-        label.textColor = .white
-        label.font = UIFont.setFont(type: .medium, size: 14)
-        return label
-    }()
+    private let currentMaximumTemperatureLabel = UILabel().then {
+        $0.text = "최고: 10'C"
+        $0.textColor = .white
+        $0.font = UIFont.setFont(type: .medium, size: 14)
+    }
     
-    private let currentMinimumTemperatureLabel: UILabel = {
-        let label = UILabel()
-        label.text = "최저: -1'C"
-        label.textColor = .white
-        label.font = UIFont.setFont(type: .medium, size: 14)
-        return label
-    }()
+    private let currentMinimumTemperatureLabel = UILabel().then {
+        $0.text = "최저: -1'C"
+        $0.textColor = .white
+        $0.font = UIFont.setFont(type: .medium, size: 14)
+    }
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)

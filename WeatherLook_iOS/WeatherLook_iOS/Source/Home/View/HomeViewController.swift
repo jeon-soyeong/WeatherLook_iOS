@@ -8,58 +8,43 @@
 import UIKit
 
 import SnapKit
+import Then
 
 class HomeViewController: UIViewController {
     weak var coordinator: HomeCoordinator?
     private let homeViewModel = HomeViewModel()
     
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .mainBlue
-        return scrollView
-    }()
+    private let scrollView = UIScrollView().then {
+        $0.backgroundColor = .mainBlue
+    }
     
-    private let contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+    private let contentView = UIView().then {
+        $0.backgroundColor = .clear
+    }
     
-    private let dailyWeatherView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
+    private let dailyWeatherView = UIView().then {
+        $0.backgroundColor = .clear
+    }
     
-    private let weeklyWeatherView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .brown
-        return view
-    }()
+    private let weeklyWeatherView = UIView().then {
+        $0.backgroundColor = .brown
+    }
     
-    private let bottomView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
+    private let bottomView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
-    private let listButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "list"), for: .normal)
-        return button
-    }()
+    private let listButton = UIButton().then {
+        $0.setImage(UIImage(named: "list"), for: .normal)
+    }
     
-    private let currentWeatherLineView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .mainLineGray
-        return view
-    }()
-
-    private let clothingGuideLineView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .mainLineGray
-        return view
-    }()
+    private let currentWeatherLineView = UIView().then {
+        $0.backgroundColor = .mainLineGray
+    }
+    
+    private let clothingGuideLineView = UIView().then {
+        $0.backgroundColor = .mainLineGray
+    }
     
     private let currentWeatherView = CurrentWeatherView.init()
     private let clothingGuideCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -181,8 +166,8 @@ extension HomeViewController: UICollectionViewDataSource {
             guard let clothingCollectionViewCell = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-//            TODO: 실 ViewModel로 변경
-//            clothingCollectionViewCell.updateUI(index: indexPath.item, data: homeViewModel.weatherList[indexPath.item])
+            //            TODO: 실 ViewModel로 변경
+            //            clothingCollectionViewCell.updateUI(index: indexPath.item, data: homeViewModel.weatherList[indexPath.item])
             clothingCollectionViewCell.updateUI(index: indexPath.item)
             
             return clothingCollectionViewCell

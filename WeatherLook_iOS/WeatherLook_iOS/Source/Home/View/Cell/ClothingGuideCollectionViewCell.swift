@@ -10,17 +10,11 @@ import UIKit
 class ClothingGuideCollectionViewCell: UICollectionViewCell {
     static let cellHeight = 148
     
-    private let clothingImageView: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
-    }()
-    
-    private let clothingTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.font = UIFont.setFont(type: .semiBold, size: 14)
-        return label
-    }()
+    private let clothingImageView = UIImageView()
+    private let clothingTitleLabel = UILabel().then {
+        $0.textColor = .white
+        $0.font = UIFont.setFont(type: .semiBold, size: 14)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

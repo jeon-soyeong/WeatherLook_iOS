@@ -13,13 +13,11 @@ import SnapKit
 class SplashViewController: UIViewController {
     weak var coordinator: SplashCoordinator?
     
-    private let splashImageView: UIImageView = {
-        let imageView = UIImageView()
+    private let splashImageView = UIImageView().then {
         if let splashImage = UIImage(named: "splashImage") {
-            imageView.image = splashImage
+            $0.image = splashImage
         }
-        return imageView
-    }()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
