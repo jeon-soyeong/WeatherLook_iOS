@@ -8,7 +8,7 @@
 import UIKit
 
 class ClothingGuideCollectionViewCell: UICollectionViewCell {
-    static let cellHeight = 148
+    static let cellHeight = 150
     
     private let clothingImageView = UIImageView()
     private let clothingTitleLabel = UILabel().then {

@@ -22,14 +22,6 @@ class HomeViewController: UIViewController {
         $0.backgroundColor = .clear
     }
     
-    private let dailyWeatherView = UIView().then {
-        $0.backgroundColor = .clear
-    }
-    
-    private let weeklyWeatherView = UIView().then {
-        $0.backgroundColor = .brown
-    }
-    
     private let bottomView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -46,8 +38,44 @@ class HomeViewController: UIViewController {
         $0.backgroundColor = .mainLineGray
     }
     
-    private let currentWeatherView = CurrentWeatherView.init()
-    private let clothingGuideCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private let dailyWeatherLineView = UIView().then {
+        $0.backgroundColor = .mainLineGray
+    }
+    
+    private let currentWeatherView = CurrentWeatherView()
+    
+    private let clothingGuideCollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = .zero
+    }
+    
+    private lazy var clothingGuideCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: clothingGuideCollectionViewFlowLayout).then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .clear
+        $0.isScrollEnabled = false
+    }
+    
+    private let dailyWeatherCollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = .zero
+    }
+    
+    private lazy var dailyWeatherCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: dailyWeatherCollectionViewFlowLayout).then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .clear
+        $0.isScrollEnabled = false
+    }
+    
+    private let weeklyWeatherCollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = .zero
+    }
+    
+    private lazy var weeklyWeatherCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: weeklyWeatherCollectionViewFlowLayout).then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .clear
+        $0.isScrollEnabled = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,16 +138,23 @@ class HomeViewController: UIViewController {
             $0.height.equalTo(0.5)
         }
         
-        contentView.addSubview(dailyWeatherView)
-        dailyWeatherView.snp.makeConstraints {
+        contentView.addSubview(dailyWeatherCollectionView)
+        dailyWeatherCollectionView.snp.makeConstraints {
             $0.top.equalTo(clothingGuideCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
         
-        contentView.addSubview(weeklyWeatherView)
-        weeklyWeatherView.snp.makeConstraints {
-            $0.top.equalTo(dailyWeatherView.snp.bottom)
+        contentView.addSubview(dailyWeatherLineView)
+        dailyWeatherLineView.snp.makeConstraints {
+            $0.centerX.width.equalToSuperview()
+            $0.top.equalTo(dailyWeatherCollectionView.snp.bottom)
+            $0.height.equalTo(0.5)
+        }
+        
+        contentView.addSubview(weeklyWeatherCollectionView)
+        weeklyWeatherCollectionView.snp.makeConstraints {
+            $0.top.equalTo(dailyWeatherLineView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(300)
             $0.bottom.equalToSuperview().inset(50)
@@ -127,17 +162,17 @@ class HomeViewController: UIViewController {
     }
     
     private func setupCollectionViewUI() {
-        let clothingGuideCollectionViewFlowLayout = UICollectionViewFlowLayout()
-        clothingGuideCollectionViewFlowLayout.scrollDirection = .horizontal
-        clothingGuideCollectionViewFlowLayout.minimumLineSpacing = .zero
-        
         clothingGuideCollectionView.dataSource = self
         clothingGuideCollectionView.delegate = self
-        clothingGuideCollectionView.setCollectionViewLayout(clothingGuideCollectionViewFlowLayout, animated: false)
-        clothingGuideCollectionView.showsHorizontalScrollIndicator = false
-        clothingGuideCollectionView.backgroundColor = .clear
-        clothingGuideCollectionView.isScrollEnabled = false
         clothingGuideCollectionView.registerCell(cellType: ClothingGuideCollectionViewCell.self)
+        
+        dailyWeatherCollectionView.dataSource = self
+        dailyWeatherCollectionView.delegate = self
+//        dailyWeatherCollectionView.registerCell(cellType: .self)
+        
+        weeklyWeatherCollectionView.dataSource = self
+        weeklyWeatherCollectionView.delegate = self
+//        weeklyWeatherCollectionView.registerCell(cellType: .self)
     }
     
     func bindViewModel() {
