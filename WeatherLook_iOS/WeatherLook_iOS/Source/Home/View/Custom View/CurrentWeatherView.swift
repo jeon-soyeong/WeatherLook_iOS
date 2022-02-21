@@ -21,7 +21,7 @@ class CurrentWeatherView: UIView {
     }
     
     private let currentWeatherImageView = UIImageView().then {
-        $0.image = UIImage(named: "splashImage")
+        $0.image = UIImage(named: "sun")
     }
     
     private let currentWeatherDescriptionLabel = UILabel().then {

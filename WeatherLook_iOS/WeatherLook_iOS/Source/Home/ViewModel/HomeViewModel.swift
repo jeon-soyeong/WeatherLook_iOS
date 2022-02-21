@@ -8,5 +8,5 @@
 import Foundation
 
 class HomeViewModel {
-    var weatherList: [WeatherData] = []
+    var weatherData: WeatherData?
 }

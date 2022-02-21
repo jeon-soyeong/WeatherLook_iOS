@@ -13,7 +13,7 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
     private let clothingImageView = UIImageView()
     private let clothingTitleLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .semiBold, size: 14)
+        $0.font = UIFont.setFont(type: .semiBold, size: 16)
     }
     
     override init(frame: CGRect) {
@@ -22,7 +22,8 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupUI()
     }
     
     private func setupUI() {
