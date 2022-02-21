@@ -63,16 +63,15 @@ class HomeViewController: UIViewController {
     private lazy var dailyWeatherCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: dailyWeatherCollectionViewFlowLayout).then {
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .clear
-        $0.isScrollEnabled = false
     }
     
     private let weeklyWeatherCollectionViewFlowLayout = UICollectionViewFlowLayout().then {
-        $0.scrollDirection = .horizontal
+        $0.scrollDirection = .vertical
         $0.minimumLineSpacing = .zero
     }
     
     private lazy var weeklyWeatherCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: weeklyWeatherCollectionViewFlowLayout).then {
-        $0.showsHorizontalScrollIndicator = false
+        $0.showsVerticalScrollIndicator = false
         $0.backgroundColor = .clear
         $0.isScrollEnabled = false
     }
@@ -157,7 +156,7 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(dailyWeatherLineView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(300)
-            $0.bottom.equalToSuperview().inset(50)
+            $0.bottom.equalToSuperview().inset(60)
         }
     }
     
@@ -168,11 +167,12 @@ class HomeViewController: UIViewController {
         
         dailyWeatherCollectionView.dataSource = self
         dailyWeatherCollectionView.delegate = self
-//        dailyWeatherCollectionView.registerCell(cellType: .self)
-        
+        dailyWeatherCollectionView.registerCell(cellType: DailyWeatherCollectionViewCell.self)
+        scrollView.addGestureRecognizer(dailyWeatherCollectionView.panGestureRecognizer)
+                
         weeklyWeatherCollectionView.dataSource = self
         weeklyWeatherCollectionView.delegate = self
-//        weeklyWeatherCollectionView.registerCell(cellType: .self)
+        weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
     }
     
     func bindViewModel() {
@@ -187,9 +187,18 @@ class HomeViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        guard let weatherData = homeViewModel.weatherData else {
+//            return 0
+//        }
+        
         switch collectionView {
         case clothingGuideCollectionView:
             return 3
+        // FIXME: viewModel 갯수로 변경
+//        case dailyWeatherCollectionView:
+//            return weatherData.hourly.count
+//        case weeklyWeatherCollectionView:
+//            return weatherData.daily.count
         default:
             return 7
         }
@@ -198,14 +207,32 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case clothingGuideCollectionView:
-            guard let clothingCollectionViewCell = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
+            guard let clothingGuideCollectionView = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
             //            TODO: 실 ViewModel로 변경
-            //            clothingCollectionViewCell.updateUI(index: indexPath.item, data: homeViewModel.weatherList[indexPath.item])
-            clothingCollectionViewCell.updateUI(index: indexPath.item)
+            //            clothingCollectionViewCell.updateUI(index: indexPath.item, data: homeViewModel.weatherData[indexPath.item])
+            clothingGuideCollectionView.updateUI(index: indexPath.item)
             
-            return clothingCollectionViewCell
+            return clothingGuideCollectionView
+        case dailyWeatherCollectionView:
+            guard let dailyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: DailyWeatherCollectionViewCell.self, indexPath: indexPath) else {
+                return UICollectionViewCell()
+            }
+            
+            //            TODO: 실 ViewModel로 변경
+            dailyWeatherCollectionViewCell.updateUI()
+            
+            return dailyWeatherCollectionViewCell
+        case weeklyWeatherCollectionView:
+            guard let weeklyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: WeeklyWeatherCollectionViewCell.self, indexPath: indexPath) else {
+                return UICollectionViewCell()
+            }
+            
+            //            TODO: 실 ViewModel로 변경
+            weeklyWeatherCollectionViewCell.updateUI()
+
+            return weeklyWeatherCollectionViewCell
         default:
             return UICollectionViewCell()
         }
@@ -218,6 +245,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         switch collectionView {
         case clothingGuideCollectionView:
             return CGSize(width: Int(collectionView.frame.width) / 3, height: ClothingGuideCollectionViewCell.cellHeight)
+        case dailyWeatherCollectionView:
+            return CGSize(width: DailyWeatherCollectionViewCell.cellWidth, height: DailyWeatherCollectionViewCell.cellHeight)
+        case weeklyWeatherCollectionView:
+            return CGSize(width: Int(collectionView.frame.width), height: WeeklyWeatherCollectionViewCell.cellHeight)
         default:
             return CGSize()
         }
