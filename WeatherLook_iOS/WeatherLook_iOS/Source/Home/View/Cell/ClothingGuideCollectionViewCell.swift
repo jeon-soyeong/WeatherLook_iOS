@@ -45,8 +45,8 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
         //TODO: 변경
 //    func updateUI(index: Int, data: WeatherData) {
         let clothingGuide = ClothingGuide()
-        let clothingImageName = clothingGuide.getClotingImageName(by: 4) // data.current.temp
-        let clothingDescription = clothingGuide.getClotingDescriptions(by: 4)
+        let clothingImageName = clothingGuide.getClothingImageName(by: 4) // data.current.temp
+        let clothingDescription = clothingGuide.getClothingDescriptions(by: 4)
         
         clothingImageView.image = UIImage(named: "\(clothingImageName)\(index)")
         clothingTitleLabel.text = "\(clothingDescription[index])"

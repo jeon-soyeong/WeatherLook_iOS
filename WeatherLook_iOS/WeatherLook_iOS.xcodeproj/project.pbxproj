@@ -217,7 +217,7 @@
 			children = (
 				9B76639527A3EC530053E981 /* Extension */,
 				9B76639427A3EC420053E981 /* Network */,
-				9B7C40CF27C4CF53001C1BAD /* ViewModelType.swift */,
+				9B7663A727AC4AA40053E981 /* Protocol */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -397,7 +397,6 @@
 		9B7663A627AC4A9D0053E981 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				9B7663A727AC4AA40053E981 /* Protocol */,
 				9B7663A827AC4AB40053E981 /* Coordinator */,
 			);
 			path = Main;
@@ -406,6 +405,7 @@
 		9B7663A727AC4AA40053E981 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				9B7C40CF27C4CF53001C1BAD /* ViewModelType.swift */,
 				9B7663A927AC4C650053E981 /* Coordinator.swift */,
 			);
 			path = Protocol;
@@ -422,9 +422,7 @@
 		9B7663AD27AC50700053E981 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
-				9B7663B127AC50A70053E981 /* Model */,
 				9B7663B027AC50A10053E981 /* View */,
-				9B7663AF27AC50990053E981 /* ViewModel */,
 				9B7663AE27AC50800053E981 /* Coordinator */,
 			);
 			path = Splash;
@@ -438,26 +436,12 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		9B7663AF27AC50990053E981 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		9B7663B027AC50A10053E981 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				9B7663B427AD0EBD0053E981 /* SplashViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		9B7663B127AC50A70053E981 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -17,7 +17,7 @@ struct ClothingGuide {
     let from5To8 = 5...8
     let to4 = ...4
     
-    func getClotingImageName(by temperature: Int) -> String {
+    func getClothingImageName(by temperature: Int) -> String {
         switch temperature {
         case self.from28:
             return "28temp"
@@ -40,7 +40,7 @@ struct ClothingGuide {
         }
     }
     
-    func getClotingDescriptions(by temperature: Int) -> [String] {
+    func getClothingDescriptions(by temperature: Int) -> [String] {
         switch temperature {
         case self.from28:
             return ["민소매", "차양모자", "반팔"]

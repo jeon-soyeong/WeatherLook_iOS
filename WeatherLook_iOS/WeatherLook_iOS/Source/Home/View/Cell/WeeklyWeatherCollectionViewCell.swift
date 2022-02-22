@@ -7,7 +7,6 @@
 
 import UIKit
 
-//    min, max, pop, main
 class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
     //FIXME:  viewModel 갯수로 수정
     static let cellHeight = 300 / 7
@@ -77,6 +76,7 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // TODO: 실제로 변경
     func updateUI() {
         daysLabel.text = "월요일"
         weatherImageView.image = UIImage(named: "sun")

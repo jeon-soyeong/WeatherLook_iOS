@@ -54,6 +54,7 @@ class DailyWeatherCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // TODO: 실제로 변경
     func updateUI() {
         timeLabel.text = "오전 10시"
         weatherImageView.image = UIImage(named: "sun")

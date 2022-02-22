@@ -7,15 +7,19 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
 import SnapKit
 import Then
 
 class HomeViewController: UIViewController {
     weak var coordinator: HomeCoordinator?
     private let homeViewModel = HomeViewModel()
+    private let disposeBag = DisposeBag()
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .mainBlue
+        $0.showsVerticalScrollIndicator = false
     }
     
     private let contentView = UIView().then {
@@ -84,13 +88,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupCollectionViewUI()
+        bindViewModel()
     }
     
     private func setupUI() {
         view.backgroundColor = .white
         
         view.addSubview(scrollView)
-        scrollView.showsVerticalScrollIndicator = false
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -178,7 +182,6 @@ class HomeViewController: UIViewController {
         dailyWeatherCollectionView.dataSource = self
         dailyWeatherCollectionView.delegate = self
         dailyWeatherCollectionView.registerCell(cellType: DailyWeatherCollectionViewCell.self)
-        scrollView.addGestureRecognizer(dailyWeatherCollectionView.panGestureRecognizer)
                 
         weeklyWeatherCollectionView.dataSource = self
         weeklyWeatherCollectionView.delegate = self
@@ -186,11 +189,8 @@ class HomeViewController: UIViewController {
     }
     
     func bindViewModel() {
-        //rx.tap
-    }
-    
-    func observeViewModel() {
-        // view update
+        let input = HomeViewModel.Input(viewDidLoadEvent: Observable.just(()))
+        let output = homeViewModel.transform(input: input)
     }
 }
 
