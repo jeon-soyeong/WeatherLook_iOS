@@ -33,12 +33,12 @@ struct HourlyWeather: Codable {
 }
 
 struct Daily: Codable {
-    let temp: DailyTemparature
+    let temp: DailyTemperature
     let weather: [DailyWeather]
     let pop: Float
 }
 
-struct DailyTemparature: Codable {
+struct DailyTemperature: Codable {
     let min: Float
     let max: Float
 }
