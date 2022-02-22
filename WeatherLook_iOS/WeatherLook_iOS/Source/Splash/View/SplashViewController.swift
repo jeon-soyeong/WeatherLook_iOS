@@ -8,7 +8,6 @@
 import UIKit
 
 import RxSwift
-import SnapKit
 
 class SplashViewController: UIViewController {
     weak var coordinator: SplashCoordinator?

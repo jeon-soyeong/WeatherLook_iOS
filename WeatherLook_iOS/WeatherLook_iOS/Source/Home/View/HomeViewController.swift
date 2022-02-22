@@ -23,11 +23,15 @@ class HomeViewController: UIViewController {
     }
     
     private let bottomView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .mainBlue
     }
     
     private let listButton = UIButton().then {
         $0.setImage(UIImage(named: "list"), for: .normal)
+    }
+    
+    private let bottomTopLineView = UIView().then {
+        $0.backgroundColor = .mainLineGray
     }
     
     private let currentWeatherLineView = UIView().then {
@@ -99,9 +103,15 @@ class HomeViewController: UIViewController {
         
         bottomView.addSubview(listButton)
         listButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalTo(18)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
+        }
+        
+        bottomView.addSubview(bottomTopLineView)
+        bottomTopLineView.snp.makeConstraints {
+            $0.top.centerX.width.equalToSuperview()
+            $0.height.equalTo(0.5)
         }
         
         scrollView.addSubview(contentView)
