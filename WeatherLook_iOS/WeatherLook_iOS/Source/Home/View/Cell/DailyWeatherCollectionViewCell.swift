@@ -25,29 +25,37 @@ class DailyWeatherCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        setupView()
     }
     
-    private func setupUI() {
+    private func setupView() {
+        setupSubViews()
+        setupConstraints()
+    }
+    
+    private func setupSubViews() {
         self.addSubview(timeLabel)
+        self.addSubview(weatherImageView)
+        self.addSubview(temperatureLabel)
+    }
+    
+    private func setupConstraints() {
         timeLabel.snp.makeConstraints {
             $0.top.equalTo(20)
             $0.centerX.equalToSuperview()
         }
         
-        self.addSubview(weatherImageView)
         weatherImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(35)
             $0.top.equalTo(timeLabel.snp.bottom).offset(15)
         }
         
-        self.addSubview(temperatureLabel)
         temperatureLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(weatherImageView.snp.bottom).offset(18)

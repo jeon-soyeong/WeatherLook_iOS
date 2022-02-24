@@ -18,23 +18,28 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        setupView()
     }
     
-    private func setupUI() {
+    private func setupView() {
         self.addSubview(clothingImageView)
+        self.addSubview(clothingTitleLabel)
+        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         clothingImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(20)
             $0.width.height.equalTo(85)
         }
         
-        self.addSubview(clothingTitleLabel)
         clothingTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(clothingImageView.snp.bottom).offset(10)
@@ -43,7 +48,7 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
     
     func updateUI(index: Int) {
         //TODO: 변경
-//    func updateUI(index: Int, data: WeatherData) {
+        //    func updateUI(index: Int, data: WeatherData) {
         let clothingGuide = ClothingGuide()
         let clothingImageName = clothingGuide.getClothingImageName(by: 4) // data.current.temp
         let clothingDescription = clothingGuide.getClothingDescriptions(by: 4)

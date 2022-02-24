@@ -20,17 +20,21 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupView()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [weak self] in
             self?.coordinator?.goHome()
         })
     }
     
-    private func setupUI() {
+    private func setupView() {
         view.backgroundColor = .white
         
         view.addSubview(splashImageView)
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         splashImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()

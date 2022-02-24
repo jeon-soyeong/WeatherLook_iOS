@@ -14,6 +14,8 @@ import Then
 
 class HomeViewController: UIViewController {
     weak var coordinator: HomeCoordinator?
+    //FIXME: real location
+    //    private let homeViewModel = HomeViewModel(cityLocationList: [(Float, Float)])
     private let homeViewModel = HomeViewModel()
     private let disposeBag = DisposeBag()
     
@@ -86,86 +88,94 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        setupCollectionViewUI()
+        setupView()
+        setupCollectionView()
         bindViewModel()
     }
     
-    private func setupUI() {
+    private func setupView() {
         view.backgroundColor = .white
         
+        setupSubViews()
+        setupConstraints()
+    }
+    
+    private func setupSubViews() {
         view.addSubview(scrollView)
+        view.addSubview(bottomView)
+        bottomView.addSubview(listButton)
+        bottomView.addSubview(bottomTopLineView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(currentWeatherView)
+        contentView.addSubview(currentWeatherLineView)
+        contentView.addSubview(clothingGuideCollectionView)
+        contentView.addSubview(clothingGuideLineView)
+        contentView.addSubview(dailyWeatherCollectionView)
+        contentView.addSubview(dailyWeatherLineView)
+        contentView.addSubview(weeklyWeatherCollectionView)
+    }
+    
+    private func setupConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        view.addSubview(bottomView)
         bottomView.snp.makeConstraints {
             $0.centerX.width.bottom.equalToSuperview()
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
         
-        bottomView.addSubview(listButton)
         listButton.snp.makeConstraints {
             $0.top.equalTo(18)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
         }
         
-        bottomView.addSubview(bottomTopLineView)
         bottomTopLineView.snp.makeConstraints {
             $0.top.centerX.width.equalToSuperview()
             $0.height.equalTo(0.5)
         }
         
-        scrollView.addSubview(contentView)
         contentView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.centerX.top.bottom.equalToSuperview()
         }
         
-        contentView.addSubview(currentWeatherView)
         currentWeatherView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.equalTo(300)
         }
         
-        contentView.addSubview(currentWeatherLineView)
         currentWeatherLineView.snp.makeConstraints {
             $0.centerX.width.equalToSuperview()
             $0.top.equalTo(currentWeatherView.snp.bottom)
             $0.height.equalTo(0.5)
         }
         
-        contentView.addSubview(clothingGuideCollectionView)
         clothingGuideCollectionView.snp.makeConstraints {
             $0.top.equalTo(currentWeatherView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
         
-        contentView.addSubview(clothingGuideLineView)
         clothingGuideLineView.snp.makeConstraints {
             $0.centerX.width.equalToSuperview()
             $0.top.equalTo(clothingGuideCollectionView.snp.bottom)
             $0.height.equalTo(0.5)
         }
         
-        contentView.addSubview(dailyWeatherCollectionView)
         dailyWeatherCollectionView.snp.makeConstraints {
             $0.top.equalTo(clothingGuideCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
         
-        contentView.addSubview(dailyWeatherLineView)
         dailyWeatherLineView.snp.makeConstraints {
             $0.centerX.width.equalToSuperview()
             $0.top.equalTo(dailyWeatherCollectionView.snp.bottom)
             $0.height.equalTo(0.5)
         }
         
-        contentView.addSubview(weeklyWeatherCollectionView)
         weeklyWeatherCollectionView.snp.makeConstraints {
             $0.top.equalTo(dailyWeatherLineView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
@@ -174,7 +184,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func setupCollectionViewUI() {
+    private func setupCollectionView() {
         clothingGuideCollectionView.dataSource = self
         clothingGuideCollectionView.delegate = self
         clothingGuideCollectionView.registerCell(cellType: ClothingGuideCollectionViewCell.self)
@@ -182,7 +192,7 @@ class HomeViewController: UIViewController {
         dailyWeatherCollectionView.dataSource = self
         dailyWeatherCollectionView.delegate = self
         dailyWeatherCollectionView.registerCell(cellType: DailyWeatherCollectionViewCell.self)
-                
+        
         weeklyWeatherCollectionView.dataSource = self
         weeklyWeatherCollectionView.delegate = self
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
@@ -191,24 +201,26 @@ class HomeViewController: UIViewController {
     func bindViewModel() {
         let input = HomeViewModel.Input(viewDidLoadEvent: Observable.just(()))
         let output = homeViewModel.transform(input: input)
+        //list button tap rx.bind coordinator
+        // ouput view bind()
     }
 }
 
 // MARK: UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        guard let weatherData = homeViewModel.weatherData else {
-//            return 0
-//        }
+        //        guard let weatherData = homeViewModel.weatherData else {
+        //            return 0
+        //        }
         
         switch collectionView {
         case clothingGuideCollectionView:
             return 3
-        // FIXME: viewModel 갯수로 변경
-//        case dailyWeatherCollectionView:
-//            return weatherData.hourly.count
-//        case weeklyWeatherCollectionView:
-//            return weatherData.daily.count
+            // FIXME: viewModel 갯수로 변경
+            //        case dailyWeatherCollectionView:
+            //            return weatherData.hourly.count
+            //        case weeklyWeatherCollectionView:
+            //            return weatherData.daily.count
         default:
             return 7
         }
@@ -241,7 +253,7 @@ extension HomeViewController: UICollectionViewDataSource {
             
             //            TODO: 실 ViewModel로 변경
             weeklyWeatherCollectionViewCell.updateUI()
-
+            
             return weeklyWeatherCollectionViewCell
         default:
             return UICollectionViewCell()

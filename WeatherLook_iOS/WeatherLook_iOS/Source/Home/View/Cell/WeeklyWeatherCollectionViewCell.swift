@@ -35,41 +35,49 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        setupView()
     }
     
-    private func setupUI() {
+    private func setupView() {
+        setupSubViews()
+        setupConstraints()
+    }
+    
+    private func setupSubViews() {
         self.addSubview(daysLabel)
+        self.addSubview(weatherImageView)
+        self.addSubview(precipitationProbabilityLabel)
+        self.addSubview(minimumTemperatureLabel)
+        self.addSubview(maximumTemperatureLabel)
+    }
+    
+    private func setupConstraints() {
         daysLabel.snp.makeConstraints {
             $0.leading.equalTo(24)
             $0.top.equalTo(15)
         }
         
-        self.addSubview(weatherImageView)
         weatherImageView.snp.makeConstraints {
             $0.top.equalTo(12)
             $0.leading.equalTo(daysLabel.snp.trailing).offset(90)
             $0.width.height.equalTo(25)
         }
         
-        self.addSubview(precipitationProbabilityLabel)
         precipitationProbabilityLabel.snp.makeConstraints {
             $0.top.equalTo(15)
             $0.leading.equalTo(weatherImageView.snp.trailing).offset(12)
         }
         
-        self.addSubview(minimumTemperatureLabel)
         minimumTemperatureLabel.snp.makeConstraints {
             $0.top.equalTo(15)
             $0.leading.equalTo(self.snp.trailing).inset(36)
         }
         
-        self.addSubview(maximumTemperatureLabel)
         maximumTemperatureLabel.snp.makeConstraints {
             $0.top.equalTo(15)
             $0.leading.equalTo(minimumTemperatureLabel.snp.leading).offset(-36)

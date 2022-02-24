@@ -50,62 +50,54 @@ class CurrentWeatherView: UIView {
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
-        setupLocationLabel()
-        setupCurrentTemperatureLabel()
-        setupWeatherImageView()
-        setupCurrentWeatherDescription()
-        setupTemperatureStackView()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupLocationLabel()
-        setupCurrentTemperatureLabel()
-        setupWeatherImageView()
-        setupCurrentWeatherDescription()
-        setupTemperatureStackView()
+        setupView()
     }
     
-    private func setupLocationLabel() {
+    private func setupView() {
+        setupSubViews()
+        setupConstraints()
+    }
+    
+    private func setupSubViews() {
         self.addSubview(locationLabel)
+        self.addSubview(currentTemperatureLabel)
+        self.addSubview(currentWeatherImageView)
+        self.addSubview(currentWeatherDescriptionLabel)
+        self.addSubview(temperatureLabelStackView)
+        temperatureLabelStackView.addArrangedSubview(currentMaximumTemperatureLabel)
+        temperatureLabelStackView.addArrangedSubview(currentMinimumTemperatureLabel)
+    }
+    
+    private func setupConstraints() {
         self.locationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(14)
         }
-    }
-    
-    private func setupCurrentTemperatureLabel() {
-        self.addSubview(currentTemperatureLabel)
+        
         self.currentTemperatureLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(locationLabel.snp.bottom).offset(14)
         }
-    }
-    
-    private func setupWeatherImageView() {
-        self.addSubview(currentWeatherImageView)
+        
         self.currentWeatherImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(currentTemperatureLabel.snp.bottom).offset(14)
             $0.width.height.equalTo(100)
         }
-    }
-    
-    private func setupCurrentWeatherDescription() {
-        self.addSubview(currentWeatherDescriptionLabel)
+        
         self.currentWeatherDescriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(currentWeatherImageView.snp.bottom).offset(14)
         }
-    }
-    
-    private func setupTemperatureStackView() {
-        self.addSubview(temperatureLabelStackView)
+        
         self.temperatureLabelStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(currentWeatherDescriptionLabel.snp.bottom).offset(14)
         }
-        temperatureLabelStackView.addArrangedSubview(currentMaximumTemperatureLabel)
-        temperatureLabelStackView.addArrangedSubview(currentMinimumTemperatureLabel)
     }
 }
