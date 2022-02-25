@@ -1,5 +1,5 @@
 //
-//  HomeCoordinator.swift
+//  WeatherCoordinator.swift
 //  WeatherLook_iOS
 //
 //  Created by 전소영 on 2022/02/08.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HomeCoordinator: Coordinator {
+class WeatherCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
@@ -18,8 +18,8 @@ class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        let homeViewController = HomeViewController()
-        homeViewController.coordinator = self
-        navigationController.pushViewController(homeViewController, animated: false)
+        let weatherPageViewController = WeatherPageViewController()
+        weatherPageViewController.coordinator = self
+        navigationController.pushViewController(weatherPageViewController, animated: false)
     }
 }

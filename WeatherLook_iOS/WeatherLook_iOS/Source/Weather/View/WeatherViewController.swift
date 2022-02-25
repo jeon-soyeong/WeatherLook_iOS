@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  WeatherViewController.swift
 //  WeatherLook_iOS
 //
 //  Created by 전소영 on 2022/01/27.
@@ -12,11 +12,10 @@ import RxCocoa
 import SnapKit
 import Then
 
-class HomeViewController: UIViewController {
-    weak var coordinator: HomeCoordinator?
+class WeatherViewController: UIViewController {
     //FIXME: real location
-    //    private let homeViewModel = HomeViewModel(cityLocationList: [(Float, Float)])
-    private let homeViewModel = HomeViewModel()
+    //    private let weatherViewModel = WeatherViewModel(cityLocationList: [(Float, Float)])
+    private let weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
     
     private let scrollView = UIScrollView().then {
@@ -199,15 +198,15 @@ class HomeViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let input = HomeViewModel.Input(viewDidLoadEvent: Observable.just(()))
-        let output = homeViewModel.transform(input: input)
+//        let input =
+//        let output = weatherViewModel.transform(input: input)
         //list button tap rx.bind coordinator
         // ouput view bind()
     }
 }
 
 // MARK: UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDataSource {
+extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        guard let weatherData = homeViewModel.weatherData else {
         //            return 0
@@ -262,7 +261,7 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
+extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case clothingGuideCollectionView:
