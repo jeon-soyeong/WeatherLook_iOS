@@ -18,6 +18,9 @@ class WeatherViewController: UIViewController {
     private let weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
     
+    var totalPageControlCount: Int = 0
+    var currentPageControlIndex: Int = 0
+    
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .mainBlue
         $0.showsVerticalScrollIndicator = false
@@ -34,6 +37,8 @@ class WeatherViewController: UIViewController {
     private let listButton = UIButton().then {
         $0.setImage(UIImage(named: "list"), for: .normal)
     }
+    
+    private let pageControl = UIPageControl()
     
     private let bottomTopLineView = UIView().then {
         $0.backgroundColor = .mainLineGray
@@ -88,10 +93,11 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupPageControl()
         setupCollectionView()
         bindViewModel()
     }
-    
+
     private func setupView() {
         view.backgroundColor = .white
         
@@ -103,6 +109,7 @@ class WeatherViewController: UIViewController {
         view.addSubview(scrollView)
         view.addSubview(bottomView)
         bottomView.addSubview(listButton)
+        bottomView.addSubview(pageControl)
         bottomView.addSubview(bottomTopLineView)
         scrollView.addSubview(contentView)
         contentView.addSubview(currentWeatherView)
@@ -128,6 +135,11 @@ class WeatherViewController: UIViewController {
             $0.top.equalTo(18)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
+        }
+        
+        pageControl.snp.makeConstraints {
+            $0.top.equalTo(18)
+            $0.centerX.equalToSuperview()
         }
         
         bottomTopLineView.snp.makeConstraints {
@@ -183,6 +195,11 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    private func setupPageControl() {
+        pageControl.numberOfPages = totalPageControlCount
+        pageControl.currentPage = currentPageControlIndex
+    }
+    
     private func setupCollectionView() {
         clothingGuideCollectionView.dataSource = self
         clothingGuideCollectionView.delegate = self
@@ -197,7 +214,7 @@ class WeatherViewController: UIViewController {
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
     }
     
-    func bindViewModel() {
+    private func bindViewModel() {
 //        let input =
 //        let output = weatherViewModel.transform(input: input)
         //list button tap rx.bind coordinator
