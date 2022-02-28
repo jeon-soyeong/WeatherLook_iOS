@@ -23,11 +23,11 @@ class SplashCoordinator: Coordinator {
         navigationController.pushViewController(splashViewController, animated: false)
     }
     
-    func goHome() {
-        let homeCoordinator = HomeCoordinator(navigationController)
-        homeCoordinator.parentCoordinator = self
-        self.childCoordinators.append(homeCoordinator)
+    func goWeatherHome() {
+        let weatherCoordinator = WeatherCoordinator(navigationController)
+        weatherCoordinator.parentCoordinator = self
+        self.childCoordinators.append(weatherCoordinator)
         
-        homeCoordinator.start()
+        weatherCoordinator.start()
     }
 }

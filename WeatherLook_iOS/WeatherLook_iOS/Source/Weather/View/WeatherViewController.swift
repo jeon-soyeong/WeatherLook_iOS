@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  WeatherViewController.swift
 //  WeatherLook_iOS
 //
 //  Created by 전소영 on 2022/01/27.
@@ -12,12 +12,14 @@ import RxCocoa
 import SnapKit
 import Then
 
-class HomeViewController: UIViewController {
-    weak var coordinator: HomeCoordinator?
+class WeatherViewController: UIViewController {
     //FIXME: real location
-    //    private let homeViewModel = HomeViewModel(cityLocationList: [(Float, Float)])
-    private let homeViewModel = HomeViewModel()
+    //    private let weatherViewModel = WeatherViewModel(cityLocationList: [(Float, Float)])
+    private let weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
+    
+    var totalPageControlCount: Int = 0
+    var currentPageControlIndex: Int = 0
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .mainBlue
@@ -35,6 +37,8 @@ class HomeViewController: UIViewController {
     private let listButton = UIButton().then {
         $0.setImage(UIImage(named: "list"), for: .normal)
     }
+    
+    private let pageControl = UIPageControl()
     
     private let bottomTopLineView = UIView().then {
         $0.backgroundColor = .mainLineGray
@@ -89,10 +93,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupPageControl()
         setupCollectionView()
         bindViewModel()
     }
-    
+
     private func setupView() {
         view.backgroundColor = .white
         
@@ -104,6 +109,7 @@ class HomeViewController: UIViewController {
         view.addSubview(scrollView)
         view.addSubview(bottomView)
         bottomView.addSubview(listButton)
+        bottomView.addSubview(pageControl)
         bottomView.addSubview(bottomTopLineView)
         scrollView.addSubview(contentView)
         contentView.addSubview(currentWeatherView)
@@ -129,6 +135,11 @@ class HomeViewController: UIViewController {
             $0.top.equalTo(18)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
+        }
+        
+        pageControl.snp.makeConstraints {
+            $0.top.equalTo(18)
+            $0.centerX.equalToSuperview()
         }
         
         bottomTopLineView.snp.makeConstraints {
@@ -184,6 +195,11 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func setupPageControl() {
+        pageControl.numberOfPages = totalPageControlCount
+        pageControl.currentPage = currentPageControlIndex
+    }
+    
     private func setupCollectionView() {
         clothingGuideCollectionView.dataSource = self
         clothingGuideCollectionView.delegate = self
@@ -198,16 +214,16 @@ class HomeViewController: UIViewController {
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
     }
     
-    func bindViewModel() {
-        let input = HomeViewModel.Input(viewDidLoadEvent: Observable.just(()))
-        let output = homeViewModel.transform(input: input)
+    private func bindViewModel() {
+//        let input =
+//        let output = weatherViewModel.transform(input: input)
         //list button tap rx.bind coordinator
         // ouput view bind()
     }
 }
 
 // MARK: UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDataSource {
+extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //        guard let weatherData = homeViewModel.weatherData else {
         //            return 0
@@ -262,7 +278,7 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
+extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case clothingGuideCollectionView:
