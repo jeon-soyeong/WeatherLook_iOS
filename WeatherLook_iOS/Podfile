@@ -13,6 +13,7 @@ target 'WeatherLook_iOS' do
     pod 'SnapKit'
     pod 'Then'
     pod 'Kingfisher'
+    pod 'RxCoreLocation'
 
   target 'WeatherLook_iOSTests' do
     inherit! :search_paths
