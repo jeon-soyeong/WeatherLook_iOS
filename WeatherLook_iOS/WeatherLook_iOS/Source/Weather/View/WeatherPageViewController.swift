@@ -7,16 +7,21 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 class WeatherPageViewController: UIPageViewController {
     weak var coordinator: WeatherCoordinator?
     
+    private let disposeBag = DisposeBag()
     private var weatherViewControllers: [WeatherViewController] = []
     var pageIndex: Int = 0
+    var locationList: [Location] = []
     
     override init(transitionStyle: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]?) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -27,8 +32,39 @@ class WeatherPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
+        setupLocationList()
         setupWeatherViewControllers()
         setupCurrentWeatherViewController()
+    }
+    
+    private func setupLocationList() {
+        var latitude: Double = 0
+        var longitude: Double = 0
+        var name: String = ""
+        
+        if let userLocationList = UserDefaultsManager.locationList {
+            locationList = userLocationList
+        }
+        
+        Observable.zip(LocationManager.shared.locationSubject, LocationManager.shared.placeMarkSubject)
+            .subscribe(onNext: { value in
+                latitude = value.0.latitude
+                longitude = value.0.longitude
+                name = value.1
+                
+                let currentLocation = Location(coordinate: Coordinate(latitude: latitude, longitude: longitude), name: name)
+                
+                if self.locationList.isEmpty {
+                    self.locationList.append(currentLocation)
+                } else {
+                    if self.locationList.first != currentLocation {
+                        self.locationList.remove(at: 0)
+                        self.locationList.append(currentLocation)
+                    }
+                }
+                UserDefaultsManager.locationList = self.locationList
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupWeatherViewControllers() {
@@ -45,8 +81,8 @@ class WeatherPageViewController: UIPageViewController {
         //FIXME: locationList 갯수로 변경
         weatherViewController.totalPageControlCount = 5
         weatherViewController.currentPageControlIndex = index
-//        weatherViewController.location = locationList[index]
-//        weatherViewController.index = index
+        //        weatherViewController.location = locationList[index]
+        //        weatherViewController.index = index
         
         return weatherViewController
     }
@@ -61,7 +97,7 @@ class WeatherPageViewController: UIPageViewController {
 extension WeatherPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let weatherViewController = viewController as? WeatherViewController, let currentIndex = weatherViewControllers.firstIndex(of: weatherViewController) else {
-                return nil
+            return nil
         }
         
         let previousIndex = currentIndex - 1
@@ -75,11 +111,11 @@ extension WeatherPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let weatherViewController = viewController as? WeatherViewController, let currentIndex = weatherViewControllers.firstIndex(of: weatherViewController) else {
-                return nil
+            return nil
         }
         
         let nextIndex = currentIndex + 1
-      
+        
         if nextIndex >= weatherViewControllers.count {
             return weatherViewControllers.first
         } else {
