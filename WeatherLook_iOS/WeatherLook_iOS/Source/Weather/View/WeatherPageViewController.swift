@@ -68,8 +68,7 @@ class WeatherPageViewController: UIPageViewController {
     }
     
     private func setupWeatherViewControllers() {
-        //FIXME: locationList 갯수로 변경
-        for i in 0..<5 {
+        for i in 0..<locationList.count {
             if let weatherViewController = createWeatherViewController(at: i) as? WeatherViewController {
                 weatherViewControllers.append(weatherViewController)
             }
@@ -78,11 +77,9 @@ class WeatherPageViewController: UIPageViewController {
     
     private func createWeatherViewController(at index: Int) -> UIViewController {
         let weatherViewController = WeatherViewController()
-        //FIXME: locationList 갯수로 변경
-        weatherViewController.totalPageControlCount = 5
+        weatherViewController.totalPageControlCount = locationList.count
         weatherViewController.currentPageControlIndex = index
-        //        weatherViewController.location = locationList[index]
-        //        weatherViewController.index = index
+        weatherViewController.location = locationList[index]
         
         return weatherViewController
     }

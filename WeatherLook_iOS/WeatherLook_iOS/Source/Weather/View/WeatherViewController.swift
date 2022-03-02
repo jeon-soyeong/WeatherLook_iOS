@@ -20,6 +20,7 @@ class WeatherViewController: UIViewController {
     
     var totalPageControlCount: Int = 0
     var currentPageControlIndex: Int = 0
+    var location: Location?
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .mainBlue
