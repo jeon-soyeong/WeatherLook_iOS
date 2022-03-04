@@ -247,34 +247,34 @@ class WeatherViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //        guard let weatherData = homeViewModel.weatherData else {
-        //            return 0
-        //        }
-        
+        var count: Int = 0
         switch collectionView {
         case clothingGuideCollectionView:
-            return 3
-            // FIXME: viewModel 갯수로 변경
-            //        case dailyWeatherCollectionView:
-            //            return weatherData.hourly.count
-            //        case weeklyWeatherCollectionView:
-            //            return weatherData.daily.count
+            count = 3
+        case dailyWeatherCollectionView:
+            if let dailyWeatherCount = weatherViewModel?.weatherData?.hourly.count {
+                count = dailyWeatherCount
+            }
+        case weeklyWeatherCollectionView:
+            if let weeaklyWeatherCount = weatherViewModel?.weatherData?.daily.count {
+                count = weeaklyWeatherCount
+            }
         default:
-            return 7
+            count = 7
         }
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case clothingGuideCollectionView:
-            guard let clothingGuideCollectionView = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
+            guard let clothingGuideCollectionViewCell = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            //            TODO: 실 ViewModel로 변경
-            //            clothingCollectionViewCell.updateUI(index: indexPath.item, data: homeViewModel.weatherData[indexPath.item])
-            clothingGuideCollectionView.updateUI(index: indexPath.item)
-            
-            return clothingGuideCollectionView
+            if let weatherData = weatherViewModel?.weatherData {
+                clothingGuideCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
+            }
+            return clothingGuideCollectionViewCell
         case dailyWeatherCollectionView:
             guard let dailyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: DailyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()

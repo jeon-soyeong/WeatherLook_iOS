@@ -45,13 +45,11 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(clothingImageView.snp.bottom).offset(10)
         }
     }
-    
-    func updateUI(index: Int) {
-        //TODO: 변경
-        //    func updateUI(index: Int, data: WeatherData) {
+   
+    func setupUI(index: Int, data: WeatherData) {
         let clothingGuide = ClothingGuide()
-        let clothingImageName = clothingGuide.getClothingImageName(by: 4) // data.current.temp
-        let clothingDescription = clothingGuide.getClothingDescriptions(by: 4)
+        let clothingImageName = clothingGuide.getClothingImageName(by: Int(data.current.temp))
+        let clothingDescription = clothingGuide.getClothingDescriptions(by: Int(data.current.temp))
         
         clothingImageView.image = UIImage(named: "\(clothingImageName)\(index)")
         clothingTitleLabel.text = "\(clothingDescription[index])"
