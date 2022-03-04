@@ -83,12 +83,37 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // TODO: 실제로 변경
-    func updateUI() {
-        daysLabel.text = "월요일"
-        weatherImageView.image = UIImage(named: "sun")
-        precipitationProbabilityLabel.text = "10%"
-        maximumTemperatureLabel.text = "11"
-        minimumTemperatureLabel.text = "9"
+    func setupUI(index: Int, data: WeatherData) {
+        daysLabel.text = Date(timeIntervalSince1970: TimeInterval(data.daily[index].dt)).convertToString(dateFormat: "e").convertToDays()
+        
+        let dailyWeatherDescription = data.daily[index].weather.first?.main
+        switch dailyWeatherDescription {
+        case "Clear":
+            weatherImageView.image = UIImage(named: "sun")
+        case "Clouds":
+            weatherImageView.image = UIImage(named: "cloud")
+        case "Rain":
+            weatherImageView.image = UIImage(named: "rain")
+        case "Snow":
+            weatherImageView.image = UIImage(named: "snow")
+        default:
+            break
+        }
+        
+        let dailyPrecipitationProbability = data.daily[index].pop
+        switch dailyPrecipitationProbability {
+        case 0:
+            precipitationProbabilityLabel.text = ""
+        case 1:
+            precipitationProbabilityLabel.text = "100%"
+        default:
+            let precipitationProbability = String(format: "%.0f", round(dailyPrecipitationProbability) * 10)
+            if precipitationProbability != "0" {
+                precipitationProbabilityLabel.text = "\(precipitationProbability)%"
+            }
+        }
+        
+        maximumTemperatureLabel.text = String(format: "%.0f", round(data.daily[index].temp.max))
+        minimumTemperatureLabel.text = String(format: "%.0f", round(data.daily[index].temp.min))
     }
 }

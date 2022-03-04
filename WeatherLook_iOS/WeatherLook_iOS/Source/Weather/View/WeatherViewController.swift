@@ -290,7 +290,7 @@ extension WeatherViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             if let weatherData = weatherViewModel?.weatherData {
-//                weeklyWeatherCollectionViewCell.setupUI()
+                weeklyWeatherCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return weeklyWeatherCollectionViewCell
         default:
