@@ -13,7 +13,7 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
     private let clothingImageView = UIImageView()
     private let clothingTitleLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .semiBold, size: 16)
+        $0.font = UIFont.setFont(type: .semiBold, size: 18)
     }
     
     override init(frame: CGRect) {

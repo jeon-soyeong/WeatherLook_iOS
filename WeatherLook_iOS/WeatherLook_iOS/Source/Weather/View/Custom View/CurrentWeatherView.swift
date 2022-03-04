@@ -15,7 +15,7 @@ class CurrentWeatherView: UIView {
     
     private let currentTemperatureLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .bold, size: 35)
+        $0.font = UIFont.setFont(type: .bold, size: 38)
     }
     
     private let currentWeatherImageView = UIImageView()
@@ -33,12 +33,12 @@ class CurrentWeatherView: UIView {
     
     private let currentMaximumTemperatureLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .medium, size: 14)
+        $0.font = UIFont.setFont(type: .medium, size: 18)
     }
     
     private let currentMinimumTemperatureLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .medium, size: 14)
+        $0.font = UIFont.setFont(type: .medium, size: 18)
     }
     
     override init(frame: CGRect = .zero) {
@@ -79,13 +79,13 @@ class CurrentWeatherView: UIView {
         
         self.currentWeatherImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(currentTemperatureLabel.snp.bottom).offset(14)
+            $0.top.equalTo(currentTemperatureLabel.snp.bottom).offset(10)
             $0.width.height.equalTo(100)
         }
         
         self.currentWeatherDescriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(currentWeatherImageView.snp.bottom).offset(14)
+            $0.top.equalTo(currentWeatherImageView.snp.bottom).offset(12)
         }
         
         self.temperatureLabelStackView.snp.makeConstraints {
@@ -98,7 +98,7 @@ class CurrentWeatherView: UIView {
         locationLabel.text = location.name
         
         if let currentTemperature = viewModel.weatherData?.current.temp {
-            currentTemperatureLabel.text = "\(currentTemperature)℃"
+            currentTemperatureLabel.text = "\(String(format: "%.0f", round(currentTemperature)))°"
         }
         
         let currentWeatherDescription = viewModel.weatherData?.current.weather.first?.main
@@ -121,8 +121,8 @@ class CurrentWeatherView: UIView {
         
         if let maximumTemperature = viewModel.weatherData?.daily.first?.temp.max,
            let minimumTemperature = viewModel.weatherData?.daily.first?.temp.min {
-            currentMaximumTemperatureLabel.text = "최고: \(maximumTemperature)℃"
-            currentMinimumTemperatureLabel.text = "최저: \(minimumTemperature)℃"
+            currentMaximumTemperatureLabel.text = "최고: \(String(format: "%.0f", round(maximumTemperature)))°"
+            currentMinimumTemperatureLabel.text = "최저: \(String(format: "%.0f", round(minimumTemperature)))°"
         }
     }
 }
