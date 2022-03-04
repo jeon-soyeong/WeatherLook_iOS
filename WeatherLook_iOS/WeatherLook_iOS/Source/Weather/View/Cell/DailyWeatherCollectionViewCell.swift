@@ -61,9 +61,9 @@ class DailyWeatherCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(weatherImageView.snp.bottom).offset(18)
         }
     }
-  
+    
     func setupUI(index: Int, data: WeatherData) {
-        timeLabel.text = Date(timeIntervalSince1970: TimeInterval(data.hourly[index].dt)).toString(dateFormat: "a hh시")
+        timeLabel.text = Date(timeIntervalSince1970: TimeInterval(data.hourly[index].dt)).convertToString(dateFormat: "a hh시")
         
         let hourlyWeatherDescription = data.hourly[index].weather.first?.main
         switch hourlyWeatherDescription {
