@@ -247,22 +247,24 @@ class WeatherViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var count: Int = 0
+        var itemCount: Int = 0
+        
         switch collectionView {
         case clothingGuideCollectionView:
-            count = 3
+            itemCount = 3
         case dailyWeatherCollectionView:
             if let dailyWeatherCount = weatherViewModel?.weatherData?.hourly.count {
-                count = dailyWeatherCount
+                itemCount = dailyWeatherCount
             }
         case weeklyWeatherCollectionView:
             if let weeaklyWeatherCount = weatherViewModel?.weatherData?.daily.count {
-                count = weeaklyWeatherCount
+                itemCount = weeaklyWeatherCount
             }
         default:
-            count = 7
+            itemCount = 7
         }
-        return count
+        
+        return itemCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -300,15 +302,21 @@ extension WeatherViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegateFlowLayout
 extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var cellSize = CGSize()
+        
         switch collectionView {
         case clothingGuideCollectionView:
-            return CGSize(width: Int(collectionView.frame.width) / 3, height: ClothingGuideCollectionViewCell.cellHeight)
+            cellSize = CGSize(width: Int(collectionView.frame.width) / 3, height: ClothingGuideCollectionViewCell.cellHeight)
         case dailyWeatherCollectionView:
-            return CGSize(width: DailyWeatherCollectionViewCell.cellWidth, height: DailyWeatherCollectionViewCell.cellHeight)
+            cellSize = CGSize(width: DailyWeatherCollectionViewCell.cellWidth, height: DailyWeatherCollectionViewCell.cellHeight)
         case weeklyWeatherCollectionView:
-            return CGSize(width: Int(collectionView.frame.width), height: WeeklyWeatherCollectionViewCell.cellHeight)
+            if let weeklyWeatherDataCount = weatherViewModel?.weatherData?.daily.count {
+                cellSize = CGSize(width: Int(collectionView.frame.width), height: WeeklyWeatherCollectionViewCell.cellHeight / weeklyWeatherDataCount)
+            }
         default:
-            return CGSize()
+            return cellSize
         }
+        
+        return cellSize
     }
 }

@@ -8,8 +8,7 @@
 import UIKit
 
 class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
-    //FIXME:  viewModel 갯수로 수정
-    static let cellHeight = 300 / 7
+    static let cellHeight = 300
     
     private let daysLabel = UILabel().then {
         $0.textColor = .white
@@ -70,7 +69,7 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
         
         precipitationProbabilityLabel.snp.makeConstraints {
             $0.top.equalTo(15)
-            $0.leading.equalTo(weatherImageView.snp.trailing).offset(12)
+            $0.leading.equalTo(weatherImageView.snp.trailing).offset(16)
         }
         
         minimumTemperatureLabel.snp.makeConstraints {
