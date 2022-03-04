@@ -279,19 +279,17 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let dailyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: DailyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            
-            //            TODO: 실 ViewModel로 변경
-            dailyWeatherCollectionViewCell.updateUI()
-            
+            if let weatherData = weatherViewModel?.weatherData {
+                dailyWeatherCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
+            }
             return dailyWeatherCollectionViewCell
         case weeklyWeatherCollectionView:
             guard let weeklyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: WeeklyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            
-            //            TODO: 실 ViewModel로 변경
-            weeklyWeatherCollectionViewCell.updateUI()
-            
+            if let weatherData = weatherViewModel?.weatherData {
+//                weeklyWeatherCollectionViewCell.setupUI()
+            }
             return weeklyWeatherCollectionViewCell
         default:
             return UICollectionViewCell()
