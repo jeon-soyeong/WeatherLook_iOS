@@ -22,4 +22,12 @@ class WeatherCoordinator: Coordinator {
         weatherPageViewController.coordinator = self
         navigationController.pushViewController(weatherPageViewController, animated: false)
     }
+    
+    func pushWeatherListViewController() {
+        let weatherListCoordinator = WeatherListCoordinator(navigationController)
+        weatherListCoordinator.parentCoordinator = self
+        self.childCoordinators.append(weatherListCoordinator)
+        
+        weatherListCoordinator.start()
+    }
 }
