@@ -23,7 +23,7 @@ class SplashViewController: UIViewController {
         setupView()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [weak self] in
-            self?.coordinator?.goWeatherHome()
+            self?.coordinator?.pushWeatherPageViewController()
         })
     }
     
