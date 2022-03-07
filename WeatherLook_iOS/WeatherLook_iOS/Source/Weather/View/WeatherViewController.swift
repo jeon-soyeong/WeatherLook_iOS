@@ -14,9 +14,7 @@ import Then
 class WeatherViewController: UIViewController {
     private var weatherViewModel: WeatherViewModel?
     private let disposeBag = DisposeBag()
-    
-    var totalPageControlCount: Int = 0
-    var currentPageControlIndex: Int = 0
+
     var location: Location?
     
     private let scrollView = UIScrollView().then {
@@ -26,20 +24,6 @@ class WeatherViewController: UIViewController {
     
     private let contentView = UIView().then {
         $0.backgroundColor = .clear
-    }
-    
-    private let bottomView = UIView().then {
-        $0.backgroundColor = .mainBlue
-    }
-    
-    private let listButton = UIButton().then {
-        $0.setImage(UIImage(named: "list"), for: .normal)
-    }
-    
-    private let pageControl = UIPageControl()
-    
-    private let bottomTopLineView = UIView().then {
-        $0.backgroundColor = .mainLineGray
     }
     
     private let currentWeatherLineView = UIView().then {
@@ -91,9 +75,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupPageControl()
         setupCollectionView()
-        bindAction()
         bindViewModel()
     }
     
@@ -111,10 +93,6 @@ class WeatherViewController: UIViewController {
     
     private func setupSubViews() {
         view.addSubview(scrollView)
-        view.addSubview(bottomView)
-        bottomView.addSubview(listButton)
-        bottomView.addSubview(pageControl)
-        bottomView.addSubview(bottomTopLineView)
         scrollView.addSubview(contentView)
         contentView.addSubview(currentWeatherView)
         contentView.addSubview(currentWeatherLineView)
@@ -128,27 +106,6 @@ class WeatherViewController: UIViewController {
     private func setupConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-        
-        bottomView.snp.makeConstraints {
-            $0.centerX.width.bottom.equalToSuperview()
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-50)
-        }
-        
-        listButton.snp.makeConstraints {
-            $0.top.equalTo(18)
-            $0.trailing.equalToSuperview().inset(30)
-            $0.width.height.equalTo(25)
-        }
-        
-        pageControl.snp.makeConstraints {
-            $0.top.equalTo(18)
-            $0.centerX.equalToSuperview()
-        }
-        
-        bottomTopLineView.snp.makeConstraints {
-            $0.top.centerX.width.equalToSuperview()
-            $0.height.equalTo(0.5)
         }
         
         contentView.snp.makeConstraints {
@@ -199,11 +156,6 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private func setupPageControl() {
-        pageControl.numberOfPages = totalPageControlCount
-        pageControl.currentPage = currentPageControlIndex
-    }
-    
     private func setupCollectionView() {
         clothingGuideCollectionView.dataSource = self
         clothingGuideCollectionView.delegate = self
@@ -216,14 +168,6 @@ class WeatherViewController: UIViewController {
         weeklyWeatherCollectionView.dataSource = self
         weeklyWeatherCollectionView.delegate = self
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
-    }
-    
-    private func bindAction() {
-        listButton.rx.tap
-            .bind {
-                //TODO: list coordinator로 연결
-            }
-            .disposed(by: disposeBag)
     }
     
     private func bindViewModel() {
