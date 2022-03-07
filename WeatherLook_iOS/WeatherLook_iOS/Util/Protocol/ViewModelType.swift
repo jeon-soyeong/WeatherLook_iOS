@@ -10,10 +10,8 @@ import Foundation
 import RxSwift
 
 protocol ViewModelType {
-    associatedtype Input
-    associatedtype Output
+    associatedtype Action
+    associatedtype State
     
     var disposeBag: DisposeBag { get set }
-    
-    func transform(input: Input) -> Output
 }
