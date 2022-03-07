@@ -13,13 +13,12 @@ import SnapKit
 import Then
 
 class WeatherViewController: UIViewController {
-    //FIXME: real location
-    //    private let weatherViewModel = WeatherViewModel(cityLocationList: [(Float, Float)])
-    private let weatherViewModel = WeatherViewModel()
+    private var weatherViewModel: WeatherViewModel?
     private let disposeBag = DisposeBag()
     
     var totalPageControlCount: Int = 0
     var currentPageControlIndex: Int = 0
+    var location: Location?
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .mainBlue
@@ -95,9 +94,10 @@ class WeatherViewController: UIViewController {
         setupView()
         setupPageControl()
         setupCollectionView()
+        bindAction()
         bindViewModel()
     }
-
+    
     private func setupView() {
         view.backgroundColor = .white
         
@@ -214,11 +214,33 @@ class WeatherViewController: UIViewController {
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
     }
     
+    private func bindAction() {
+        listButton.rx.tap
+            .bind {
+                //TODO: list coordinator로 연결
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func bindViewModel() {
-//        let input =
-//        let output = weatherViewModel.transform(input: input)
-        //list button tap rx.bind coordinator
-        // ouput view bind()
+        guard let location = location else {
+            return
+        }
+        weatherViewModel = WeatherViewModel(location: location)
+        
+        let input = WeatherViewModel.Input()
+        let output = weatherViewModel?.transform(input: input)
+        
+        output?.weatherDataResponse
+            .subscribe(onNext: { [weak self] _ in
+                if let weatherViewModel = self?.weatherViewModel {
+                    self?.currentWeatherView.setupView(location: location, viewModel: weatherViewModel)
+                }
+                self?.clothingGuideCollectionView.reloadData()
+                self?.dailyWeatherCollectionView.reloadData()
+                self?.weeklyWeatherCollectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

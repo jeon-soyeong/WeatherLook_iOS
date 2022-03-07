@@ -9,23 +9,18 @@ import UIKit
 
 class CurrentWeatherView: UIView {
     private let locationLabel = UILabel().then {
-        $0.text = "서울시 강남구"
         $0.textColor = .white
         $0.font = UIFont.setFont(type: .semiBold, size: 32)
     }
     
     private let currentTemperatureLabel = UILabel().then {
-        $0.text = "4'C"
         $0.textColor = .white
         $0.font = UIFont.setFont(type: .bold, size: 35)
     }
     
-    private let currentWeatherImageView = UIImageView().then {
-        $0.image = UIImage(named: "sun")
-    }
+    private let currentWeatherImageView = UIImageView()
     
     private let currentWeatherDescriptionLabel = UILabel().then {
-        $0.text = "맑음"
         $0.textColor = .white
         $0.font = UIFont.setFont(type: .semiBold, size: 18)
     }
@@ -37,13 +32,11 @@ class CurrentWeatherView: UIView {
     }
     
     private let currentMaximumTemperatureLabel = UILabel().then {
-        $0.text = "최고: 10'C"
         $0.textColor = .white
         $0.font = UIFont.setFont(type: .medium, size: 14)
     }
     
     private let currentMinimumTemperatureLabel = UILabel().then {
-        $0.text = "최저: -1'C"
         $0.textColor = .white
         $0.font = UIFont.setFont(type: .medium, size: 14)
     }
@@ -99,5 +92,29 @@ class CurrentWeatherView: UIView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(currentWeatherDescriptionLabel.snp.bottom).offset(14)
         }
+    }
+    
+    func setupView(location: Location, viewModel: WeatherViewModel) {
+        locationLabel.text = location.name
+        currentTemperatureLabel.text = "\(viewModel.weatherData?.current.temp)℃"
+        let currentWeatherDescription = viewModel.weatherData?.current.weather.first?.main
+        switch currentWeatherDescription {
+            case "Clear":
+                currentWeatherImageView.image = UIImage(named: "sun")
+                currentWeatherDescriptionLabel.text = "맑음"
+            case "Clouds":
+                currentWeatherImageView.image = UIImage(named: "cloud")
+                currentWeatherDescriptionLabel.text = "구름"
+            case "Rain":
+                currentWeatherImageView.image = UIImage(named: "rain")
+                currentWeatherDescriptionLabel.text = "비"
+            case "Snow":
+                currentWeatherImageView.image = UIImage(named: "snow")
+                currentWeatherDescriptionLabel.text = "눈"
+            default:
+                break
+        }
+        currentMaximumTemperatureLabel.text = "최고: \(viewModel.weatherData?.daily.first?.temp.max)℃"
+        currentMinimumTemperatureLabel.text = "최저: \(viewModel.weatherData?.daily.first?.temp.min)℃"
     }
 }

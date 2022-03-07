@@ -11,25 +11,26 @@ import RxSwift
 import RxCocoa
 
 class WeatherViewModel: ViewModelType {
-    struct Input {
-        let viewDidLoadEvent: PublishSubject<Void>
+    private var location: Location?
+    var weatherData: WeatherData?
+    var disposeBag = DisposeBag()
+    
+    init(location: Location) {
+        self.location = location
     }
+    
+    struct Input {}
     
     struct Output {
-        //TODO: API 연결 후
-//        let didLoadWeatherData: Driver<Void>
+        let weatherDataResponse = PublishSubject<WeatherData>()
     }
     
-    var disposeBag = DisposeBag()
-    var weatherData: [WeatherData] = []
-    var cityLocationList: [(Float,Float)] = []
-    
-//    init(cityLocationList: [(Float,Float)]) {
-//        self.cityLocationList = cityLocationList
-//    }
-    
     func transform(input: Input) -> Output {
-        
+       
         return Output()
+    }
+    
+    private func requestWeatherData() {
+        //TODO: API 연결
     }
 }

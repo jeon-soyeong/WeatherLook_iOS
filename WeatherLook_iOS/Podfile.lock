@@ -9,6 +9,11 @@ PODS:
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
+  - RxCoreLocation (1.5.1):
+    - RxCoreLocation/Core (= 1.5.1)
+  - RxCoreLocation/Core (1.5.1):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
@@ -19,6 +24,7 @@ DEPENDENCIES:
   - Kingfisher
   - Moya/RxSwift
   - RxCocoa
+  - RxCoreLocation
   - RxSwift
   - SnapKit
   - Then
@@ -29,6 +35,7 @@ SPEC REPOS:
     - Kingfisher
     - Moya
     - RxCocoa
+    - RxCoreLocation
     - RxRelay
     - RxSwift
     - SnapKit
@@ -39,11 +46,12 @@ SPEC CHECKSUMS:
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxCoreLocation: a78f4cbf32a4c6c47ecccbe22d41ff93b7e8c099
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 480891f83d1fa2f9cf2681c4e243e5be21271930
+PODFILE CHECKSUM: b7f11826c686736bd4bb2b3daa787962f4032714
 
 COCOAPODS: 1.10.1
