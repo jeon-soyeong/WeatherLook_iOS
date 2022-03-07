@@ -8,7 +8,6 @@
 import UIKit
 
 import RxSwift
-import RxCocoa
 import SnapKit
 import Then
 
@@ -96,6 +95,11 @@ class WeatherViewController: UIViewController {
         setupCollectionView()
         bindAction()
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        weatherViewModel?.action.fetch.onNext(())
     }
     
     private func setupView() {
@@ -228,17 +232,14 @@ class WeatherViewController: UIViewController {
         }
         weatherViewModel = WeatherViewModel(location: location)
         
-        let input = WeatherViewModel.Input()
-        let output = weatherViewModel?.transform(input: input)
-        
-        output?.weatherDataResponse
+        weatherViewModel?.state.weatherDataResponse
             .subscribe(onNext: { [weak self] _ in
                 if let weatherViewModel = self?.weatherViewModel {
                     self?.currentWeatherView.setupView(location: location, viewModel: weatherViewModel)
+                    self?.clothingGuideCollectionView.reloadData()
+                    self?.dailyWeatherCollectionView.reloadData()
+                    self?.weeklyWeatherCollectionView.reloadData()
                 }
-                self?.clothingGuideCollectionView.reloadData()
-                self?.dailyWeatherCollectionView.reloadData()
-                self?.weeklyWeatherCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }

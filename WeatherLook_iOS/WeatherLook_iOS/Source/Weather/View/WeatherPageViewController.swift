@@ -8,7 +8,6 @@
 import UIKit
 
 import RxSwift
-import RxCocoa
 
 class WeatherPageViewController: UIPageViewController {
     weak var coordinator: WeatherCoordinator?
