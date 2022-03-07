@@ -13,7 +13,7 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
     private let clothingImageView = UIImageView()
     private let clothingTitleLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .semiBold, size: 16)
+        $0.font = UIFont.setFont(type: .semiBold, size: 18)
     }
     
     override init(frame: CGRect) {
@@ -45,13 +45,11 @@ class ClothingGuideCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(clothingImageView.snp.bottom).offset(10)
         }
     }
-    
-    func updateUI(index: Int) {
-        //TODO: 변경
-        //    func updateUI(index: Int, data: WeatherData) {
+   
+    func setupUI(index: Int, data: WeatherData) {
         let clothingGuide = ClothingGuide()
-        let clothingImageName = clothingGuide.getClothingImageName(by: 4) // data.current.temp
-        let clothingDescription = clothingGuide.getClothingDescriptions(by: 4)
+        let clothingImageName = clothingGuide.getClothingImageName(by: Int(data.current.temp))
+        let clothingDescription = clothingGuide.getClothingDescriptions(by: Int(data.current.temp))
         
         clothingImageView.image = UIImage(named: "\(clothingImageName)\(index)")
         clothingTitleLabel.text = "\(clothingDescription[index])"

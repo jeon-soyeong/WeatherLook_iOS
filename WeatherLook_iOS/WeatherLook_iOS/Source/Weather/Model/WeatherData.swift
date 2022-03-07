@@ -24,8 +24,9 @@ struct CurrentWeather: Codable {
 }
 
 struct Hourly: Codable {
+    let dt: Int
     let temp: Float
-    let main: [HourlyWeather]
+    let weather: [HourlyWeather]
 }
 
 struct HourlyWeather: Codable {
@@ -33,6 +34,7 @@ struct HourlyWeather: Codable {
 }
 
 struct Daily: Codable {
+    let dt: Int
     let temp: DailyTemperature
     let weather: [DailyWeather]
     let pop: Float

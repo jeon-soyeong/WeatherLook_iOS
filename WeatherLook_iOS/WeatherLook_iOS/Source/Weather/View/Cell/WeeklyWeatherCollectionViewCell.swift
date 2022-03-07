@@ -8,8 +8,7 @@
 import UIKit
 
 class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
-    //FIXME:  viewModel 갯수로 수정
-    static let cellHeight = 300 / 7
+    static let cellHeight = 300
     
     private let daysLabel = UILabel().then {
         $0.textColor = .white
@@ -70,7 +69,7 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
         
         precipitationProbabilityLabel.snp.makeConstraints {
             $0.top.equalTo(15)
-            $0.leading.equalTo(weatherImageView.snp.trailing).offset(12)
+            $0.leading.equalTo(weatherImageView.snp.trailing).offset(16)
         }
         
         minimumTemperatureLabel.snp.makeConstraints {
@@ -84,12 +83,37 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // TODO: 실제로 변경
-    func updateUI() {
-        daysLabel.text = "월요일"
-        weatherImageView.image = UIImage(named: "sun")
-        precipitationProbabilityLabel.text = "10%"
-        maximumTemperatureLabel.text = "11"
-        minimumTemperatureLabel.text = "9"
+    func setupUI(index: Int, data: WeatherData) {
+        daysLabel.text = Date(timeIntervalSince1970: TimeInterval(data.daily[index].dt)).convertToString(dateFormat: "e").convertToDays()
+        
+        let dailyWeatherDescription = data.daily[index].weather.first?.main
+        switch dailyWeatherDescription {
+        case "Clear":
+            weatherImageView.image = UIImage(named: "sun")
+        case "Clouds":
+            weatherImageView.image = UIImage(named: "cloud")
+        case "Rain":
+            weatherImageView.image = UIImage(named: "rain")
+        case "Snow":
+            weatherImageView.image = UIImage(named: "snow")
+        default:
+            break
+        }
+        
+        let dailyPrecipitationProbability = data.daily[index].pop
+        switch dailyPrecipitationProbability {
+        case 0:
+            precipitationProbabilityLabel.text = ""
+        case 1:
+            precipitationProbabilityLabel.text = "100%"
+        default:
+            let precipitationProbability = String(format: "%.0f", round(dailyPrecipitationProbability) * 10)
+            if precipitationProbability != "0" {
+                precipitationProbabilityLabel.text = "\(precipitationProbability)%"
+            }
+        }
+        
+        maximumTemperatureLabel.text = String(format: "%.0f", round(data.daily[index].temp.max))
+        minimumTemperatureLabel.text = String(format: "%.0f", round(data.daily[index].temp.min))
     }
 }

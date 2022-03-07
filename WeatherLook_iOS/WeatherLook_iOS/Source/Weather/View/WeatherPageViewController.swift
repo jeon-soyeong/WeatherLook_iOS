@@ -8,7 +8,6 @@
 import UIKit
 
 import RxSwift
-import RxCocoa
 
 class WeatherPageViewController: UIPageViewController {
     weak var coordinator: WeatherCoordinator?
@@ -33,8 +32,6 @@ class WeatherPageViewController: UIPageViewController {
         delegate = self
         
         setupLocationList()
-        setupWeatherViewControllers()
-        setupCurrentWeatherViewController()
     }
     
     private func setupLocationList() {
@@ -63,6 +60,9 @@ class WeatherPageViewController: UIPageViewController {
                     }
                 }
                 UserDefaultsManager.locationList = self.locationList
+                
+                self.setupWeatherViewControllers()
+                self.setupCurrentWeatherViewController()
             })
             .disposed(by: disposeBag)
     }

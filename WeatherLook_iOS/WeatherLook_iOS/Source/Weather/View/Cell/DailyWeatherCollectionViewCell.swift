@@ -20,7 +20,7 @@ class DailyWeatherCollectionViewCell: UICollectionViewCell {
     
     private let temperatureLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.setFont(type: .semiBold, size: 18)
+        $0.font = UIFont.setFont(type: .semiBold, size: 22)
     }
     
     override init(frame: CGRect) {
@@ -62,10 +62,23 @@ class DailyWeatherCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // TODO: 실제로 변경
-    func updateUI() {
-        timeLabel.text = "오전 10시"
-        weatherImageView.image = UIImage(named: "sun")
-        temperatureLabel.text = "맑음"
+    func setupUI(index: Int, data: WeatherData) {
+        timeLabel.text = Date(timeIntervalSince1970: TimeInterval(data.hourly[index].dt)).convertToString(dateFormat: "a hh시")
+        
+        let hourlyWeatherDescription = data.hourly[index].weather.first?.main
+        switch hourlyWeatherDescription {
+        case "Clear":
+            weatherImageView.image = UIImage(named: "sun")
+        case "Clouds":
+            weatherImageView.image = UIImage(named: "cloud")
+        case "Rain":
+            weatherImageView.image = UIImage(named: "rain")
+        case "Snow":
+            weatherImageView.image = UIImage(named: "snow")
+        default:
+            break
+        }
+        
+        temperatureLabel.text = "\(String(format: "%.0f", round(data.hourly[index].temp)))°"
     }
 }

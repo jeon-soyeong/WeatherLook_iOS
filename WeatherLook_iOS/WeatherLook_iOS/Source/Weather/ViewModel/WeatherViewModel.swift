@@ -8,29 +8,46 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 class WeatherViewModel: ViewModelType {
     private var location: Location?
     var weatherData: WeatherData?
     var disposeBag = DisposeBag()
     
-    init(location: Location) {
-        self.location = location
+    struct Action {
+        let fetch = PublishSubject<Void>()
     }
     
-    struct Input {}
-    
-    struct Output {
+    struct State {
         let weatherDataResponse = PublishSubject<WeatherData>()
     }
     
-    func transform(input: Input) -> Output {
-       
-        return Output()
+    var action = Action()
+    var state = State()
+    
+    init(location: Location) {
+        self.location = location
+        configure()
+    }
+    
+    private func configure() {
+        action.fetch
+            .subscribe(onNext: {
+                self.requestWeatherData()
+            }).disposed(by: self.disposeBag)
     }
     
     private func requestWeatherData() {
-        //TODO: API 연결
+        guard let latitude = location?.coordinate.latitude,
+              let longitude = location?.coordinate.longitude else {
+                  return
+              }
+        
+        APIService.shared.request(WeatherAPI.getWeatherData(latitude: latitude, longitude: longitude))
+            .subscribe(onSuccess: { [weak self] (weatherData: WeatherData) in
+                guard let self = self else { return }
+                self.weatherData = weatherData
+                self.state.weatherDataResponse.onNext(weatherData)
+            }).disposed(by: self.disposeBag)
     }
 }
