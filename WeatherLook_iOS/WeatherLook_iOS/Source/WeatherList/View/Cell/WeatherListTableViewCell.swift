@@ -60,10 +60,8 @@ class WeatherListTableViewCell: UITableViewCell {
         }
     }
     
-    //TODO: 실 data로 변경
-//    func setupUI(index: Int, data: WeatherData) {
-    func setupUI() {
-        locationNameLabel.text = "뉴욕 맨해튼"
-        currentTemperatureLabel.text = "20°"
+    func setupUI(location: Location, data: WeatherData) {
+        locationNameLabel.text = location.name
+        currentTemperatureLabel.text = "\(String(format: "%.0f", round(data.current.temp)))°"
     }
 }
