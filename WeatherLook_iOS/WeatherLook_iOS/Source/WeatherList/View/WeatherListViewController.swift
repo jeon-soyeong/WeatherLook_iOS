@@ -12,7 +12,9 @@ import RxSwift
 class WeatherListViewController: UIViewController {
     weak var coordinator: WeatherListCoordinator?
     private let disposeBag = DisposeBag()
+    private var weatherViewModel = WeatherViewModel()
     var locationList: [Location] = []
+    var weatherDatas: [WeatherData] = []
     
     private let weatherListTableView = UITableView().then {
         $0.showsVerticalScrollIndicator = false
@@ -30,13 +32,17 @@ class WeatherListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let locations = UserDefaultsManager.locationList {
-            locationList = locations
-        }
         
         setupView()
         setupTableView()
         bindAction()
+        bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchWeatherData()
     }
     
     private func setupView() {
@@ -65,10 +71,29 @@ class WeatherListViewController: UIViewController {
         weatherListTableView.tableFooterView = footerView
     }
     
+    private func fetchWeatherData() {
+        if let locations = UserDefaultsManager.locationList {
+            locationList = locations
+        }
+        
+        for i in 0..<locationList.count {
+            weatherViewModel.action.fetch.onNext(locationList[i])
+        }
+    }
+    
     private func bindAction() {
         searchButton.rx.tap
             .subscribe(onNext: {
                 print("searchButton Tapped")
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewModel() {
+        weatherViewModel.state.weatherDataResponse
+            .subscribe(onNext: { [weak self] data in
+                self?.weatherDatas.append(data)
+                self?.weatherListTableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -77,14 +102,14 @@ class WeatherListViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension WeatherListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return weatherDatas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let weatherListTableViewCell = tableView.dequeueReusableCell(cellType: WeatherListTableViewCell.self, indexPath: indexPath) else {
             return UITableViewCell()
         }
-        weatherListTableViewCell.setupUI()
+        weatherListTableViewCell.setupUI(location:locationList[indexPath.row] ,data: weatherDatas[indexPath.row])
         return weatherListTableViewCell
     }
     
@@ -96,8 +121,8 @@ extension WeatherListViewController: UITableViewDataSource {
         }
     }
 }
-    
+
 // MARK: UITableViewDelegate
 extension WeatherListViewController: UITableViewDelegate {
-
+    
 }
