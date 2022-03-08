@@ -124,5 +124,7 @@ extension WeatherListViewController: UITableViewDataSource {
 
 // MARK: UITableViewDelegate
 extension WeatherListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coordinator?.popWeatherListViewController()
+    }
 }

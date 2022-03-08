@@ -21,4 +21,8 @@ class WeatherListCoordinator: Coordinator {
         weatherListViewController.coordinator = self
         navigationController.pushViewController(weatherListViewController, animated: false)
     }
+    
+    func popWeatherListViewController() {
+        navigationController.popViewController(animated: true)
+    }
 }
