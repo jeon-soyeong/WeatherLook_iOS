@@ -12,7 +12,7 @@ import SnapKit
 import Then
 
 class WeatherViewController: UIViewController {
-    private var weatherViewModel: WeatherViewModel?
+    private var weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
 
     var location: Location?
@@ -81,7 +81,11 @@ class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        weatherViewModel?.action.fetch.onNext(())
+        
+        guard let location = location else {
+            return
+        }
+        weatherViewModel.action.fetch.onNext(location)
     }
     
     private func setupView() {
@@ -174,16 +178,13 @@ class WeatherViewController: UIViewController {
         guard let location = location else {
             return
         }
-        weatherViewModel = WeatherViewModel(location: location)
         
-        weatherViewModel?.state.weatherDataResponse
-            .subscribe(onNext: { [weak self] _ in
-                if let weatherViewModel = self?.weatherViewModel {
-                    self?.currentWeatherView.setupView(location: location, viewModel: weatherViewModel)
+        weatherViewModel.state.weatherDataResponse
+            .subscribe(onNext: { [weak self] weatherData in
+                    self?.currentWeatherView.setupView(location: location, data: weatherData)
                     self?.clothingGuideCollectionView.reloadData()
                     self?.dailyWeatherCollectionView.reloadData()
                     self?.weeklyWeatherCollectionView.reloadData()
-                }
             })
             .disposed(by: disposeBag)
     }
@@ -198,11 +199,11 @@ extension WeatherViewController: UICollectionViewDataSource {
         case clothingGuideCollectionView:
             itemCount = 3
         case dailyWeatherCollectionView:
-            if let dailyWeatherCount = weatherViewModel?.weatherData?.hourly.count {
+            if let dailyWeatherCount = weatherViewModel.weatherData?.hourly.count {
                 itemCount = dailyWeatherCount
             }
         case weeklyWeatherCollectionView:
-            if let weeaklyWeatherCount = weatherViewModel?.weatherData?.daily.count {
+            if let weeaklyWeatherCount = weatherViewModel.weatherData?.daily.count {
                 itemCount = weeaklyWeatherCount
             }
         default:
@@ -218,7 +219,7 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let clothingGuideCollectionViewCell = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            if let weatherData = weatherViewModel?.weatherData {
+            if let weatherData = weatherViewModel.weatherData {
                 clothingGuideCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return clothingGuideCollectionViewCell
@@ -226,7 +227,7 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let dailyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: DailyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            if let weatherData = weatherViewModel?.weatherData {
+            if let weatherData = weatherViewModel.weatherData {
                 dailyWeatherCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return dailyWeatherCollectionViewCell
@@ -234,7 +235,7 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let weeklyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: WeeklyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            if let weatherData = weatherViewModel?.weatherData {
+            if let weatherData = weatherViewModel.weatherData {
                 weeklyWeatherCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return weeklyWeatherCollectionViewCell
@@ -255,7 +256,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
         case dailyWeatherCollectionView:
             cellSize = CGSize(width: DailyWeatherCollectionViewCell.cellWidth, height: DailyWeatherCollectionViewCell.cellHeight)
         case weeklyWeatherCollectionView:
-            if let weeklyWeatherDataCount = weatherViewModel?.weatherData?.daily.count {
+            if let weeklyWeatherDataCount = weatherViewModel.weatherData?.daily.count {
                 cellSize = CGSize(width: Int(collectionView.frame.width), height: WeeklyWeatherCollectionViewCell.cellHeight / weeklyWeatherDataCount)
             }
         default:
