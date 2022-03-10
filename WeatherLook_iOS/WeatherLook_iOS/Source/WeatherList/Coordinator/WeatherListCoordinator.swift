@@ -5,6 +5,7 @@
 //  Created by 전소영 on 2022/03/07.
 //
 
+import Foundation
 import UIKit
 
 class WeatherListCoordinator: Coordinator {
@@ -27,5 +28,13 @@ class WeatherListCoordinator: Coordinator {
     
     func popWeatherListViewController() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func pushSearchViewController() {
+        let searchCoordinator = SearchCoordinator(navigationController)
+        searchCoordinator.parentCoordinator = self
+        self.childCoordinators.append(searchCoordinator)
+        
+        searchCoordinator.start()
     }
 }

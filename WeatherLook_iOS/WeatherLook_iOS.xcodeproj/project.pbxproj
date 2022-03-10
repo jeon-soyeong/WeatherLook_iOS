@@ -10,6 +10,8 @@
 		0AB82F6A1B72DA60B5F065B7 /* Pods_WeatherLook_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB673275D39993B157C42412 /* Pods_WeatherLook_iOSTests.framework */; };
 		3E0D23D784E2040CC7E22A68 /* Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7E3AEB8C013A5A98ECC38F /* Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework */; };
 		63F1B867CA7C2F9C9F88D344 /* Pods_WeatherLook_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E39D72C8D4031A1297E0C45 /* Pods_WeatherLook_iOS.framework */; };
+		9B2FD9CA27DA3CE400C8AF0D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2FD9C927DA3CE400C8AF0D /* SearchViewController.swift */; };
+		9B2FD9CC27DA3CF600C8AF0D /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2FD9CB27DA3CF600C8AF0D /* SearchCoordinator.swift */; };
 		9B33259527BABEBD0096F20D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33259427BABEBD0096F20D /* UIColor+Extension.swift */; };
 		9B33259727BAC35F0096F20D /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33259627BAC35F0096F20D /* CurrentWeatherView.swift */; };
 		9B33259B27BB6BAD0096F20D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33259A27BB6BAD0096F20D /* UIFont+Extension.swift */; };
@@ -75,6 +77,8 @@
 		32EAD0376619090E28B26ED9 /* Pods-WeatherLook_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherLook_iOS.release.xcconfig"; path = "Target Support Files/Pods-WeatherLook_iOS/Pods-WeatherLook_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		6494212F0566EE95908B58D4 /* Pods-WeatherLook_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherLook_iOS.debug.xcconfig"; path = "Target Support Files/Pods-WeatherLook_iOS/Pods-WeatherLook_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7E7E3AEB8C013A5A98ECC38F /* Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherLook_iOS_WeatherLook_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2FD9C927DA3CE400C8AF0D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9B2FD9CB27DA3CF600C8AF0D /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		9B33259427BABEBD0096F20D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9B33259627BAC35F0096F20D /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		9B33259A27BB6BAD0096F20D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
@@ -334,7 +338,6 @@
 		9B76639727A3F3DD0053E981 /* WeatherList */ = {
 			isa = PBXGroup;
 			children = (
-				9B76639E27A3F4460053E981 /* Model */,
 				9B76639D27A3F43F0053E981 /* View */,
 				9B7663A327A3F4BA0053E981 /* Coordinator */,
 			);
@@ -390,16 +393,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		9B76639E27A3F4460053E981 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		9B7663A027A3F4540053E981 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9B2FD9C927DA3CE400C8AF0D /* SearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +427,7 @@
 		9B7663A427A3F4C40053E981 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				9B2FD9CB27DA3CF600C8AF0D /* SearchCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -752,6 +750,8 @@
 				9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */,
 				9BF3264B27CD2D5400D7CE23 /* LocationManager.swift in Sources */,
 				9BE8B61427D0B52D009C1426 /* APIService.swift in Sources */,
+				9B2FD9CA27DA3CE400C8AF0D /* SearchViewController.swift in Sources */,
+				9B2FD9CC27DA3CF600C8AF0D /* SearchCoordinator.swift in Sources */,
 				9B7C40D027C4CF53001C1BAD /* ViewModelType.swift in Sources */,
 				9BE8B61227D0AF7F009C1426 /* APIConstants.swift in Sources */,
 				9BE8B61027D09FA2009C1426 /* WeatherAPI.swift in Sources */,

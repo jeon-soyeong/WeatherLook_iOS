@@ -34,7 +34,8 @@ class WeatherViewModel: ViewModelType {
             .subscribe(onNext: { location in
                 self.location = location
                 self.requestWeatherData()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func requestWeatherData() {
@@ -48,6 +49,7 @@ class WeatherViewModel: ViewModelType {
                 guard let self = self else { return }
                 self.weatherData = weatherData
                 self.state.weatherDataResponse.onNext(weatherData)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

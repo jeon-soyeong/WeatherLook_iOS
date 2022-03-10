@@ -155,7 +155,6 @@ class WeatherPageViewController: UIPageViewController {
         listButton.rx.tap
             .subscribe(onNext: {
                 self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
-                    print("index: \(index)")
                     self?.pageIndex = index
                 })
             })

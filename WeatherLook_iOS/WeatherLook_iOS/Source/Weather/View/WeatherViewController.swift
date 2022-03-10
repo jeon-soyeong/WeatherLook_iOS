@@ -14,7 +14,6 @@ import Then
 class WeatherViewController: UIViewController {
     private var weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
-
     var location: Location?
     
     private let scrollView = UIScrollView().then {

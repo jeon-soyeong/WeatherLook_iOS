@@ -11,8 +11,9 @@ import RxSwift
 
 class WeatherListViewController: UIViewController {
     weak var coordinator: WeatherListCoordinator?
-    private let disposeBag = DisposeBag()
+
     private var weatherViewModel = WeatherViewModel()
+    private let disposeBag = DisposeBag()
     var locationList: [Location] = []
     var weatherDatas: [WeatherData] = []
     var completion: ((Int) -> Void)?
@@ -85,7 +86,7 @@ class WeatherListViewController: UIViewController {
     private func bindAction() {
         searchButton.rx.tap
             .subscribe(onNext: {
-                print("searchButton Tapped")
+                self.coordinator?.pushSearchViewController()
             })
             .disposed(by: disposeBag)
     }
