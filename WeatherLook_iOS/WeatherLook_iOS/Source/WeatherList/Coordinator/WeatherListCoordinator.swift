@@ -16,9 +16,12 @@ class WeatherListCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start() { }
+    
+    func start(completion: ((Int) -> Void)? = nil) {
         let weatherListViewController = WeatherListViewController()
         weatherListViewController.coordinator = self
+        weatherListViewController.completion = completion
         navigationController.pushViewController(weatherListViewController, animated: false)
     }
     

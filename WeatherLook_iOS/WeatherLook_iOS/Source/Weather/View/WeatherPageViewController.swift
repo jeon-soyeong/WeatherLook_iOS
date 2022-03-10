@@ -46,9 +46,14 @@ class WeatherPageViewController: UIPageViewController {
         delegate = self
         
         setupView()
+        bindAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         setupLocationList()
         setupPageControl()
-        bindAction()
     }
     
     private func setupView() {
@@ -149,7 +154,10 @@ class WeatherPageViewController: UIPageViewController {
     private func bindAction() {
         listButton.rx.tap
             .subscribe(onNext: {
-                self.coordinator?.pushWeatherListViewController()
+                self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
+                    print("index: \(index)")
+                    self?.pageIndex = index
+                })
             })
             .disposed(by: disposeBag)
     }

@@ -15,6 +15,7 @@ class WeatherListViewController: UIViewController {
     private var weatherViewModel = WeatherViewModel()
     var locationList: [Location] = []
     var weatherDatas: [WeatherData] = []
+    var completion: ((Int) -> Void)?
     
     private let weatherListTableView = UITableView().then {
         $0.showsVerticalScrollIndicator = false
@@ -125,6 +126,7 @@ extension WeatherListViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension WeatherListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        completion?(indexPath.row)
         coordinator?.popWeatherListViewController()
     }
 }

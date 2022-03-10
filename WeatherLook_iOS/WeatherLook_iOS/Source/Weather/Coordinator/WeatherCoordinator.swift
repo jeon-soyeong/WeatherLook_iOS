@@ -25,12 +25,12 @@ class WeatherCoordinator: NSObject, Coordinator {
         navigationController.pushViewController(weatherPageViewController, animated: false)
     }
     
-    func pushWeatherListViewController() {
+    func pushWeatherListViewController(completion: ((Int) -> Void)? = nil) {
         let weatherListCoordinator = WeatherListCoordinator(navigationController)
         weatherListCoordinator.parentCoordinator = self
         self.childCoordinators.append(weatherListCoordinator)
         
-        weatherListCoordinator.start()
+        weatherListCoordinator.start(completion: completion)
     }
     
     func removeChildCoordinator(_ child: Coordinator?) {
