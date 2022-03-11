@@ -15,6 +15,19 @@ class WeatherViewController: UIViewController {
     private var weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
     var location: Location?
+    var pageCase = ""
+    
+    let addButton = UIButton().then {
+        $0.setTitle("추가", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.setFont(type: .semiBold, size: 20)
+    }
+    
+    let cancelButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.setFont(type: .semiBold, size: 20)
+    }
     
     private let scrollView = UIScrollView().then {
         $0.backgroundColor = .mainBlue
@@ -81,6 +94,11 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if pageCase != "search" {
+            cancelButton.isHidden = true
+            addButton.isHidden = true
+        }
+        
         guard let location = location else {
             return
         }
@@ -97,6 +115,8 @@ class WeatherViewController: UIViewController {
     private func setupSubViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(addButton)
+        contentView.addSubview(cancelButton)
         contentView.addSubview(currentWeatherView)
         contentView.addSubview(currentWeatherLineView)
         contentView.addSubview(clothingGuideCollectionView)
@@ -116,8 +136,19 @@ class WeatherViewController: UIViewController {
             $0.centerX.top.bottom.equalToSuperview()
         }
         
+        addButton.snp.makeConstraints {
+            $0.top.equalTo(12)
+            $0.trailing.equalToSuperview().inset(24)
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.top.equalTo(12)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
         currentWeatherView.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
+            $0.top.equalTo(addButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(300)
         }
         

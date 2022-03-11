@@ -30,6 +30,7 @@ class SearchCoordinator: Coordinator {
     func presentWeatherViewController(with location: Location) {
         let weatherViewController = WeatherViewController()
         weatherViewController.location = location
+        weatherViewController.pageCase = "search"
         navigationController.topViewController?.presentedViewController?.present(weatherViewController, animated: false, completion: nil)
     }
 }

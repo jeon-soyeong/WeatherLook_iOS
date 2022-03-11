@@ -69,7 +69,7 @@ class CurrentWeatherView: UIView {
     private func setupConstraints() {
         self.locationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(14)
+            $0.top.equalTo(8)
         }
         
         self.currentTemperatureLabel.snp.makeConstraints {
