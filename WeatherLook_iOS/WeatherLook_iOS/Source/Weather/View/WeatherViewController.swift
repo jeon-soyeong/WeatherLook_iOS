@@ -206,11 +206,12 @@ class WeatherViewController: UIViewController {
         weeklyWeatherCollectionView.delegate = self
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
     }
-    
+
     private func bindAction() {
         addButton.rx.tap
             .subscribe(onNext: {
                 self.coordinator?.popToWeatherListController()
+                NotificationCenter.default.post(name: .addLocation, object: self.location)
             })
             .disposed(by: disposeBag)
         
