@@ -58,14 +58,10 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchBar.delegate = self
-        
-        searchCompleter.delegate = self
-        searchCompleter.resultTypes = .address
-        
+
         setupView()
         setupTableView()
+        setupSearchCompleter()
         bindAction()
     }
     
@@ -135,10 +131,22 @@ class SearchViewController: UIViewController {
         searchTableView.separatorStyle = .none
     }
     
+    private func setupSearchCompleter() {
+        searchCompleter.delegate = self
+        searchCompleter.resultTypes = .address
+    }
+    
     private func bindAction() {
         cancelButton.rx.tap
             .subscribe(onNext: {
                 self.coordinator?.dismiss()
+            })
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.text.orEmpty
+            .subscribe(onNext: { [unowned self] query in
+                searchTableView.reloadData()
+                searchCompleter.queryFragment = query
             })
             .disposed(by: disposeBag)
     }
@@ -185,7 +193,7 @@ extension SearchViewController: UITableViewDelegate {
             let country = response?.mapItems.first?.placemark.country ?? ""
             
             if locality.isEmpty {
-                if locality.isEmpty, subLocality.isEmpty {
+                if administrativeArea.isEmpty, subLocality.isEmpty {
                     locationName = "\(country)"
                 } else {
                     locationName = "\(administrativeArea) \(subLocality)"
@@ -205,18 +213,6 @@ extension SearchViewController: UITableViewDelegate {
                 return
             }
         }
-    }
-}
-
-// MARK: UISearchBarDelegate
-extension SearchViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            searchResults.removeAll()
-            searchTableView.reloadData()
-        }
-        
-        searchCompleter.queryFragment = searchText
     }
 }
 
