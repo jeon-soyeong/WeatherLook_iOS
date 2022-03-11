@@ -1,5 +1,5 @@
 //
-//  WeatherCoordinator.swift
+//  WeatherPageCoordinator.swift
 //  WeatherLook_iOS
 //
 //  Created by 전소영 on 2022/02/08.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WeatherCoordinator: NSObject, Coordinator {
+class WeatherPageCoordinator: NSObject, Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: Coordinator?
@@ -43,7 +43,7 @@ class WeatherCoordinator: NSObject, Coordinator {
     }
 }
 
-extension WeatherCoordinator: UINavigationControllerDelegate {
+extension WeatherPageCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return

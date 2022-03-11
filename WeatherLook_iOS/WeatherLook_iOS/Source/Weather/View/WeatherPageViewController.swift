@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class WeatherPageViewController: UIPageViewController {
-    weak var coordinator: WeatherCoordinator?
+    weak var coordinator: WeatherPageCoordinator?
     
     private let disposeBag = DisposeBag()
     private var weatherViewControllers: [WeatherViewController] = []

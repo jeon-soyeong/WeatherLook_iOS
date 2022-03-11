@@ -24,10 +24,10 @@ class SplashCoordinator: Coordinator {
     }
     
     func pushWeatherPageViewController() {
-        let weatherCoordinator = WeatherCoordinator(navigationController)
-        weatherCoordinator.parentCoordinator = self
-        self.childCoordinators.append(weatherCoordinator)
+        let weatherPageCoordinator = WeatherPageCoordinator(navigationController)
+        weatherPageCoordinator.parentCoordinator = self
+        self.childCoordinators.append(weatherPageCoordinator)
         
-        weatherCoordinator.start()
+        weatherPageCoordinator.start()
     }
 }
