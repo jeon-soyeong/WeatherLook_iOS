@@ -26,4 +26,10 @@ class SearchCoordinator: Coordinator {
     func dismiss() {
         navigationController.dismiss(animated: true, completion: nil)
     }
+    
+    func presentWeatherViewController(with location: Location) {
+        let weatherViewController = WeatherViewController()
+        weatherViewController.location = location
+        navigationController.topViewController?.presentedViewController?.present(weatherViewController, animated: false, completion: nil)
+    }
 }
