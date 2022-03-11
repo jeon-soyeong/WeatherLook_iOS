@@ -12,6 +12,8 @@ import SnapKit
 import Then
 
 class WeatherViewController: UIViewController {
+    weak var coordinator: WeatherCoordinator?
+    
     private var weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
     var location: Location?
@@ -88,6 +90,7 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupCollectionView()
+        bindAction()
         bindViewModel()
     }
     
@@ -202,6 +205,20 @@ class WeatherViewController: UIViewController {
         weeklyWeatherCollectionView.dataSource = self
         weeklyWeatherCollectionView.delegate = self
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
+    }
+    
+    private func bindAction() {
+        addButton.rx.tap
+            .subscribe(onNext: {
+                self.coordinator?.popToWeatherListController()
+            })
+            .disposed(by: disposeBag)
+        
+        cancelButton.rx.tap
+            .subscribe(onNext: {
+                self.coordinator?.popWeatherViewController()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindViewModel() {
