@@ -146,6 +146,16 @@ extension WeatherListViewController: UITableViewDataSource {
             return 95
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            locationList.remove(at: indexPath.row)
+            UserDefaultsManager.locationList = locationList
+
+            weatherDatas.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
 // MARK: UITableViewDelegate
