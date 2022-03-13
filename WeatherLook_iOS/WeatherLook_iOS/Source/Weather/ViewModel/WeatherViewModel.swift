@@ -15,7 +15,7 @@ class WeatherViewModel: ViewModelType {
     var disposeBag = DisposeBag()
     
     struct Action {
-        let fetch = PublishSubject<Void>()
+        let fetch = PublishSubject<Location>()
     }
     
     struct State {
@@ -25,16 +25,17 @@ class WeatherViewModel: ViewModelType {
     var action = Action()
     var state = State()
     
-    init(location: Location) {
-        self.location = location
+    init() {
         configure()
     }
     
     private func configure() {
         action.fetch
-            .subscribe(onNext: {
+            .subscribe(onNext: { location in
+                self.location = location
                 self.requestWeatherData()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func requestWeatherData() {
@@ -48,6 +49,7 @@ class WeatherViewModel: ViewModelType {
                 guard let self = self else { return }
                 self.weatherData = weatherData
                 self.state.weatherDataResponse.onNext(weatherData)
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

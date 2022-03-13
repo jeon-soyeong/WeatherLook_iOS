@@ -94,14 +94,11 @@ class CurrentWeatherView: UIView {
         }
     }
     
-    func setupView(location: Location, viewModel: WeatherViewModel) {
+    func setupView(location: Location, data: WeatherData) {
         locationLabel.text = location.name
+        currentTemperatureLabel.text = "\(String(format: "%.0f", round(data.current.temp)))°"
         
-        if let currentTemperature = viewModel.weatherData?.current.temp {
-            currentTemperatureLabel.text = "\(String(format: "%.0f", round(currentTemperature)))°"
-        }
-        
-        let currentWeatherDescription = viewModel.weatherData?.current.weather.first?.main
+        let currentWeatherDescription = data.current.weather.first?.main
         switch currentWeatherDescription {
         case "Clear":
             currentWeatherImageView.image = UIImage(named: "sun")
@@ -119,8 +116,8 @@ class CurrentWeatherView: UIView {
             break
         }
         
-        if let maximumTemperature = viewModel.weatherData?.daily.first?.temp.max,
-           let minimumTemperature = viewModel.weatherData?.daily.first?.temp.min {
+        if let maximumTemperature = data.daily.first?.temp.max,
+           let minimumTemperature = data.daily.first?.temp.min {
             currentMaximumTemperatureLabel.text = "최고: \(String(format: "%.0f", round(maximumTemperature)))°"
             currentMinimumTemperatureLabel.text = "최저: \(String(format: "%.0f", round(minimumTemperature)))°"
         }

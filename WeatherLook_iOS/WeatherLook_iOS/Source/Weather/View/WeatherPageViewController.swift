@@ -17,6 +17,20 @@ class WeatherPageViewController: UIPageViewController {
     var pageIndex: Int = 0
     var locationList: [Location] = []
     
+    private let bottomView = UIView().then {
+        $0.backgroundColor = .mainBlue
+    }
+    
+    private let bottomTopLineView = UIView().then {
+        $0.backgroundColor = .mainLineGray
+    }
+    
+    private let listButton = UIButton().then {
+        $0.setImage(UIImage(named: "list"), for: .normal)
+    }
+    
+    private let pageControl = UIPageControl()
+    
     override init(transitionStyle: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]?) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -31,7 +45,52 @@ class WeatherPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
+        setupView()
+        bindAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         setupLocationList()
+        setupPageControl()
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .mainBlue
+        
+        setupSubViews()
+        setupConstraints()
+    }
+    
+    private func setupSubViews() {
+        view.addSubview(bottomView)
+        bottomView.addSubview(listButton)
+        bottomView.addSubview(pageControl)
+        bottomView.addSubview(bottomTopLineView)
+    }
+    
+    private func setupConstraints() {
+        bottomView.snp.makeConstraints {
+            $0.centerX.width.bottom.equalToSuperview()
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-50)
+        }
+        
+        bottomTopLineView.snp.makeConstraints {
+            $0.top.centerX.width.equalToSuperview()
+            $0.height.equalTo(0.5)
+        }
+        
+        listButton.snp.makeConstraints {
+            $0.top.equalTo(18)
+            $0.trailing.equalToSuperview().inset(30)
+            $0.width.height.equalTo(25)
+        }
+        
+        pageControl.snp.makeConstraints {
+            $0.top.equalTo(18)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     private func setupLocationList() {
@@ -77,8 +136,6 @@ class WeatherPageViewController: UIPageViewController {
     
     private func createWeatherViewController(at index: Int) -> UIViewController {
         let weatherViewController = WeatherViewController()
-        weatherViewController.totalPageControlCount = locationList.count
-        weatherViewController.currentPageControlIndex = index
         weatherViewController.location = locationList[index]
         
         return weatherViewController
@@ -87,6 +144,21 @@ class WeatherPageViewController: UIPageViewController {
     private func setupCurrentWeatherViewController() {
         let currentWeatherViewController = weatherViewControllers[pageIndex]
         setViewControllers([currentWeatherViewController], direction: .forward, animated: false, completion: nil)
+    }
+    
+    private func setupPageControl() {
+        pageControl.numberOfPages = locationList.count
+        pageControl.currentPage = pageIndex
+    }
+    
+    private func bindAction() {
+        listButton.rx.tap
+            .subscribe(onNext: {
+                self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
+                    self?.pageIndex = index
+                })
+            })
+            .disposed(by: disposeBag)
     }
 }
 

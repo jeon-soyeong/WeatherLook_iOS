@@ -12,11 +12,8 @@ import SnapKit
 import Then
 
 class WeatherViewController: UIViewController {
-    private var weatherViewModel: WeatherViewModel?
+    private var weatherViewModel = WeatherViewModel()
     private let disposeBag = DisposeBag()
-    
-    var totalPageControlCount: Int = 0
-    var currentPageControlIndex: Int = 0
     var location: Location?
     
     private let scrollView = UIScrollView().then {
@@ -26,20 +23,6 @@ class WeatherViewController: UIViewController {
     
     private let contentView = UIView().then {
         $0.backgroundColor = .clear
-    }
-    
-    private let bottomView = UIView().then {
-        $0.backgroundColor = .mainBlue
-    }
-    
-    private let listButton = UIButton().then {
-        $0.setImage(UIImage(named: "list"), for: .normal)
-    }
-    
-    private let pageControl = UIPageControl()
-    
-    private let bottomTopLineView = UIView().then {
-        $0.backgroundColor = .mainLineGray
     }
     
     private let currentWeatherLineView = UIView().then {
@@ -91,15 +74,17 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupPageControl()
         setupCollectionView()
-        bindAction()
         bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        weatherViewModel?.action.fetch.onNext(())
+        
+        guard let location = location else {
+            return
+        }
+        weatherViewModel.action.fetch.onNext(location)
     }
     
     private func setupView() {
@@ -111,10 +96,6 @@ class WeatherViewController: UIViewController {
     
     private func setupSubViews() {
         view.addSubview(scrollView)
-        view.addSubview(bottomView)
-        bottomView.addSubview(listButton)
-        bottomView.addSubview(pageControl)
-        bottomView.addSubview(bottomTopLineView)
         scrollView.addSubview(contentView)
         contentView.addSubview(currentWeatherView)
         contentView.addSubview(currentWeatherLineView)
@@ -128,27 +109,6 @@ class WeatherViewController: UIViewController {
     private func setupConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-        
-        bottomView.snp.makeConstraints {
-            $0.centerX.width.bottom.equalToSuperview()
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-50)
-        }
-        
-        listButton.snp.makeConstraints {
-            $0.top.equalTo(18)
-            $0.trailing.equalToSuperview().inset(30)
-            $0.width.height.equalTo(25)
-        }
-        
-        pageControl.snp.makeConstraints {
-            $0.top.equalTo(18)
-            $0.centerX.equalToSuperview()
-        }
-        
-        bottomTopLineView.snp.makeConstraints {
-            $0.top.centerX.width.equalToSuperview()
-            $0.height.equalTo(0.5)
         }
         
         contentView.snp.makeConstraints {
@@ -199,11 +159,6 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private func setupPageControl() {
-        pageControl.numberOfPages = totalPageControlCount
-        pageControl.currentPage = currentPageControlIndex
-    }
-    
     private func setupCollectionView() {
         clothingGuideCollectionView.dataSource = self
         clothingGuideCollectionView.delegate = self
@@ -218,28 +173,17 @@ class WeatherViewController: UIViewController {
         weeklyWeatherCollectionView.registerCell(cellType: WeeklyWeatherCollectionViewCell.self)
     }
     
-    private func bindAction() {
-        listButton.rx.tap
-            .bind {
-                //TODO: list coordinator로 연결
-            }
-            .disposed(by: disposeBag)
-    }
-    
     private func bindViewModel() {
         guard let location = location else {
             return
         }
-        weatherViewModel = WeatherViewModel(location: location)
         
-        weatherViewModel?.state.weatherDataResponse
-            .subscribe(onNext: { [weak self] _ in
-                if let weatherViewModel = self?.weatherViewModel {
-                    self?.currentWeatherView.setupView(location: location, viewModel: weatherViewModel)
+        weatherViewModel.state.weatherDataResponse
+            .subscribe(onNext: { [weak self] weatherData in
+                    self?.currentWeatherView.setupView(location: location, data: weatherData)
                     self?.clothingGuideCollectionView.reloadData()
                     self?.dailyWeatherCollectionView.reloadData()
                     self?.weeklyWeatherCollectionView.reloadData()
-                }
             })
             .disposed(by: disposeBag)
     }
@@ -254,11 +198,11 @@ extension WeatherViewController: UICollectionViewDataSource {
         case clothingGuideCollectionView:
             itemCount = 3
         case dailyWeatherCollectionView:
-            if let dailyWeatherCount = weatherViewModel?.weatherData?.hourly.count {
+            if let dailyWeatherCount = weatherViewModel.weatherData?.hourly.count {
                 itemCount = dailyWeatherCount
             }
         case weeklyWeatherCollectionView:
-            if let weeaklyWeatherCount = weatherViewModel?.weatherData?.daily.count {
+            if let weeaklyWeatherCount = weatherViewModel.weatherData?.daily.count {
                 itemCount = weeaklyWeatherCount
             }
         default:
@@ -274,7 +218,7 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let clothingGuideCollectionViewCell = collectionView.dequeueReusableCell(cellType: ClothingGuideCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            if let weatherData = weatherViewModel?.weatherData {
+            if let weatherData = weatherViewModel.weatherData {
                 clothingGuideCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return clothingGuideCollectionViewCell
@@ -282,7 +226,7 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let dailyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: DailyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            if let weatherData = weatherViewModel?.weatherData {
+            if let weatherData = weatherViewModel.weatherData {
                 dailyWeatherCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return dailyWeatherCollectionViewCell
@@ -290,7 +234,7 @@ extension WeatherViewController: UICollectionViewDataSource {
             guard let weeklyWeatherCollectionViewCell = collectionView.dequeueReusableCell(cellType: WeeklyWeatherCollectionViewCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-            if let weatherData = weatherViewModel?.weatherData {
+            if let weatherData = weatherViewModel.weatherData {
                 weeklyWeatherCollectionViewCell.setupUI(index: indexPath.item, data: weatherData)
             }
             return weeklyWeatherCollectionViewCell
@@ -311,7 +255,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
         case dailyWeatherCollectionView:
             cellSize = CGSize(width: DailyWeatherCollectionViewCell.cellWidth, height: DailyWeatherCollectionViewCell.cellHeight)
         case weeklyWeatherCollectionView:
-            if let weeklyWeatherDataCount = weatherViewModel?.weatherData?.daily.count {
+            if let weeklyWeatherDataCount = weatherViewModel.weatherData?.daily.count {
                 cellSize = CGSize(width: Int(collectionView.frame.width), height: WeeklyWeatherCollectionViewCell.cellHeight / weeklyWeatherDataCount)
             }
         default:
