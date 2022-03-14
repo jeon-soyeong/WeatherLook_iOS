@@ -147,6 +147,15 @@ extension WeatherListViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        var editFlag = true
+        if indexPath.row == 0 {
+            editFlag = false
+        }
+        
+        return editFlag
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             locationList.remove(at: indexPath.row)
