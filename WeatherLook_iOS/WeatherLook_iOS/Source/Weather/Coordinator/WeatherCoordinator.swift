@@ -2,7 +2,7 @@
 //  WeatherCoordinator.swift
 //  WeatherLook_iOS
 //
-//  Created by 전소영 on 2022/02/08.
+//  Created by 전소영 on 2022/03/12.
 //
 
 import Foundation
@@ -17,44 +17,22 @@ class WeatherCoordinator: NSObject, Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-        navigationController.delegate = self
+    func start() { }
+    
+    func presentWeatherViewController(location: Location) {
+        let weatherViewController = WeatherViewController()
+        weatherViewController.coordinator = self
         
-        let weatherPageViewController = WeatherPageViewController()
-        weatherPageViewController.coordinator = self
-        navigationController.pushViewController(weatherPageViewController, animated: false)
+        weatherViewController.location = location
+        weatherViewController.pageCase = "search"
+        navigationController.topViewController?.presentedViewController?.present(weatherViewController, animated: false, completion: nil)
     }
     
-    func pushWeatherListViewController(completion: ((Int) -> Void)? = nil) {
-        let weatherListCoordinator = WeatherListCoordinator(navigationController)
-        weatherListCoordinator.parentCoordinator = self
-        self.childCoordinators.append(weatherListCoordinator)
-        
-        weatherListCoordinator.start(completion: completion)
+    func popWeatherViewController() {
+        navigationController.topViewController?.presentedViewController?.presentedViewController?.dismiss(animated: true, completion: nil)
     }
     
-    func removeChildCoordinator(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-    }
-}
-
-extension WeatherCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
-            return
-        }
-        
-        if navigationController.viewControllers.contains(fromViewController) {
-            return
-        }
-        
-        if let weatherListViewController = fromViewController as? WeatherListViewController {
-            removeChildCoordinator(weatherListViewController.coordinator)
-        }
+    func popToWeatherListController() {
+        navigationController.topViewController?.dismiss(animated: true, completion: nil)
     }
 }

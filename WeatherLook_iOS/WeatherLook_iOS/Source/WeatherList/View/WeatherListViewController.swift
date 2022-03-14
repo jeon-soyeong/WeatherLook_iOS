@@ -37,6 +37,7 @@ class WeatherListViewController: UIViewController {
         
         setupView()
         setupTableView()
+        registerNotification()
         bindAction()
         bindViewModel()
     }
@@ -45,6 +46,16 @@ class WeatherListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchWeatherData()
+    }
+    
+    private func fetchWeatherData() {
+        if let locations = UserDefaultsManager.locationList {
+            locationList = locations
+        }
+        
+        for i in 0..<locationList.count {
+            weatherViewModel.action.fetch.onNext(locationList[i])
+        }
     }
     
     private func setupView() {
@@ -73,14 +84,8 @@ class WeatherListViewController: UIViewController {
         weatherListTableView.tableFooterView = footerView
     }
     
-    private func fetchWeatherData() {
-        if let locations = UserDefaultsManager.locationList {
-            locationList = locations
-        }
-        
-        for i in 0..<locationList.count {
-            weatherViewModel.action.fetch.onNext(locationList[i])
-        }
+    private func registerNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(addLocation), name: .addLocation, object: nil)
     }
     
     private func bindAction() {
@@ -98,6 +103,25 @@ class WeatherListViewController: UIViewController {
                 self?.weatherListTableView.reloadData()
             })
             .disposed(by: disposeBag)
+    }
+    
+    @objc func addLocation(notification: NSNotification) {
+        guard let location = notification.object as? Location else {
+            return
+        }
+        
+        var addFlag = true
+        for i in 0..<locationList.count {
+            if locationList[i].name == location.name {
+                addFlag = false
+            }
+        }
+        
+        if addFlag {
+            locationList.append(location)
+            UserDefaultsManager.locationList = locationList
+            weatherViewModel.action.fetch.onNext(location)
+        }
     }
 }
 
@@ -120,6 +144,25 @@ extension WeatherListViewController: UITableViewDataSource {
             return 110
         } else {
             return 95
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        var editFlag = true
+        if indexPath.row == 0 {
+            editFlag = false
+        }
+        
+        return editFlag
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            locationList.remove(at: indexPath.row)
+            UserDefaultsManager.locationList = locationList
+
+            weatherDatas.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }

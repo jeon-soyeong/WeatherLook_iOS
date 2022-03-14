@@ -69,7 +69,7 @@ class CurrentWeatherView: UIView {
     private func setupConstraints() {
         self.locationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(14)
+            $0.top.equalTo(8)
         }
         
         self.currentTemperatureLabel.snp.makeConstraints {
@@ -103,10 +103,10 @@ class CurrentWeatherView: UIView {
         case "Clear":
             currentWeatherImageView.image = UIImage(named: "sun")
             currentWeatherDescriptionLabel.text = "맑음"
-        case "Clouds":
+        case "Clouds", "Haze", "Mist":
             currentWeatherImageView.image = UIImage(named: "cloud")
             currentWeatherDescriptionLabel.text = "구름"
-        case "Rain":
+        case "Rain", "Drizzle":
             currentWeatherImageView.image = UIImage(named: "rain")
             currentWeatherDescriptionLabel.text = "비"
         case "Snow":

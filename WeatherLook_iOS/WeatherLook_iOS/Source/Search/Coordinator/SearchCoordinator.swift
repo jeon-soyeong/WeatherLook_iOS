@@ -22,4 +22,16 @@ class SearchCoordinator: Coordinator {
         searchViewController.coordinator = self
         navigationController.topViewController?.present(searchViewController, animated: true, completion: nil)
     }
+    
+    func dismiss() {
+        navigationController.dismiss(animated: true, completion: nil)
+    }
+    
+    func presentWeatherViewController(with location: Location) {
+        let weatherCoordinator = WeatherCoordinator(navigationController)
+        weatherCoordinator.parentCoordinator = self
+        self.childCoordinators.append(weatherCoordinator)
+
+        weatherCoordinator.presentWeatherViewController(location: location)
+    }
 }
