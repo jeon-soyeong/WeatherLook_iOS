@@ -10,6 +10,7 @@
 
 ## [Reference]
  ### Architecture
+- MVVM
 - Coordinator Pattern
 
  ### UI
