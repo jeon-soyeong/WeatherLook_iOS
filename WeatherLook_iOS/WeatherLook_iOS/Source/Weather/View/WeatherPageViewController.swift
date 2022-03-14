@@ -115,7 +115,7 @@ class WeatherPageViewController: UIPageViewController {
                 } else {
                     if self.locationList.first != currentLocation {
                         self.locationList.remove(at: 0)
-                        self.locationList.append(currentLocation)
+                        self.locationList.insert(currentLocation, at: 0)
                     }
                 }
                 UserDefaultsManager.locationList = self.locationList
