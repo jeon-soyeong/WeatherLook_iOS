@@ -29,8 +29,6 @@ class WeatherPageViewController: UIPageViewController {
         $0.setImage(UIImage(named: "list"), for: .normal)
     }
     
-    private let pageControl = UIPageControl()
-    
     override init(transitionStyle: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]?) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -45,15 +43,9 @@ class WeatherPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
+        setupLocationList()
         setupView()
         bindAction()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setupLocationList()
-        setupPageControl()
     }
     
     private func setupView() {
@@ -66,7 +58,6 @@ class WeatherPageViewController: UIPageViewController {
     private func setupSubViews() {
         view.addSubview(bottomView)
         bottomView.addSubview(listButton)
-        bottomView.addSubview(pageControl)
         bottomView.addSubview(bottomTopLineView)
     }
     
@@ -82,14 +73,9 @@ class WeatherPageViewController: UIPageViewController {
         }
         
         listButton.snp.makeConstraints {
-            $0.top.equalTo(18)
+            $0.top.equalTo(20)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
-        }
-        
-        pageControl.snp.makeConstraints {
-            $0.top.equalTo(18)
-            $0.centerX.equalToSuperview()
         }
     }
     
@@ -147,16 +133,18 @@ class WeatherPageViewController: UIPageViewController {
         setViewControllers([currentWeatherViewController], direction: .forward, animated: false, completion: nil)
     }
     
-    private func setupPageControl() {
-        pageControl.numberOfPages = locationList.count
-        pageControl.currentPage = pageIndex
-    }
-    
     private func bindAction() {
         listButton.rx.tap
             .subscribe(onNext: {
                 self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
                     self?.pageIndex = index
+                    
+                    if let userLocationList = UserDefaultsManager.locationList {
+                        self?.locationList = userLocationList
+                    }
+                    
+                    self?.setupWeatherViewControllers()
+                    self?.setupCurrentWeatherViewController()
                 })
             })
             .disposed(by: disposeBag)
@@ -195,4 +183,17 @@ extension WeatherPageViewController: UIPageViewControllerDataSource {
 }
 
 // MARK: UIPageViewControllerDelegate
-extension WeatherPageViewController: UIPageViewControllerDelegate { }
+extension WeatherPageViewController: UIPageViewControllerDelegate {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return weatherViewControllers.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        guard let currentViewController = viewControllers?.first as? WeatherViewController,
+              let currentViewControllerIndex = weatherViewControllers.firstIndex(of: currentViewController) else {
+                  return 0
+              }
+        
+        return currentViewControllerIndex
+    }
+}
