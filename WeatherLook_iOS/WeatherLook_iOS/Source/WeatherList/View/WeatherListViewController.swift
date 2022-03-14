@@ -153,7 +153,7 @@ extension WeatherListViewController: UITableViewDataSource {
             UserDefaultsManager.locationList = locationList
 
             weatherDatas.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }
