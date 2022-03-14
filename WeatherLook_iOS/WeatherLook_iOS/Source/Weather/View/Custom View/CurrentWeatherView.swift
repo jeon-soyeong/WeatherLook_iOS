@@ -106,7 +106,7 @@ class CurrentWeatherView: UIView {
         case "Clouds", "Haze":
             currentWeatherImageView.image = UIImage(named: "cloud")
             currentWeatherDescriptionLabel.text = "구름"
-        case "Rain":
+        case "Rain", "Drizzle":
             currentWeatherImageView.image = UIImage(named: "rain")
             currentWeatherDescriptionLabel.text = "비"
         case "Snow":
