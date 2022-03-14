@@ -127,6 +127,7 @@ class WeatherPageViewController: UIPageViewController {
     }
     
     private func setupWeatherViewControllers() {
+        weatherViewControllers = []
         for i in 0..<locationList.count {
             if let weatherViewController = createWeatherViewController(at: i) as? WeatherViewController {
                 weatherViewControllers.append(weatherViewController)
