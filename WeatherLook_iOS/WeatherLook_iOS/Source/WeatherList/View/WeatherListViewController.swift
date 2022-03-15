@@ -82,6 +82,7 @@ class WeatherListViewController: UIViewController {
         weatherListTableView.delegate = self
         weatherListTableView.registerCell(cellType: WeatherListTableViewCell.self)
         weatherListTableView.tableFooterView = footerView
+        weatherListTableView.contentInsetAdjustmentBehavior = .never
     }
     
     private func registerNotification() {
