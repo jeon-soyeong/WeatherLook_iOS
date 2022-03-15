@@ -67,7 +67,7 @@ class WeatherListViewController: UIViewController {
     
     private func setupConstraints() {
         weatherListTableView.snp.makeConstraints {
-            $0.centerX.centerY.width.height.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         searchButton.snp.makeConstraints {
@@ -142,9 +142,9 @@ extension WeatherListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 110
+            return 125
         } else {
-            return 95
+            return 100
         }
     }
     

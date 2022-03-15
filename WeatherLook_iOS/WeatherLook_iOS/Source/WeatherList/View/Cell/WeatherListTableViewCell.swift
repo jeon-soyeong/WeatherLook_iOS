@@ -37,7 +37,7 @@ class WeatherListTableViewCell: UITableViewCell {
         setupSubViews()
         setupConstraints()
     }
-    
+   
     private func setupSubViews() {
         self.addSubview(backgroundImageView)
         self.addSubview(locationNameLabel)
@@ -51,12 +51,12 @@ class WeatherListTableViewCell: UITableViewCell {
         
         locationNameLabel.snp.makeConstraints {
             $0.leading.equalTo(24)
-            $0.centerY.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(28)
         }
         
         currentTemperatureLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(24)
-            $0.centerY.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(16)
         }
     }
     
