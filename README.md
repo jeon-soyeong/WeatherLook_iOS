@@ -8,8 +8,8 @@
 날씨에 따른 옷차림 가이드를 통해 매일 아침 '오늘 뭐 입지?'에 대한 고민을 도와주는 서비스입니다.
 
 ## [Preview]
-### - 기상 및 옷차림 정보 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - 자동완성 위치검색, 위치 리스트 추가 / 삭제 기능
-<img src="https://user-images.githubusercontent.com/61855905/158514842-c769709d-df1d-4845-a55d-28b470a75b57.gif" width="200" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://user-images.githubusercontent.com/61855905/158515323-049e99e6-11c4-4d1e-81df-c3ce885e9dde.gif" width="200" />
+### - 기상 및 옷차림 정보 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - 자동완성 위치검색, 위치 리스트 추가 / 삭제 기능
+<img src="https://user-images.githubusercontent.com/61855905/158514842-c769709d-df1d-4845-a55d-28b470a75b57.gif" width="200" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://user-images.githubusercontent.com/61855905/158515323-049e99e6-11c4-4d1e-81df-c3ce885e9dde.gif" width="200" />
 
 ## [Reference]
  ### Architecture
