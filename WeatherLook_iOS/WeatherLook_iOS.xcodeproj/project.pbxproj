@@ -247,10 +247,13 @@
 		9B76635F27A2A8740053E981 /* WeatherLook_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				9B778B18281A682B00C95883 /* Application */,
 				9B76639027A3EBFC0053E981 /* Util */,
-				9B76639127A3EC0C0053E981 /* Source */,
+				9B778B14281A67A400C95883 /* Domain */,
+				9B778B15281A67B000C95883 /* Presentation */,
+				9B778B16281A67C000C95883 /* Data */,
+				9B76639427A3EC420053E981 /* Network */,
 				9B76639227A3EC160053E981 /* Resource */,
-				9B76639327A3EC240053E981 /* SupportingFiles */,
 			);
 			path = WeatherLook_iOS;
 			sourceTree = "<group>";
@@ -276,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				9B76639527A3EC530053E981 /* Extension */,
-				9B76639427A3EC420053E981 /* Network */,
 				9B7663A727AC4AA40053E981 /* Protocol */,
 				9BF3264A27CD2D5400D7CE23 /* LocationManager.swift */,
 				9BCE2AB127CF53F800645DB5 /* UserDefaultsManager.swift */,
@@ -285,35 +287,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		9B76639127A3EC0C0053E981 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				9B7663A627AC4A9D0053E981 /* Main */,
-				9B7663AD27AC50700053E981 /* Splash */,
-				9B76639627A3EC840053E981 /* Weather */,
-				9B76639727A3F3DD0053E981 /* WeatherList */,
-				9B76639827A3F3E80053E981 /* Search */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		9B76639227A3EC160053E981 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9B76636B27A2A8770053E981 /* LaunchScreen.storyboard */,
+				9B76636E27A2A8770053E981 /* Info.plist */,
 				9B76636927A2A8770053E981 /* Assets.xcassets */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		9B76639327A3EC240053E981 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				9B76636027A2A8740053E981 /* AppDelegate.swift */,
-				9B76636227A2A8740053E981 /* SceneDelegate.swift */,
-				9B76636B27A2A8770053E981 /* LaunchScreen.storyboard */,
-				9B76636E27A2A8770053E981 /* Info.plist */,
-			);
-			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		9B76639427A3EC420053E981 /* Network */ = {
@@ -492,6 +473,105 @@
 				9B7663B427AD0EBD0053E981 /* SplashViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9B778B14281A67A400C95883 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				9B778B19281A694300C95883 /* Entities */,
+				9B778B1A281A696D00C95883 /* UseCases */,
+				9B778B1B281A6A1700C95883 /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9B778B15281A67B000C95883 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9B778B20281A6BD300C95883 /* Scenes */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9B778B16281A67C000C95883 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9B778B1D281A6A8100C95883 /* Repositories */,
+				9B778B1E281A6A9200C95883 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9B778B18281A682B00C95883 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9B76636027A2A8740053E981 /* AppDelegate.swift */,
+				9B76636227A2A8740053E981 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		9B778B19281A694300C95883 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		9B778B1A281A696D00C95883 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		9B778B1B281A6A1700C95883 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				9B778B1C281A6A1D00C95883 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		9B778B1C281A6A1D00C95883 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		9B778B1D281A6A8100C95883 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		9B778B1E281A6A9200C95883 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9B778B1F281A6A9D00C95883 /* DataMapping */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9B778B1F281A6A9D00C95883 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		9B778B20281A6BD300C95883 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9B7663A627AC4A9D0053E981 /* Main */,
+				9B7663AD27AC50700053E981 /* Splash */,
+				9B76639627A3EC840053E981 /* Weather */,
+				9B76639727A3F3DD0053E981 /* WeatherList */,
+				9B76639827A3F3E80053E981 /* Search */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -946,7 +1026,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = WeatherLook_iOS/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "기상룩";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -975,7 +1055,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 577SG3C42S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherLook_iOS/SupportingFiles/Info.plist;
+				INFOPLIST_FILE = WeatherLook_iOS/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "기상룩";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

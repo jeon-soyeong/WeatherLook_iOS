@@ -51,5 +51,22 @@ class WeatherViewModel: ViewModelType {
                 self.state.weatherDataResponse.onNext(weatherData)
             })
             .disposed(by: self.disposeBag)
+        
+        
+        APIService.shared.testRequest(target: WeatherAPI.getWeatherData(latitude: latitude, longitude: longitude), responseType: WeatherData.self, completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("weatherData__: \(response)")
+            case .failure(let error):
+                switch error {
+                case .serverError:
+                    print("serverError")
+                case .clientError:
+                    print("clientError")
+                case .networkError:
+                    print("networkError")
+                }
+            }
+        })
     }
 }
