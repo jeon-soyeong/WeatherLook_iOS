@@ -19,7 +19,7 @@ class SearchCoordinator: Coordinator {
     
     func start() {
         let searchViewController = SearchViewController()
-        searchViewController.coordinator = self
+        searchViewController.viewModel = SearchViewModel(coordinator: self)
         navigationController.topViewController?.present(searchViewController, animated: true, completion: nil)
     }
     

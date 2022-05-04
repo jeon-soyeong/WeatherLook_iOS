@@ -11,7 +11,7 @@ import MapKit
 import RxSwift
 
 class SearchViewController: UIViewController {
-    weak var coordinator: SearchCoordinator?
+    var viewModel: SearchViewModel?
     
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchResults = [MKLocalSearchCompletion]()
@@ -139,7 +139,7 @@ class SearchViewController: UIViewController {
     private func bindAction() {
         cancelButton.rx.tap
             .subscribe(onNext: {
-                self.coordinator?.dismiss()
+                self.viewModel?.dismiss()
             })
             .disposed(by: disposeBag)
         
@@ -206,7 +206,7 @@ extension SearchViewController: UITableViewDelegate {
                 locationName = "\(locality) \(subLocality)"
             }
             
-            self.coordinator?.presentWeatherViewController(with: Location(coordinate: Coordinate(latitude: searchLatitude, longitude: searchLongtitude), name: locationName))
+            self.viewModel?.presentWeatherViewController(with: Location(coordinate: Coordinate(latitude: searchLatitude, longitude: searchLongtitude), name: locationName))
             
             guard error == nil else {
                 print(error.debugDescription)
