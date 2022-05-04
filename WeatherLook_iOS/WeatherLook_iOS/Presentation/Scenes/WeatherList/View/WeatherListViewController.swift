@@ -10,13 +10,11 @@ import UIKit
 import RxSwift
 
 class WeatherListViewController: UIViewController {
-    weak var coordinator: WeatherListCoordinator?
-
-    private var weatherViewModel = WeatherViewModel()
-    private let disposeBag = DisposeBag()
+    var viewModel: WeatherListViewModel?
     var locationList: [Location] = []
     var weatherDatas: [WeatherData] = []
     var completion: ((Int) -> Void)?
+    private let disposeBag = DisposeBag()
     
     private let weatherListTableView = UITableView().then {
         $0.showsVerticalScrollIndicator = false
@@ -54,7 +52,7 @@ class WeatherListViewController: UIViewController {
         }
         
         for i in 0..<locationList.count {
-            weatherViewModel.action.fetch.onNext(locationList[i])
+            viewModel?.action.fetch.onNext(locationList[i])
         }
     }
     
@@ -92,13 +90,13 @@ class WeatherListViewController: UIViewController {
     private func bindAction() {
         searchButton.rx.tap
             .subscribe(onNext: {
-                self.coordinator?.pushSearchViewController()
+                self.viewModel?.pushSearchViewController()
             })
             .disposed(by: disposeBag)
     }
     
     private func bindViewModel() {
-        weatherViewModel.state.weatherDataResponse
+        viewModel?.state.weatherDataResponse
             .subscribe(onNext: { [weak self] data in
                 self?.weatherDatas.append(data)
                 self?.weatherListTableView.reloadData()
@@ -121,7 +119,7 @@ class WeatherListViewController: UIViewController {
         if addFlag {
             locationList.append(location)
             UserDefaultsManager.locationList = locationList
-            weatherViewModel.action.fetch.onNext(location)
+            viewModel?.action.fetch.onNext(location)
         }
     }
 }
@@ -172,6 +170,6 @@ extension WeatherListViewController: UITableViewDataSource {
 extension WeatherListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         completion?(indexPath.row)
-        coordinator?.popWeatherListViewController()
+        viewModel?.popWeatherListViewController()
     }
 }

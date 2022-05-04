@@ -21,8 +21,8 @@ class WeatherListCoordinator: Coordinator {
     
     func start(completion: ((Int) -> Void)? = nil) {
         let weatherListViewController = WeatherListViewController()
-        weatherListViewController.coordinator = self
         weatherListViewController.completion = completion
+        weatherListViewController.viewModel = WeatherListViewModel(coordinator: self, weatherUseCase: WeatherUseCase(weatherRepository: DefaultWeatherRepository()))
         navigationController.pushViewController(weatherListViewController, animated: false)
     }
     
