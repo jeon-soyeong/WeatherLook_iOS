@@ -10,10 +10,11 @@ import UIKit
 import RxSwift
 
 class WeatherPageViewController: UIPageViewController {
-    weak var coordinator: WeatherPageCoordinator?
+    weak var weatherCoordinator: WeatherCoordinator?
     
     private let disposeBag = DisposeBag()
     private var weatherViewControllers: [WeatherViewController] = []
+    var viewModel: WeatherPageViewModel?
     var pageIndex: Int = 0
     var locationList: [Location] = []
     
@@ -123,6 +124,7 @@ class WeatherPageViewController: UIPageViewController {
     
     private func createWeatherViewController(at index: Int) -> UIViewController {
         let weatherViewController = WeatherViewController()
+        weatherViewController.viewModel = WeatherViewModel(coordinator: weatherCoordinator, weatherUseCase: WeatherUseCase(weatherRepository: DefaultWeatherRepository()))
         weatherViewController.location = locationList[index]
         
         return weatherViewController
@@ -136,7 +138,7 @@ class WeatherPageViewController: UIPageViewController {
     private func bindAction() {
         listButton.rx.tap
             .subscribe(onNext: {
-                self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
+                self.viewModel?.pushWeatherListViewController(completion: { [weak self] index in
                     self?.pageIndex = index
                     
                     if let userLocationList = UserDefaultsManager.locationList {

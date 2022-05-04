@@ -21,7 +21,7 @@ class WeatherPageCoordinator: NSObject, Coordinator {
         navigationController.delegate = self
         
         let weatherPageViewController = WeatherPageViewController()
-        weatherPageViewController.coordinator = self
+        weatherPageViewController.viewModel = WeatherPageViewModel(coordinator: self)
         navigationController.pushViewController(weatherPageViewController, animated: false)
     }
     
@@ -54,7 +54,7 @@ extension WeatherPageCoordinator: UINavigationControllerDelegate {
         }
         
         if let weatherListViewController = fromViewController as? WeatherListViewController {
-            removeChildCoordinator(weatherListViewController.coordinator)
+            removeChildCoordinator(weatherListViewController.viewModel?.coordinator)
         }
     }
 }
