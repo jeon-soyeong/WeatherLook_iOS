@@ -21,8 +21,7 @@ class WeatherCoordinator: NSObject, Coordinator {
     
     func presentWeatherViewController(location: Location) {
         let weatherViewController = WeatherViewController()
-        weatherViewController.coordinator = self
-        
+        weatherViewController.viewModel = WeatherViewModel(coordinator: self, weatherUseCase: WeatherUseCase(weatherRepository: DefaultWeatherRepository()))
         weatherViewController.location = location
         weatherViewController.pageCase = "search"
         navigationController.topViewController?.presentedViewController?.present(weatherViewController, animated: false, completion: nil)
