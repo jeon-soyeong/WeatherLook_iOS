@@ -19,7 +19,7 @@ class SplashCoordinator: Coordinator {
     
     func start() {
         let splashViewController = SplashViewController()
-        splashViewController.coordinator = self
+        splashViewController.viewModel = SplashViewModel(coordinator: self)
         navigationController.pushViewController(splashViewController, animated: false)
     }
     

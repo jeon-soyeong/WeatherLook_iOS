@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class SplashViewController: UIViewController {
-    weak var coordinator: SplashCoordinator?
+    var viewModel: SplashViewModel?
     
     private let splashImageView = UIImageView().then {
         if let splashImage = UIImage(named: "splashImage") {
@@ -23,7 +23,7 @@ class SplashViewController: UIViewController {
         setupView()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [weak self] in
-            self?.coordinator?.pushWeatherPageViewController()
+            self?.viewModel?.pushWeatherPageViewController()
         })
     }
     
