@@ -33,12 +33,12 @@ class WeatherPageCoordinator: NSObject, Coordinator {
         weatherListCoordinator.start(completion: completion)
     }
     
-    func pushPreviewViewController() {
+    func pushPreviewViewController(with image: UIImage) {
         let previewCoordinator = PreViewCoordinator(navigationController)
         previewCoordinator.parentCoordinator = self
         self.childCoordinators.append(previewCoordinator)
         
-        previewCoordinator.start()
+        previewCoordinator.start(with: image)
     }
     
     func removeChildCoordinator(_ child: Coordinator?) {

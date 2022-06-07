@@ -50,6 +50,8 @@ class WeatherPageViewController: UIPageViewController {
         setupLocationList()
         setupView()
         bindAction()
+        
+        shareButton.isHidden = false
     }
     
     private func setupView() {
@@ -162,7 +164,10 @@ class WeatherPageViewController: UIPageViewController {
         
         shareButton.rx.tap
             .subscribe(onNext: {
-                self.coordinator?.pushPreviewViewController()
+                self.shareButton.isHidden = true
+                if let capturedImage = self.view.convertToImage() {
+                    self.coordinator?.pushPreviewViewController(with: capturedImage)
+                }
             })
             .disposed(by: disposeBag)
     }

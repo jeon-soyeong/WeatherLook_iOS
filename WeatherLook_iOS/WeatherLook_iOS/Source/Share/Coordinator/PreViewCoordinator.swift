@@ -17,9 +17,12 @@ class PreViewCoordinator: NSObject, Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start() { }
+    
+    func start(with image: UIImage) {
         let previewViewController = PreviewViewController()
         previewViewController.coordinator = self
+        previewViewController.imageView.image = image
         navigationController.pushViewController(previewViewController, animated: false)
     }
 }
