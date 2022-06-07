@@ -30,6 +30,7 @@
 		9B6E864A27D5FAAE00001616 /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E864927D5FAAE00001616 /* WeatherListViewController.swift */; };
 		9B6E864D27D61F4B00001616 /* WeatherListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E864C27D61F4B00001616 /* WeatherListTableViewCell.swift */; };
 		9B6E864F27D61FDA00001616 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E864E27D61FDA00001616 /* UITableView+Extension.swift */; };
+		9B728FBE284F8E170041FF6D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B728FBD284F8E170041FF6D /* UIView+Extension.swift */; };
 		9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636027A2A8740053E981 /* AppDelegate.swift */; };
 		9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636227A2A8740053E981 /* SceneDelegate.swift */; };
 		9B76636527A2A8740053E981 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636427A2A8740053E981 /* WeatherViewController.swift */; };
@@ -103,6 +104,7 @@
 		9B6E864927D5FAAE00001616 /* WeatherListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListViewController.swift; sourceTree = "<group>"; };
 		9B6E864C27D61F4B00001616 /* WeatherListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListTableViewCell.swift; sourceTree = "<group>"; };
 		9B6E864E27D61FDA00001616 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		9B728FBD284F8E170041FF6D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9B76635D27A2A8740053E981 /* WeatherLook_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLook_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76636027A2A8740053E981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B76636227A2A8740053E981 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				9BE8B61927D20B47009C1426 /* String+Extension.swift */,
 				9B62DE8727DB3A45008BC0F8 /* UILabel+Extension.swift */,
 				9B62DE8B27DBCA2D008BC0F8 /* Notification.Name+Extension.swift */,
+				9B728FBD284F8E170041FF6D /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				9B6E864D27D61F4B00001616 /* WeatherListTableViewCell.swift in Sources */,
 				9B33259727BAC35F0096F20D /* CurrentWeatherView.swift in Sources */,
 				9B33259527BABEBD0096F20D /* UIColor+Extension.swift in Sources */,
+				9B728FBE284F8E170041FF6D /* UIView+Extension.swift in Sources */,
 				9BCE2AB227CF53F800645DB5 /* UserDefaultsManager.swift in Sources */,
 				9B3325A527BCE2E80096F20D /* WeatherData.swift in Sources */,
 				9BDA6722284F546A00D1D6E4 /* PreviewViewController.swift in Sources */,
