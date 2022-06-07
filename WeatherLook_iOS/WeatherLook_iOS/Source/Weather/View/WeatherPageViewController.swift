@@ -29,6 +29,10 @@ class WeatherPageViewController: UIPageViewController {
         $0.setImage(UIImage(named: "list"), for: .normal)
     }
     
+    private let shareButton = UIButton().then {
+        $0.setImage(UIImage(named: "share"), for: .normal)
+    }
+    
     override init(transitionStyle: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]?) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -58,6 +62,7 @@ class WeatherPageViewController: UIPageViewController {
     private func setupSubViews() {
         view.addSubview(bottomView)
         bottomView.addSubview(listButton)
+        bottomView.addSubview(shareButton)
         bottomView.addSubview(bottomTopLineView)
     }
     
@@ -76,6 +81,12 @@ class WeatherPageViewController: UIPageViewController {
             $0.top.equalTo(20)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
+        }
+        
+        shareButton.snp.makeConstraints {
+            $0.top.equalTo(15)
+            $0.leading.equalToSuperview().inset(30)
+            $0.width.height.equalTo(35)
         }
     }
     
@@ -146,6 +157,12 @@ class WeatherPageViewController: UIPageViewController {
                     self?.setupWeatherViewControllers()
                     self?.setupCurrentWeatherViewController()
                 })
+            })
+            .disposed(by: disposeBag)
+        
+        shareButton.rx.tap
+            .subscribe(onNext: {
+                self.coordinator?.pushPreviewViewController()
             })
             .disposed(by: disposeBag)
     }

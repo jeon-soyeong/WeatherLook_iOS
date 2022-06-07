@@ -33,6 +33,14 @@ class WeatherPageCoordinator: NSObject, Coordinator {
         weatherListCoordinator.start(completion: completion)
     }
     
+    func pushPreviewViewController() {
+        let previewCoordinator = PreViewCoordinator(navigationController)
+        previewCoordinator.parentCoordinator = self
+        self.childCoordinators.append(previewCoordinator)
+        
+        previewCoordinator.start()
+    }
+    
     func removeChildCoordinator(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
