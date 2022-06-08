@@ -7,8 +7,12 @@
 
 import UIKit
 
+import RxSwift
+
 class PreviewViewController: UIViewController {
     weak var coordinator: PreViewCoordinator?
+    private let disposeBag = DisposeBag()
+    
     var imageView = UIImageView()
     
     private let deleteButton = UIButton().then {
@@ -26,6 +30,7 @@ class PreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        bindAction()
     }
     
     private func setupView() {
@@ -62,5 +67,13 @@ class PreviewViewController: UIViewController {
             $0.trailing.equalToSuperview().inset(22)
             $0.width.height.equalTo(22)
         }
+    }
+    
+    private func bindAction() {
+        deleteButton.rx.tap
+            .subscribe(onNext: {
+                self.coordinator?.popPreviewViewController()
+            })
+            .disposed(by: disposeBag)
     }
 }

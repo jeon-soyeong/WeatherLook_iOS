@@ -25,4 +25,8 @@ class PreViewCoordinator: NSObject, Coordinator {
         previewViewController.imageView.image = image
         navigationController.pushViewController(previewViewController, animated: false)
     }
+    
+    func popPreviewViewController() {
+        navigationController.popViewController(animated: true)
+    }
 }

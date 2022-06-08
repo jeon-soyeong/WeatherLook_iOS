@@ -60,9 +60,13 @@ extension WeatherPageCoordinator: UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
-        
+   
         if let weatherListViewController = fromViewController as? WeatherListViewController {
             removeChildCoordinator(weatherListViewController.coordinator)
+        }
+        
+        if let previewViewController = fromViewController as? PreviewViewController {
+            removeChildCoordinator(previewViewController.coordinator)
         }
     }
 }
