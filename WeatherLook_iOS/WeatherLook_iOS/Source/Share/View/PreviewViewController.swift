@@ -75,5 +75,11 @@ class PreviewViewController: UIViewController {
                 self.coordinator?.popPreviewViewController()
             })
             .disposed(by: disposeBag)
+        
+        stickerButton.rx.tap
+            .subscribe(onNext: {
+                self.coordinator?.pushStickerPopUpViewController()
+            })
+            .disposed(by: disposeBag)
     }
 }

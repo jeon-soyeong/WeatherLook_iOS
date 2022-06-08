@@ -29,4 +29,12 @@ class PreViewCoordinator: NSObject, Coordinator {
     func popPreviewViewController() {
         navigationController.popViewController(animated: true)
     }
+    
+    func pushStickerPopUpViewController() {
+        let stickerPopUpCoordinator = StickerPopUpCoordinator(navigationController)
+        stickerPopUpCoordinator.parentCoordinator = self
+        self.childCoordinators.append(stickerPopUpCoordinator)
+        
+        stickerPopUpCoordinator.start()
+    }
 }
