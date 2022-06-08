@@ -50,6 +50,10 @@ class WeatherPageViewController: UIPageViewController {
         setupLocationList()
         setupView()
         bindAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         shareButton.isHidden = false
     }
