@@ -30,7 +30,7 @@ class PreViewCoordinator: NSObject, Coordinator {
         navigationController.popViewController(animated: true)
     }
     
-    func pushStickerPopUpViewController() {
+    func presentStickerPopUpViewController() {
         let stickerPopUpCoordinator = StickerPopUpCoordinator(navigationController)
         stickerPopUpCoordinator.parentCoordinator = self
         self.childCoordinators.append(stickerPopUpCoordinator)
