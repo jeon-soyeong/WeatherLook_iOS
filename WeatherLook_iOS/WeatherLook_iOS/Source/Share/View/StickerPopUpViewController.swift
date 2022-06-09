@@ -8,12 +8,19 @@
 import UIKit
 
 import RxSwift
+import SnapKit
 
 class StickerPopUpViewController: UIViewController {
     weak var coordinator: StickerPopUpCoordinator?
     private let disposeBag = DisposeBag()
     
-    private let stickerPopUpViewHeight: CGFloat = 359
+    private let stickerPopUpViewHeight: CGFloat = 360
+    private var stickerPopUpViewMinimumTopConstant: CGFloat = 50
+    private var stickerPopUpViewTopConstraint: Constraint!
+    private lazy var stickerPopUpViewStartTopConstant: CGFloat = stickerPopUpViewMinimumTopConstant
+    private lazy var safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
+    private lazy var safeAreaInsetBottomHeight: CGFloat = view.safeAreaInsets.bottom
+    private lazy var defaultTopConstant: CGFloat = safeAreaHeight + safeAreaInsetBottomHeight - stickerPopUpViewHeight
     
     private let backgroundView = UIView().then {
         $0.backgroundColor = .transparentGrey
@@ -56,8 +63,9 @@ class StickerPopUpViewController: UIViewController {
         
         stickerPopUpView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            let topConstant = view.safeAreaLayoutGuide.layoutFrame.height + view.safeAreaInsets.bottom
+            let topConstant = safeAreaHeight + safeAreaInsetBottomHeight
             $0.top.equalTo(topConstant)
+            stickerPopUpViewTopConstraint = $0.top.equalTo(topConstant).constraint
         }
     }
     
@@ -66,30 +74,64 @@ class StickerPopUpViewController: UIViewController {
         backgroundView.addGestureRecognizer(tapGestureRecognizer)
         backgroundView.isUserInteractionEnabled = true
         
-        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture(_:)))
-        swipeGestureRecognizer.direction = UISwipeGestureRecognizer.Direction.down
-        view.addGestureRecognizer(swipeGestureRecognizer)
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        panGestureRecognizer.delaysTouchesBegan = false
+        panGestureRecognizer.delaysTouchesEnded = false
+        view.addGestureRecognizer(panGestureRecognizer)
     }
     
     @objc private func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         hideStickerPopUpView()
     }
     
-    @objc private func handleSwipeGesture(_ gestureRecognizer: UISwipeGestureRecognizer) {
-        if gestureRecognizer.state == .ended {
-            switch gestureRecognizer.direction {
-            case .down:
-                hideStickerPopUpView()
-            default:
-                break
+    @objc private func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let translation = gestureRecognizer.translation(in: view)
+        let velocity = gestureRecognizer.velocity(in: view)
+        let stickerPopUpViewTopConstant = stickerPopUpViewTopConstraint.layoutConstraints.first?.constant ?? 0
+        
+        switch gestureRecognizer.state {
+        case .began:
+            if defaultTopConstant < stickerPopUpViewTopConstant {
+                stickerPopUpView.snp.updateConstraints {
+                    $0.top.equalTo(defaultTopConstant)
+                    stickerPopUpViewTopConstraint = $0.top.equalTo(defaultTopConstant).constraint
+                }
             }
+            stickerPopUpViewStartTopConstant = stickerPopUpViewTopConstant
+        case .changed:
+            if stickerPopUpViewStartTopConstant + translation.y > stickerPopUpViewMinimumTopConstant {
+                stickerPopUpView.snp.updateConstraints {
+                    $0.top.equalTo(stickerPopUpViewStartTopConstant + translation.y)
+                    stickerPopUpViewTopConstraint = $0.top.equalTo(stickerPopUpViewStartTopConstant + translation.y).constraint
+                }
+            }
+        case .ended:
+            if velocity.y > 1500 {
+                hideStickerPopUpView()
+                return
+            }
+            
+            if stickerPopUpViewTopConstant < (safeAreaHeight + safeAreaInsetBottomHeight) * 0.45 {
+                showStickerPopUpView(atState: .expanded)
+            } else if stickerPopUpViewTopConstant < safeAreaHeight - 150 {
+                showStickerPopUpView(atState: .normal)
+            } else {
+                hideStickerPopUpView()
+            }
+        default:
+            break
         }
     }
     
-    private func showStickerPopUpView() {
-        stickerPopUpView.snp.makeConstraints {
-            let topConstant = (view.safeAreaLayoutGuide.layoutFrame.height + view.safeAreaInsets.bottom) - stickerPopUpViewHeight
-            $0.top.equalTo(topConstant)
+    private func showStickerPopUpView(atState: StickerPopUpViewState = .normal) {
+        if atState == .normal {
+            stickerPopUpView.snp.updateConstraints {
+                $0.top.equalTo(defaultTopConstant)
+            }
+        } else {
+            stickerPopUpView.snp.updateConstraints {
+                $0.top.equalTo(stickerPopUpViewMinimumTopConstant)
+            }
         }
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
@@ -99,9 +141,8 @@ class StickerPopUpViewController: UIViewController {
     }
     
     private func hideStickerPopUpView() {
-        stickerPopUpView.snp.makeConstraints {
-            let topConstant = view.safeAreaLayoutGuide.layoutFrame.height + view.safeAreaInsets.bottom
-            $0.top.equalTo(topConstant)
+        stickerPopUpView.snp.updateConstraints {
+            $0.top.equalTo(safeAreaHeight + safeAreaInsetBottomHeight)
         }
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
