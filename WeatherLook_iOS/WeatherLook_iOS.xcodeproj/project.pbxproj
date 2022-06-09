@@ -33,6 +33,7 @@
 		9B728FBE284F8E170041FF6D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B728FBD284F8E170041FF6D /* UIView+Extension.swift */; };
 		9B728FC028506A410041FF6D /* StickerPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B728FBF28506A410041FF6D /* StickerPopUpViewController.swift */; };
 		9B728FC228506AEF0041FF6D /* StickerPopUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B728FC128506AEF0041FF6D /* StickerPopUpCoordinator.swift */; };
+		9B728FC52851EA8A0041FF6D /* StickerPopUpViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B728FC42851EA8A0041FF6D /* StickerPopUpViewState.swift */; };
 		9B76636127A2A8740053E981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636027A2A8740053E981 /* AppDelegate.swift */; };
 		9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636227A2A8740053E981 /* SceneDelegate.swift */; };
 		9B76636527A2A8740053E981 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B76636427A2A8740053E981 /* WeatherViewController.swift */; };
@@ -109,6 +110,7 @@
 		9B728FBD284F8E170041FF6D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9B728FBF28506A410041FF6D /* StickerPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPopUpViewController.swift; sourceTree = "<group>"; };
 		9B728FC128506AEF0041FF6D /* StickerPopUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPopUpCoordinator.swift; sourceTree = "<group>"; };
+		9B728FC42851EA8A0041FF6D /* StickerPopUpViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPopUpViewState.swift; sourceTree = "<group>"; };
 		9B76635D27A2A8740053E981 /* WeatherLook_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLook_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B76636027A2A8740053E981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B76636227A2A8740053E981 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +232,14 @@
 				9B6E864C27D61F4B00001616 /* WeatherListTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		9B728FC32851EA770041FF6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B728FC42851EA8A0041FF6D /* StickerPopUpViewState.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9B76635427A2A8740053E981 = {
@@ -509,8 +519,9 @@
 		9BDA671C284A757900D1D6E4 /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				9BDA671E284A75B200D1D6E4 /* Coordinator */,
+				9B728FC32851EA770041FF6D /* Model */,
 				9BDA671D284A75A300D1D6E4 /* View */,
+				9BDA671E284A75B200D1D6E4 /* Coordinator */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -824,6 +835,7 @@
 				9B7663B527AD0EBD0053E981 /* SplashViewController.swift in Sources */,
 				9B76636327A2A8740053E981 /* SceneDelegate.swift in Sources */,
 				9BF3264B27CD2D5400D7CE23 /* LocationManager.swift in Sources */,
+				9B728FC52851EA8A0041FF6D /* StickerPopUpViewState.swift in Sources */,
 				9B62DE8627DB2A1B008BC0F8 /* SearchTableViewCell.swift in Sources */,
 				9BE8B61427D0B52D009C1426 /* APIService.swift in Sources */,
 				9B2FD9CA27DA3CE400C8AF0D /* SearchViewController.swift in Sources */,
