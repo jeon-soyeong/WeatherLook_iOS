@@ -14,7 +14,7 @@ class StickerPopUpViewController: UIViewController {
     weak var coordinator: StickerPopUpCoordinator?
     private let disposeBag = DisposeBag()
     
-    private let stickerPopUpViewHeight: CGFloat = 360
+    private let stickerPopUpViewHeight: CGFloat = 400
     private var stickerPopUpViewMinimumTopConstant: CGFloat = 50
     private var stickerPopUpViewTopConstraint: Constraint!
     private lazy var stickerPopUpViewStartTopConstant: CGFloat = stickerPopUpViewMinimumTopConstant
@@ -33,6 +33,11 @@ class StickerPopUpViewController: UIViewController {
         $0.clipsToBounds = true
     }
     
+    private let indicatorView = UIView().then {
+        $0.backgroundColor = .lightGray
+        $0.layer.cornerRadius = 3
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -54,6 +59,7 @@ class StickerPopUpViewController: UIViewController {
     private func setupSubViews() {
         view.addSubview(backgroundView)
         view.addSubview(stickerPopUpView)
+        view.addSubview(indicatorView)
     }
     
     private func setupConstraints() {
@@ -66,6 +72,13 @@ class StickerPopUpViewController: UIViewController {
             let topConstant = safeAreaHeight + safeAreaInsetBottomHeight
             $0.top.equalTo(topConstant)
             stickerPopUpViewTopConstraint = $0.top.equalTo(topConstant).constraint
+        }
+    
+        indicatorView.snp.makeConstraints {
+            $0.width.equalTo(60)
+            $0.height.equalTo(7)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(stickerPopUpView.snp.top).inset(12)
         }
     }
     
