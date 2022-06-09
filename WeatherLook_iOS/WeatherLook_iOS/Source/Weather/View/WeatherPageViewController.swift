@@ -152,8 +152,8 @@ class WeatherPageViewController: UIPageViewController {
     
     private func bindAction() {
         listButton.rx.tap
-            .subscribe(onNext: {
-                self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
                     self?.pageIndex = index
                     
                     if let userLocationList = UserDefaultsManager.locationList {
@@ -167,10 +167,10 @@ class WeatherPageViewController: UIPageViewController {
             .disposed(by: disposeBag)
         
         shareButton.rx.tap
-            .subscribe(onNext: {
-                self.shareButton.isHidden = true
-                if let capturedImage = self.view.convertToImage() {
-                    self.coordinator?.pushPreviewViewController(with: capturedImage)
+            .subscribe(onNext: { [weak self] in
+                self?.shareButton.isHidden = true
+                if let capturedImage = self?.view.convertToImage() {
+                    self?.coordinator?.pushPreviewViewController(with: capturedImage)
                 }
             })
             .disposed(by: disposeBag)

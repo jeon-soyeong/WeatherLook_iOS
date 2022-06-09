@@ -71,14 +71,14 @@ class PreviewViewController: UIViewController {
     
     private func bindAction() {
         deleteButton.rx.tap
-            .subscribe(onNext: {
-                self.coordinator?.popPreviewViewController()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.popPreviewViewController()
             })
             .disposed(by: disposeBag)
         
         stickerButton.rx.tap
-            .subscribe(onNext: {
-                self.coordinator?.presentStickerPopUpViewController()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.presentStickerPopUpViewController()
             })
             .disposed(by: disposeBag)
     }

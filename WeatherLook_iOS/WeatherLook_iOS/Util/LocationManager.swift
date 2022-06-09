@@ -49,11 +49,11 @@ class LocationManager {
             .disposed(by: disposeBag)
         
         self.locationManager.rx.placemark
-            .subscribe(onNext: { placemark in
+            .subscribe(onNext: { [weak self] placemark in
                 guard let locality = placemark.locality, let subLocality = placemark.subLocality else {
                     return
                 }
-                self.placeMarkSubject.onNext("\(locality) \(subLocality)")
+                self?.placeMarkSubject.onNext("\(locality) \(subLocality)")
             })
             .disposed(by: disposeBag)
     }
