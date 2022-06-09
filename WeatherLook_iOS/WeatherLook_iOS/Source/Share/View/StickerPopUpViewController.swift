@@ -37,7 +37,7 @@ class StickerPopUpViewController: UIViewController {
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 3
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -73,7 +73,7 @@ class StickerPopUpViewController: UIViewController {
             $0.top.equalTo(topConstant)
             stickerPopUpViewTopConstraint = $0.top.equalTo(topConstant).constraint
         }
-    
+        
         indicatorView.snp.makeConstraints {
             $0.width.equalTo(60)
             $0.height.equalTo(7)
@@ -83,21 +83,33 @@ class StickerPopUpViewController: UIViewController {
     }
     
     private func setupGestureRecognizer() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer()
         backgroundView.addGestureRecognizer(tapGestureRecognizer)
         backgroundView.isUserInteractionEnabled = true
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        let panGestureRecognizer = UIPanGestureRecognizer()
         panGestureRecognizer.delaysTouchesBegan = false
         panGestureRecognizer.delaysTouchesEnded = false
         view.addGestureRecognizer(panGestureRecognizer)
+        
+        tapGestureRecognizer.rx.event
+            .subscribe(onNext: { [weak self] _ in
+                self?.handleTapGesture(tapGestureRecognizer)
+            })
+            .disposed(by: disposeBag)
+        
+        panGestureRecognizer.rx.event
+            .subscribe(onNext: { [weak self] _ in
+                self?.handlePanGesture(panGestureRecognizer)
+            })
+            .disposed(by: disposeBag)
     }
     
-    @objc private func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+    private func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         hideStickerPopUpView()
     }
     
-    @objc private func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+    private func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: view)
         let velocity = gestureRecognizer.velocity(in: view)
         let stickerPopUpViewTopConstant = stickerPopUpViewTopConstraint.layoutConstraints.first?.constant ?? 0
