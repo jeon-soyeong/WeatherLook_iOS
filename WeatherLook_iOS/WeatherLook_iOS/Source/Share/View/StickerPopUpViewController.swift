@@ -203,3 +203,33 @@ class StickerPopUpViewController: UIViewController {
         }
     }
 }
+
+// MARK: UICollectionViewDataSource
+extension StickerPopUpViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let stickerPopUpCollectionViewCell = collectionView.dequeueReusableCell(cellType: StickerPopUpCollectionViewCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
+        }
+        stickerPopUpCollectionViewCell.setupUI(index: indexPath.item)
+    
+        return stickerPopUpCollectionViewCell
+    }
+}
+
+// MARK: UICollectionViewDelegate
+extension StickerPopUpViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    }
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+extension StickerPopUpViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: Int(collectionView.frame.width) / 3, height: StickerPopUpCollectionViewCell.cellHeight)
+    }
+}
