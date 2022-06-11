@@ -33,6 +33,16 @@ class StickerPopUpViewController: UIViewController {
         $0.clipsToBounds = true
     }
     
+    private let stickerPopUpCollectionViewFlowLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+        $0.minimumLineSpacing = .zero
+        $0.minimumInteritemSpacing = .zero
+    }
+    
+    private lazy var stickerPopUpCollectionView = UICollectionView.init(frame: .zero, collectionViewLayout: stickerPopUpCollectionViewFlowLayout).then {
+        $0.showsVerticalScrollIndicator = false
+    }
+    
     private let indicatorView = UIView().then {
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 3
@@ -60,6 +70,7 @@ class StickerPopUpViewController: UIViewController {
         view.addSubview(backgroundView)
         view.addSubview(stickerPopUpView)
         view.addSubview(indicatorView)
+        stickerPopUpView.addSubview(stickerPopUpCollectionView)
     }
     
     private func setupConstraints() {
@@ -72,6 +83,11 @@ class StickerPopUpViewController: UIViewController {
             let topConstant = safeAreaHeight + safeAreaInsetBottomHeight
             $0.top.equalTo(topConstant)
             stickerPopUpViewTopConstraint = $0.top.equalTo(topConstant).constraint
+        }
+        
+        stickerPopUpCollectionView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(stickerPopUpView.snp.top).inset(24)
         }
         
         indicatorView.snp.makeConstraints {
