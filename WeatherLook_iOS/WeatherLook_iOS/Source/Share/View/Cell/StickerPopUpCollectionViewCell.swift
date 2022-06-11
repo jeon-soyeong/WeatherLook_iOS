@@ -34,7 +34,6 @@ class StickerPopUpCollectionViewCell: UICollectionViewCell {
     }
     
     func setupUI(index: Int) {
-//        stickerImageView.image = UIImage(named: "sticker\(index)")
-        stickerImageView.image = UIImage(named: "28temp0")
+        stickerImageView.image = UIImage(named: "sticker\(index)")
     }
 }

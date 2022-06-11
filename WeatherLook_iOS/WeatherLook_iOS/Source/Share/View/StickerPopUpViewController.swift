@@ -207,7 +207,7 @@ class StickerPopUpViewController: UIViewController {
 // MARK: UICollectionViewDataSource
 extension StickerPopUpViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 21
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
