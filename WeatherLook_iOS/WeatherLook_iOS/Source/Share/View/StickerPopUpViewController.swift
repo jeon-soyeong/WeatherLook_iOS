@@ -63,6 +63,7 @@ class StickerPopUpViewController: UIViewController {
         backgroundView.alpha = 0.0
         
         setupSubViews()
+        setupCollectionView()
         setupConstraints()
     }
     
@@ -96,6 +97,12 @@ class StickerPopUpViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(stickerPopUpView.snp.top).inset(12)
         }
+    }
+    
+    private func setupCollectionView() {
+        stickerPopUpCollectionView.dataSource = self
+        stickerPopUpCollectionView.delegate = self
+        stickerPopUpCollectionView.registerCell(cellType: StickerPopUpCollectionViewCell.self)
     }
     
     private func setupGestureRecognizer() {
