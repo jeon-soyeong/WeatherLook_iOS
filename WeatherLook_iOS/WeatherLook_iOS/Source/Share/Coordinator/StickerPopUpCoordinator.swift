@@ -17,10 +17,17 @@ class StickerPopUpCoordinator: NSObject, Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start() { }
+    
+    func start(completion: ((Int) -> Void)? = nil) {
         let stickerPopUpViewController = StickerPopUpViewController()
         stickerPopUpViewController.coordinator = self
+        stickerPopUpViewController.completion = completion
         stickerPopUpViewController.modalPresentationStyle = .overFullScreen
-        self.navigationController.present(stickerPopUpViewController, animated: false, completion: nil)
+        navigationController.present(stickerPopUpViewController, animated: false, completion: nil)
+    }
+    
+    func popStickerPopUpViewController() {
+        navigationController.dismiss(animated: false)
     }
 }

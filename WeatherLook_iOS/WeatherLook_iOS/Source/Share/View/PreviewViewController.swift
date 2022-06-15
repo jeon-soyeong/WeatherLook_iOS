@@ -78,8 +78,14 @@ class PreviewViewController: UIViewController {
         
         stickerButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.coordinator?.presentStickerPopUpViewController()
+                self?.coordinator?.presentStickerPopUpViewController(completion: { [weak self] index in
+                    self?.addStickerView(index: index)
+                })
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func addStickerView(index: Int) {
+        
     }
 }

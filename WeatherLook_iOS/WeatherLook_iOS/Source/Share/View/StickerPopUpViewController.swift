@@ -21,6 +21,7 @@ class StickerPopUpViewController: UIViewController {
     private lazy var safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
     private lazy var safeAreaInsetBottomHeight: CGFloat = view.safeAreaInsets.bottom
     private lazy var defaultTopConstant: CGFloat = safeAreaHeight + safeAreaInsetBottomHeight - stickerPopUpViewHeight
+    var completion: ((Int) -> Void)?
     
     private let backgroundView = UIView().then {
         $0.backgroundColor = .transparentGrey
@@ -223,7 +224,8 @@ extension StickerPopUpViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegate
 extension StickerPopUpViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+        completion?(indexPath.row)
+        coordinator?.popStickerPopUpViewController()
     }
 }
 
