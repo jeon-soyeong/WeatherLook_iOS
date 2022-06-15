@@ -86,6 +86,13 @@ class PreviewViewController: UIViewController {
     }
     
     private func addStickerView(index: Int) {
+        let stickerView = StickerView()
+        stickerView.stickerImageView.image = UIImage(named: "sticker\(index)")
+        view.addSubview(stickerView)
         
+        stickerView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+            $0.width.height.equalTo(120)
+        }
     }
 }

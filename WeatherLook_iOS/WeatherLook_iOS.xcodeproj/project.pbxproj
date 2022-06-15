@@ -49,6 +49,7 @@
 		9B7663B527AD0EBD0053E981 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B427AD0EBD0053E981 /* SplashViewController.swift */; };
 		9B7663B727B23AD30053E981 /* WeatherPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B627B23AD30053E981 /* WeatherPageCoordinator.swift */; };
 		9B7C40D027C4CF53001C1BAD /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7C40CF27C4CF53001C1BAD /* ViewModelType.swift */; };
+		9B807FA5285A122500640E52 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B807FA4285A122500640E52 /* StickerView.swift */; };
 		9BCE2AAA27CE8DF700645DB5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE2AA927CE8DF600645DB5 /* Location.swift */; };
 		9BCE2AAC27CE8E3300645DB5 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE2AAB27CE8E3300645DB5 /* Coordinate.swift */; };
 		9BCE2AB027CF4D8D00645DB5 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE2AAF27CF4D8D00645DB5 /* UserDefaultWrapper.swift */; };
@@ -131,6 +132,7 @@
 		9B7663B427AD0EBD0053E981 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		9B7663B627B23AD30053E981 /* WeatherPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageCoordinator.swift; sourceTree = "<group>"; };
 		9B7C40CF27C4CF53001C1BAD /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		9B807FA4285A122500640E52 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		9BCE2AA927CE8DF600645DB5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9BCE2AAB27CE8E3300645DB5 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		9BCE2AAF27CF4D8D00645DB5 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 		9BDA6720284A762A00D1D6E4 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				9B807FA4285A122500640E52 /* StickerView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				9B6D4A8F27BFB170000F2795 /* DailyWeatherCollectionViewCell.swift in Sources */,
 				9B6E864F27D61FDA00001616 /* UITableView+Extension.swift in Sources */,
 				9B7663AA27AC4C650053E981 /* Coordinator.swift in Sources */,
+				9B807FA5285A122500640E52 /* StickerView.swift in Sources */,
 				9BE8B61627D0B589009C1426 /* DefaultSession.swift in Sources */,
 				9B3325A327BBA2AD0096F20D /* ClothingGuideCollectionViewCell.swift in Sources */,
 				9BE8B61827D1E7F9009C1426 /* Date+Extension.swift in Sources */,
