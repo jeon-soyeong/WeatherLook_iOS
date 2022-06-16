@@ -58,12 +58,15 @@ class StickerView: UIView {
         let panGestureRecognizer = UIPanGestureRecognizer()
         panGestureRecognizer.delaysTouchesBegan = false
         panGestureRecognizer.delaysTouchesEnded = false
+        panGestureRecognizer.delegate = self
         self.addGestureRecognizer(panGestureRecognizer)
         
         let pinchGestureRecognizer = UIPinchGestureRecognizer()
+        pinchGestureRecognizer.delegate = self
         self.addGestureRecognizer(pinchGestureRecognizer)
         
         let rotationGestureRecognizer = UIRotationGestureRecognizer()
+        rotationGestureRecognizer.delegate = self
         self.addGestureRecognizer(rotationGestureRecognizer)
         
         panGestureRecognizer.rx.event
@@ -121,5 +124,12 @@ class StickerView: UIView {
             by: gestureRecognizer.rotation
         )
         gestureRecognizer.rotation = 0
+    }
+}
+
+// MARK: UIGestureRecognizerDelegate
+extension StickerView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith shouldRecognizeSimultaneouslyWithGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
