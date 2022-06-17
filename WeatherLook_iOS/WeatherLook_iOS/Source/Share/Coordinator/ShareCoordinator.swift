@@ -22,7 +22,6 @@ class ShareCoordinator: NSObject, Coordinator {
     func start(with image: UIImage) {
         let shareViewController = ShareViewController()
         shareViewController.coordinator = self
-        shareViewController.capturedShareImage = image
         shareViewController.backgroundImageView.image = image
         navigationController.pushViewController(shareViewController, animated: false)
     }

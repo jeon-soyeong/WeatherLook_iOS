@@ -12,9 +12,7 @@ import RxSwift
 class ShareViewController: UIViewController {
     weak var coordinator: ShareCoordinator?
     private let disposeBag = DisposeBag()
-    
-    var capturedShareImage: UIImage?
-    
+   
     let backgroundImageView = UIImageView()
     
     private let shareButton = UIButton().then {
