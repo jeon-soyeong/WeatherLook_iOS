@@ -24,7 +24,7 @@ class StickerPopUpViewController: UIViewController {
     var completion: ((Int) -> Void)?
     
     private let backgroundView = UIView().then {
-        $0.backgroundColor = .transparentGrey
+        $0.backgroundColor = .transparentGray
     }
     
     private let stickerPopUpView = UIView().then {
