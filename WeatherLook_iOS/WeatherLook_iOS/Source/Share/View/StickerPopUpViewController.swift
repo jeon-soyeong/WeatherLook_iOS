@@ -161,9 +161,9 @@ class StickerPopUpViewController: UIViewController {
             }
             
             if stickerPopUpViewTopConstant < (safeAreaHeight + safeAreaInsetBottomHeight) * 0.45 {
-                showStickerPopUpView(atState: .expanded)
+                showStickerPopUpView(state: .expanded)
             } else if stickerPopUpViewTopConstant < safeAreaHeight - 150 {
-                showStickerPopUpView(atState: .normal)
+                showStickerPopUpView(state: .normal)
             } else {
                 hideStickerPopUpView()
             }
@@ -172,8 +172,8 @@ class StickerPopUpViewController: UIViewController {
         }
     }
     
-    private func showStickerPopUpView(atState: StickerPopUpViewState = .normal) {
-        if atState == .normal {
+    private func showStickerPopUpView(state: StickerPopUpViewState = .normal) {
+        if state == .normal {
             stickerPopUpView.snp.updateConstraints {
                 $0.top.equalTo(defaultTopConstant)
             }
