@@ -33,6 +33,14 @@ class PreviewViewController: UIViewController {
         bindAction()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        deleteButton.isHidden = false
+        stickerButton.isHidden = false
+        arrowButton.isHidden = false
+    }
+    
     private func setupView() {
         setupSubviews()
         setupConstraints()
@@ -81,6 +89,17 @@ class PreviewViewController: UIViewController {
                 self?.coordinator?.presentStickerPopUpViewController(completion: { [weak self] index in
                     self?.addStickerView(index: index)
                 })
+            })
+            .disposed(by: disposeBag)
+        
+        arrowButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.deleteButton.isHidden = true
+                self?.stickerButton.isHidden = true
+                self?.arrowButton.isHidden = true
+                if let capturedImage = self?.view.convertToImage() {
+                    self?.coordinator?.pushShareViewController(with: capturedImage)
+                }
             })
             .disposed(by: disposeBag)
     }
