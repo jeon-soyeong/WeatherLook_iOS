@@ -136,6 +136,11 @@ class PreviewViewController: UIViewController {
             view.addGestureRecognizer($0)
         }
         
+        let longPressGestureRecognizer = UILongPressGestureRecognizer().then {
+            $0.delegate = self
+            view.addGestureRecognizer($0)
+        }
+        
         panGestureRecognizer.rx.event
             .subscribe(onNext: { [weak self] _ in
                 self?.handlePanGesture(panGestureRecognizer)
@@ -151,6 +156,12 @@ class PreviewViewController: UIViewController {
         rotationGestureRecognizer.rx.event
             .subscribe(onNext: { [weak self] _ in
                 self?.handleRotationGesture(rotationGestureRecognizer)
+            })
+            .disposed(by: disposeBag)
+        
+        longPressGestureRecognizer.rx.event
+            .subscribe(onNext: { [weak self] _ in
+                self?.handleLongPressGestureRecognizer(longPressGestureRecognizer)
             })
             .disposed(by: disposeBag)
     }
@@ -178,6 +189,22 @@ class PreviewViewController: UIViewController {
         }
         gestureView.transform = gestureView.transform.rotated(by: gestureRecognizer.rotation)
         gestureRecognizer.rotation = 0
+    }
+    
+    private func handleLongPressGestureRecognizer(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state != .ended {
+            return
+        }
+         
+        let alert = UIAlertController(title: "삭제하시겠습니까?", message: "", preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "네", style: .destructive, handler: { _ in
+            gestureRecognizer.view?.removeFromSuperview()
+        })
+        let cancel = UIAlertAction(title: "아니오", style: .cancel, handler : nil)
+        alert.addAction(cancel)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        
     }
 }
 
