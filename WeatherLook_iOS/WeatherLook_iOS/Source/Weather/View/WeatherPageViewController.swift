@@ -29,6 +29,10 @@ class WeatherPageViewController: UIPageViewController {
         $0.setImage(UIImage(named: "list"), for: .normal)
     }
     
+    private let shareButton = UIButton().then {
+        $0.setImage(UIImage(named: "share"), for: .normal)
+    }
+    
     override init(transitionStyle: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]?) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -48,6 +52,12 @@ class WeatherPageViewController: UIPageViewController {
         bindAction()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        shareButton.isHidden = false
+    }
+    
     private func setupView() {
         view.backgroundColor = .mainBlue
         
@@ -58,6 +68,7 @@ class WeatherPageViewController: UIPageViewController {
     private func setupSubViews() {
         view.addSubview(bottomView)
         bottomView.addSubview(listButton)
+        bottomView.addSubview(shareButton)
         bottomView.addSubview(bottomTopLineView)
     }
     
@@ -76,6 +87,12 @@ class WeatherPageViewController: UIPageViewController {
             $0.top.equalTo(20)
             $0.trailing.equalToSuperview().inset(30)
             $0.width.height.equalTo(25)
+        }
+        
+        shareButton.snp.makeConstraints {
+            $0.top.equalTo(15)
+            $0.leading.equalToSuperview().inset(30)
+            $0.width.height.equalTo(35)
         }
     }
     
@@ -135,8 +152,8 @@ class WeatherPageViewController: UIPageViewController {
     
     private func bindAction() {
         listButton.rx.tap
-            .subscribe(onNext: {
-                self.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.pushWeatherListViewController(completion: { [weak self] index in
                     self?.pageIndex = index
                     
                     if let userLocationList = UserDefaultsManager.locationList {
@@ -146,6 +163,15 @@ class WeatherPageViewController: UIPageViewController {
                     self?.setupWeatherViewControllers()
                     self?.setupCurrentWeatherViewController()
                 })
+            })
+            .disposed(by: disposeBag)
+        
+        shareButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.shareButton.isHidden = true
+                if let capturedImage = self?.view.convertToImage() {
+                    self?.coordinator?.pushPreviewViewController(with: capturedImage)
+                }
             })
             .disposed(by: disposeBag)
     }

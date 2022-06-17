@@ -91,8 +91,8 @@ class WeatherListViewController: UIViewController {
     
     private func bindAction() {
         searchButton.rx.tap
-            .subscribe(onNext: {
-                self.coordinator?.pushSearchViewController()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.pushSearchViewController()
             })
             .disposed(by: disposeBag)
     }

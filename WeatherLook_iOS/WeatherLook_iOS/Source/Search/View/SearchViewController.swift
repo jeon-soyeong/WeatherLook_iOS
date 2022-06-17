@@ -138,8 +138,8 @@ class SearchViewController: UIViewController {
     
     private func bindAction() {
         cancelButton.rx.tap
-            .subscribe(onNext: {
-                self.coordinator?.dismiss()
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.dismiss()
             })
             .disposed(by: disposeBag)
         

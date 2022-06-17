@@ -33,6 +33,14 @@ class WeatherPageCoordinator: NSObject, Coordinator {
         weatherListCoordinator.start(completion: completion)
     }
     
+    func pushPreviewViewController(with image: UIImage) {
+        let previewCoordinator = PreViewCoordinator(navigationController)
+        previewCoordinator.parentCoordinator = self
+        self.childCoordinators.append(previewCoordinator)
+        
+        previewCoordinator.start(with: image)
+    }
+    
     func removeChildCoordinator(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
@@ -43,6 +51,7 @@ class WeatherPageCoordinator: NSObject, Coordinator {
     }
 }
 
+// MARK: UINavigationControllerDelegate
 extension WeatherPageCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
@@ -52,9 +61,13 @@ extension WeatherPageCoordinator: UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
-        
+   
         if let weatherListViewController = fromViewController as? WeatherListViewController {
             removeChildCoordinator(weatherListViewController.coordinator)
+        }
+        
+        if let previewViewController = fromViewController as? PreviewViewController {
+            removeChildCoordinator(previewViewController.coordinator)
         }
     }
 }
