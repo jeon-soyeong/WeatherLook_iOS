@@ -64,7 +64,7 @@ class ShareViewController: UIViewController {
     private func bindAction() {
         shareButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                
+                self?.shareImage()
             })
             .disposed(by: disposeBag)
         
@@ -73,5 +73,21 @@ class ShareViewController: UIViewController {
                 self?.coordinator?.popShareViewController()
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func shareImage() {
+        guard let shareImage = backgroundImageView.image else {
+            return
+        }
+        let activityViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+            if success {
+                if let weatherPageViewController = self.navigationController?.viewControllers[1] {
+                    self.navigationController?.popToViewController(weatherPageViewController, animated: false)
+                }
+            }
+        }
+        present(activityViewController, animated: true, completion: nil)
     }
 }
