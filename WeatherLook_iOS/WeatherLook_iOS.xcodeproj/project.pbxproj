@@ -49,6 +49,8 @@
 		9B7663B527AD0EBD0053E981 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B427AD0EBD0053E981 /* SplashViewController.swift */; };
 		9B7663B727B23AD30053E981 /* WeatherPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7663B627B23AD30053E981 /* WeatherPageCoordinator.swift */; };
 		9B7C40D027C4CF53001C1BAD /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7C40CF27C4CF53001C1BAD /* ViewModelType.swift */; };
+		9B807FA7285C9DD500640E52 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B807FA6285C9DD500640E52 /* ShareViewController.swift */; };
+		9B807FA9285C9DF300640E52 /* ShareCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B807FA8285C9DF300640E52 /* ShareCoordinator.swift */; };
 		9BCE2AAA27CE8DF700645DB5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE2AA927CE8DF600645DB5 /* Location.swift */; };
 		9BCE2AAC27CE8E3300645DB5 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE2AAB27CE8E3300645DB5 /* Coordinate.swift */; };
 		9BCE2AB027CF4D8D00645DB5 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE2AAF27CF4D8D00645DB5 /* UserDefaultWrapper.swift */; };
@@ -131,6 +133,8 @@
 		9B7663B427AD0EBD0053E981 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		9B7663B627B23AD30053E981 /* WeatherPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageCoordinator.swift; sourceTree = "<group>"; };
 		9B7C40CF27C4CF53001C1BAD /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		9B807FA6285C9DD500640E52 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		9B807FA8285C9DF300640E52 /* ShareCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCoordinator.swift; sourceTree = "<group>"; };
 		9BCE2AA927CE8DF600645DB5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9BCE2AAB27CE8E3300645DB5 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		9BCE2AAF27CF4D8D00645DB5 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 				9BDA671F284A762000D1D6E4 /* Cell */,
 				9BDA6721284F546A00D1D6E4 /* PreviewViewController.swift */,
 				9B728FBF28506A410041FF6D /* StickerPopUpViewController.swift */,
+				9B807FA6285C9DD500640E52 /* ShareViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -543,6 +548,7 @@
 			children = (
 				9BDA6723284F574500D1D6E4 /* PreViewCoordinator.swift */,
 				9B728FC128506AEF0041FF6D /* StickerPopUpCoordinator.swift */,
+				9B807FA8285C9DF300640E52 /* ShareCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -799,7 +805,9 @@
 				9B7663AA27AC4C650053E981 /* Coordinator.swift in Sources */,
 				9BE8B61627D0B589009C1426 /* DefaultSession.swift in Sources */,
 				9B3325A327BBA2AD0096F20D /* ClothingGuideCollectionViewCell.swift in Sources */,
+				9B807FA9285C9DF300640E52 /* ShareCoordinator.swift in Sources */,
 				9BE8B61827D1E7F9009C1426 /* Date+Extension.swift in Sources */,
+				9B807FA7285C9DD500640E52 /* ShareViewController.swift in Sources */,
 				9B76636527A2A8740053E981 /* WeatherViewController.swift in Sources */,
 				9B6E864827D5FA3D00001616 /* WeatherListCoordinator.swift in Sources */,
 				9BE8B61A27D20B47009C1426 /* String+Extension.swift in Sources */,

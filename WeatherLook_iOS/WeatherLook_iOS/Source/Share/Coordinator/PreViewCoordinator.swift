@@ -37,4 +37,12 @@ class PreViewCoordinator: NSObject, Coordinator {
         
         stickerPopUpCoordinator.start(completion: completion)
     }
+    
+    func pushShareViewController(with image: UIImage) {
+        let shareCoordinator = ShareCoordinator(navigationController)
+        shareCoordinator.parentCoordinator = self
+        self.childCoordinators.append(shareCoordinator)
+        
+        shareCoordinator.start(with: image)
+    }
 }
