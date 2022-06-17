@@ -195,7 +195,7 @@ class PreviewViewController: UIViewController {
         if gestureRecognizer.state != .ended {
             return
         }
-         
+        
         let alert = UIAlertController(title: "삭제하시겠습니까?", message: "", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "네", style: .destructive, handler: { _ in
             gestureRecognizer.view?.removeFromSuperview()
@@ -204,7 +204,6 @@ class PreviewViewController: UIViewController {
         alert.addAction(cancel)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
-        
     }
 }
 
