@@ -22,7 +22,7 @@ class PreViewCoordinator: NSObject, Coordinator {
     func start(with image: UIImage) {
         let previewViewController = PreviewViewController()
         previewViewController.coordinator = self
-        previewViewController.imageView.image = image
+        previewViewController.capturedPreviewImageView.image = image
         navigationController.pushViewController(previewViewController, animated: false)
     }
     

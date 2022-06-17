@@ -13,7 +13,7 @@ class PreviewViewController: UIViewController {
     weak var coordinator: PreViewCoordinator?
     private let disposeBag = DisposeBag()
     
-    var imageView = UIImageView()
+    var capturedPreviewImageView = UIImageView()
     
     private let deleteButton = UIButton().then {
         $0.setImage(UIImage(named: "delete"), for: .normal)
@@ -39,14 +39,14 @@ class PreviewViewController: UIViewController {
     }
     
     private func setupSubviews() {
-        view.addSubview(imageView)
+        view.addSubview(capturedPreviewImageView)
         view.addSubview(deleteButton)
         view.addSubview(stickerButton)
         view.addSubview(arrowButton)
     }
     
     private func setupConstraints() {
-        imageView.snp.makeConstraints {
+        capturedPreviewImageView.snp.makeConstraints {
             $0.centerX.centerY.width.height.equalToSuperview()
         }
         
@@ -96,26 +96,25 @@ class PreviewViewController: UIViewController {
         
         view.addSubview(stickerImageView)
         view.clipsToBounds = true
-        
         setupGestureRecognizer(to: stickerImageView)
     }
     
-    private func setupGestureRecognizer(to attachingView: UIView) {
+    private func setupGestureRecognizer(to view: UIView) {
         let panGestureRecognizer = UIPanGestureRecognizer().then {
             $0.delaysTouchesBegan = false
             $0.delaysTouchesEnded = false
             $0.delegate = self
-            attachingView.addGestureRecognizer($0)
+            view.addGestureRecognizer($0)
         }
         
         let pinchGestureRecognizer = UIPinchGestureRecognizer().then {
             $0.delegate = self
-            attachingView.addGestureRecognizer($0)
+            view.addGestureRecognizer($0)
         }
         
         let rotationGestureRecognizer = UIRotationGestureRecognizer().then {
             $0.delegate = self
-            attachingView.addGestureRecognizer($0)
+            view.addGestureRecognizer($0)
         }
         
         panGestureRecognizer.rx.event
@@ -142,7 +141,7 @@ class PreviewViewController: UIViewController {
         guard let gestureView = gestureRecognizer.view else {
             return
         }
-        gestureView.center = CGPoint( x: gestureView.center.x + translation.x, y : gestureView.center.y + translation.y)
+        gestureView.center = CGPoint(x: gestureView.center.x + translation.x, y: gestureView.center.y + translation.y)
         gestureRecognizer.setTranslation(.zero, in: view)
     }
     
@@ -150,12 +149,14 @@ class PreviewViewController: UIViewController {
         guard let gestureView = gestureRecognizer.view else {
             return
         }
-        gestureView.transform = gestureView.transform.scaledBy(x: gestureRecognizer.scale, y:gestureRecognizer.scale)
+        gestureView.transform = gestureView.transform.scaledBy(x: gestureRecognizer.scale, y: gestureRecognizer.scale)
         gestureRecognizer.scale = 1
     }
     
     private func handleRotationGesture(_ gestureRecognizer: UIRotationGestureRecognizer) {
-        guard let gestureView = gestureRecognizer.view else { return }
+        guard let gestureView = gestureRecognizer.view else {
+            return
+        }
         gestureView.transform = gestureView.transform.rotated(by: gestureRecognizer.rotation)
         gestureRecognizer.rotation = 0
     }
