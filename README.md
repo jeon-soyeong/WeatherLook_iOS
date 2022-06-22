@@ -12,8 +12,7 @@
 <img src="https://user-images.githubusercontent.com/61855905/158514842-c769709d-df1d-4845-a55d-28b470a75b57.gif" width="200" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://user-images.githubusercontent.com/61855905/158515323-049e99e6-11c4-4d1e-81df-c3ce885e9dde.gif" width="200" />
 
 ### - 스티커 Pan, Pinch, Rotation, LongPress Gesture
-<img src="https://user-images.githubusercontent.com/61855905/174353040-9a8c3292-3fc6-4e43-924e-ccab3da2ac94.gif" width="200" />
-
+<img src="https://user-images.githubusercontent.com/61855905/174940599-aefc2038-3bf0-4b15-b2fc-54034a076c1d.gif" width="200" />
 
 ## [Reference]
  ### Architecture
