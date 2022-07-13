@@ -23,10 +23,10 @@ class StickerPopUpCoordinator: NSObject, Coordinator {
         let stickerPopUpViewController = StickerPopUpViewController()
         stickerPopUpViewController.coordinator = self
         stickerPopUpViewController.completion = completion
-        navigationController.present(stickerPopUpViewController, animated: false, completion: nil)
+        navigationController.present(stickerPopUpViewController, animated: true, completion: nil)
     }
     
     func popStickerPopUpViewController() {
-        navigationController.dismiss(animated: false)
+        navigationController.dismiss(animated: true)
     }
 }
