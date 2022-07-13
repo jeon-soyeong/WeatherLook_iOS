@@ -57,11 +57,13 @@ class StickerPopUpViewController: UIViewController {
     
     private func setupSheetPresentationController() {
         if let sheet = sheetPresentationController {
-            sheet.detents = [.large(), .medium()]
-            sheet.selectedDetentIdentifier = .medium
+            sheet.detents = [.medium(), .large()]
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             sheet.prefersGrabberVisible = true
             sheet.preferredCornerRadius = 15
+            sheet.animateChanges {
+                sheet.selectedDetentIdentifier = .medium
+            }
         }
     }
 }
