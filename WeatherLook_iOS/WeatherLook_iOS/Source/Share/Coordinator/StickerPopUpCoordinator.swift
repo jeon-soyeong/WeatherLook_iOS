@@ -23,7 +23,6 @@ class StickerPopUpCoordinator: NSObject, Coordinator {
         let stickerPopUpViewController = StickerPopUpViewController()
         stickerPopUpViewController.coordinator = self
         stickerPopUpViewController.completion = completion
-        stickerPopUpViewController.modalPresentationStyle = .overFullScreen
         navigationController.present(stickerPopUpViewController, animated: false, completion: nil)
     }
     
